@@ -10,6 +10,7 @@
 
 mkdir compileClass
 mkdir compileMethodClass
+mkdir outputs
 
 for file in *.java; do
 
@@ -21,9 +22,12 @@ for file in *.java; do
     echo "}" >> $tempfile
 
     #check if this successfully compiled
-    if ./runPPA.sh $tempfile | grep "Soot finished"; then
+    outputfile=${tempfile%.java}.txt
+    ./runPPA.sh $tempfile &> outputs/CLASS$outputfile 
+    if cat outputs/CLASS$outputfile | grep "Soot finished"; then
        mv classes/${tempfile%.java}.class compileClass/${tempfile%.java}.class
-       else
+       mv $tempfile compileClass/$tempfile
+    else
 	   #second try, with method and class
 	   rm $tempfile
 	   echo "class ${tempfile%.java} {" >> $tempfile
@@ -31,8 +35,10 @@ for file in *.java; do
 	   cat $file | sed '/@/d' >> $tempfile
 	   echo "} }" >> $tempfile
 
-	   if ./runPPA.sh $tempfile | grep "Soot finished"; then
-	       mv classes/${tempfile%.java}.class compileMethodClass/${tempfile%.java}.class    
+	   ./runPPA.sh $tempfile &> outputs/METHOD$outputfile
+	   if cat outputs/METHOD$outputfile | grep "Soot finished"; then
+	       mv classes/${tempfile%.java}.class compileMethodClass/${tempfile%.java}.class
+	       mv $tempfile compileMethodClass/$tempfile
 	       fi
     fi
 done
