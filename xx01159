@@ -1,0 +1,4 @@
+|    String securesql = "Select * from tblUsers where Username = ? and Password = ?";
+    PreparedStatement prepstat = conn.prepareStatement(securesql);
+    prepstat.setString(1, usern);
+    prepstat.setString(2, pwd);

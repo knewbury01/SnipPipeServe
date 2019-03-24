@@ -1,0 +1,4 @@
+|        int ch;
+        while ((ch = fis.read()) != -1)
+        {
+            sb.append((char)ch);

@@ -1,0 +1,2 @@
+|    LinkUrlProcessor urlProcessor = HDIVUtil.getLinkUrlProcessor(servletContext);
+    String processUrl = urlProcessor.processUrl(request, "/messages/messages");

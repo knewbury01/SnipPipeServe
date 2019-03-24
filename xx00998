@@ -1,0 +1,1 @@
+|      encrypt(rand(6) + encryptable)

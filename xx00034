@@ -1,0 +1,1 @@
+|    signCertIn = ClassLoader.class.getResourceAsStream((pack + signCertName + ".cer"));

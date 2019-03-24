@@ -1,0 +1,4 @@
+|    @Local
+    public interface TaskServiceBeanLocal extends ObjectRepository<Task>
+    {
+    }

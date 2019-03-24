@@ -1,0 +1,3 @@
+|    grant codeBase "file:///path/yourcomponent.jar" {
+          permission java.lang.RuntimePermission "loadLibrary.jzmq";
+    };

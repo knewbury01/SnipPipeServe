@@ -1,0 +1,10 @@
+|		<Connector 
+			port="8443" 
+			SSLEnabled="true"
+			maxThreads="150"  
+			scheme="https" 
+			secure="true"
+			clientAuth="false" 
+			sslProtocol="TLS"
+			keystoreFile="/path.to.your.keystore/keystore.key"
+			keystorePass="mypassword" />    

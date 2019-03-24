@@ -1,0 +1,5 @@
+|     String command = "/usr/local/bin/myProgram";
+     String path = "/tmp/inputfile";
+     createNewFile(path, request.getBody());
+     runtime.exec(command, path);
+     

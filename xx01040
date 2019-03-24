@@ -1,0 +1,1 @@
+|    <security:intercept-url pattern="/**" access="ROLE_USER" />

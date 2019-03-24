@@ -1,0 +1,2 @@
+|    List<Item> items = new ArrayList<Item>();
+    // .get(int) and remove(int) return Item automatically

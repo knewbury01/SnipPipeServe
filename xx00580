@@ -1,0 +1,8 @@
+|    [main]
+    ...
+    [users]
+    jsmith = password, role1
+    ajones = anotherPassword, role1, role2
+    [roles]
+    role1 = perm1, perm2, ..., permN
+    role2 = permA, permB, ..., permZ

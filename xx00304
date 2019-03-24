@@ -1,0 +1,6 @@
+|    <bean id="cache" class="org.hdiv.session.StateCache" singleton="false" 
+      init-method="init">
+		<property name="maxSize">
+			<value>200</value>
+		</property>
+	</bean>

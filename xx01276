@@ -1,0 +1,1 @@
+|    -Djava.security.debug=access,failure,policy

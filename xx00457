@@ -1,0 +1,2 @@
+|    final SocketFactory factory = SSLSocketFactory.getDefault();
+    final Socket socket = factory.createSocket(host, port);

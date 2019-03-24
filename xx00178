@@ -1,0 +1,4 @@
+|    public void contextInitialized(ServletContextEvent sce) {
+         boolean secure = ...
+         sce.getServletContext().getSessionCookieConfig().setSecure(secure);
+    }

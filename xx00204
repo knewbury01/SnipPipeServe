@@ -1,0 +1,4 @@
+|    String token = UUID.randomUUID().toString();
+    Set<String> tokens = (Set<String>) request.getSession().getAttribute("tokens");
+    tokens.add(token);
+    request.setAttribute("token", token);

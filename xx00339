@@ -1,0 +1,1 @@
+|    keytool -genkey -alias myalias -keystore mykeystore.jks -dname "CN=www.example.com"

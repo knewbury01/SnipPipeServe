@@ -1,0 +1,10 @@
+|    [main]
+    passwordService = org.apache.shiro.authc.credential.DefaultPasswordService
+    passwordService.hashService.hashAlgorithmName = SHA-512
+    passwordService.hashService.hashIterations = 500000
+    # use the passwordService for credentials matching for a Realm:
+    passwordMatcher = org.apache.shiro.authc.credential.PasswordMatcher
+    passwordMatcher.passwordService = $passwordService
+    
+    myRelam = ....
+    myRealm.credentialsMatcher = $passwordMatcher

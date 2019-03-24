@@ -1,0 +1,14 @@
+|    Exception in thread "main" javax.xml.bind.UnmarshalException
+     - with linked exception:
+    [javax.xml.stream.XMLStreamException: ParseError at [row,col]:[8,15]
+    Message: The entity "name" was referenced, but not declared.]
+    	at com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallerImpl.handleStreamException(UnmarshallerImpl.java:436)
+    	at com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:372)
+    	at com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal(UnmarshallerImpl.java:342)
+    	at xxe.Demo.main(Demo.java:18)
+    Caused by: javax.xml.stream.XMLStreamException: ParseError at [row,col]:[8,15]
+    Message: The entity "name" was referenced, but not declared.
+    	at com.sun.org.apache.xerces.internal.impl.XMLStreamReaderImpl.next(XMLStreamReaderImpl.java:598)
+    	at com.sun.xml.bind.v2.runtime.unmarshaller.StAXStreamConnector.bridge(StAXStreamConnector.java:196)
+    	at com.sun.xml.bind.v2.runtime.unmarshaller.UnmarshallerImpl.unmarshal0(UnmarshallerImpl.java:370)
+    	... 2 more

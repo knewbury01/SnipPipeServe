@@ -1,0 +1,3 @@
+|    public String calcSha(String secret, String data) {
+        return DigestUtils.sha512Hex(secret + data);
+    }

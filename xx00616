@@ -1,0 +1,4 @@
+|     <!-- redirect url for failure of authentication -->
+     <bean id="simpleUrlAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+          	<constructor-arg value="/login.jsp?error=1"></constructor-arg>
+    </bean>

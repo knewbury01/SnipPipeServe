@@ -1,0 +1,3 @@
+|    auth.jdbcAuthentication() .dataSource(dataSource)
+		 * .passwordEncoder(passwordEncoder) .usersByUsernameQuery(
+    //   ....

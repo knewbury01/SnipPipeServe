@@ -1,0 +1,21 @@
+|    //Import JQuery
+    <script src="jquery-1.11.0.min.js"></script>
+    //Add this to your JS Logic for the page you want to change
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        if (window.history && window.history.pushState) {
+          $(window).on('popstate', function() {
+            var hashLocation = location.hash;
+            var hashSplit = hashLocation.split("#!/");
+            var hashName = hashSplit[1];
+            if (hashName !== '') {
+              var hash = window.location.hash;
+              if (hash === '') {
+                document.location.href = '/Your/Redirection/Here';
+              }
+            }
+          });
+       window.history.pushState('forward', null, '#SomeIDYouAreNotUsing');
+       }
+     });
+    </script>

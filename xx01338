@@ -1,0 +1,11 @@
+|    Protocol: Multiple
+    Subcomponent: Libraries
+    Remote Exploit without Auth.?: Yes
+    Base Score: 10 (out of 10)
+    Access Vector: Network
+    Access Complexity: Low
+    Authentication: None
+    Confidentiality: Complete
+    Integrity: Complete
+    Availability: Complete
+    Versions affected: Java SE 5.0u51 and earlier

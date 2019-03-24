@@ -1,0 +1,1 @@
+|    FileOutputStream out = new FileOutputStream(getFile2(Constants.JKS_PRIVATE_FILE_NAME));

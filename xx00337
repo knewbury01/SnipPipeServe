@@ -1,0 +1,3 @@
+|    String md5 = DigestUtils.md5Hex(id);
+    // or
+    byte[] md5 = DigestUtils.md5(id);

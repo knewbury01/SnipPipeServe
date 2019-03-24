@@ -1,0 +1,8 @@
+|    try {
+    final String imageURL = "http://www.google.com/intl/en_ALL/images/logo.gif";
+    URL url = (URL) AccessController.doPrivileged(new PrivilegedAction() {
+    public Object run() 
+    {
+        try
+ {
+     return new URL(imageURL);

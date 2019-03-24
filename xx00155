@@ -1,0 +1,5 @@
+|	static {
+			System.loadLibrary("library-name");
+		}
+	 
+	public native String getSecretKey();

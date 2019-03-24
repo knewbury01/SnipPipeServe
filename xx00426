@@ -1,0 +1,1 @@
+|    Be sure not to use (Zp) DHE *if* the server runs on Java7 or earlier; those versions used 768-bit DH group which is too small. Java8 defaults to 1024, which is enough except *perhaps* against top adversaries like NSA, see details at http://weakdh.org; and can be configured for 2048 which is definitely enough, see 

@@ -1,0 +1,6 @@
+|C:\Program Files\Java\jre1.8.0_45\lib\security\java.policy
+    grant codeBase "http://localhost/-" {
+     permission java.security.AllPermission;
+     permission java.io.FilePermission "<<ALL FILES>>", "read";
+     permission java.io.FilePermission "<<ALL FILES>>", "write";
+    };

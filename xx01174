@@ -1,0 +1,2 @@
+|    pointcut check(Access access) : 
+    execution(@Access * *(..)) && @annotation(access);

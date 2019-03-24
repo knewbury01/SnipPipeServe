@@ -1,0 +1,2 @@
+|    java.security.AccessControlException: access denied 
+        (java.util.PropertyPermission sun.java2d.opengl write)

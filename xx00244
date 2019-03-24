@@ -1,0 +1,3 @@
+|        <login-config>
+            <auth-method>CLIENT-CERT</auth-method>
+        </login-config>

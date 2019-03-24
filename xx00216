@@ -1,0 +1,4 @@
+|    myclass m;
+    myclass m2(m); // copy construction isn't allowed
+    myclass m3;
+    m3 = m; // assignment also not allowed

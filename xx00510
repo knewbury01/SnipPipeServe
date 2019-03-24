@@ -1,0 +1,1 @@
+|jar cvfm YourTargetJar.jar your_manifest_file.txt classes_and_such

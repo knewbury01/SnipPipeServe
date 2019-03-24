@@ -1,0 +1,7 @@
+|        <session-config>
+            <cookie-config>
+                <!-- browser will disallow JavaScript access to session cookie -->
+                <http-only>true</http-only>
+            </cookie-config>
+            <tracking-mode>COOKIE</tracking-mode>
+        </session-config>

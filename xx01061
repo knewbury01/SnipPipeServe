@@ -1,0 +1,3 @@
+|    final PySystemState state = new PySystemState();
+    state.setClassLoader(new MyClassLoader());
+    Py.setSystemState(state);

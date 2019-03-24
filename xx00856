@@ -1,0 +1,1 @@
+|$ keytool -import -trustcacerts -alias intermediate -file intermediate.crt -keystore keystore

@@ -1,0 +1,3 @@
+|    @RepositoryRestResource(exported = false)
+    @Component("UserRepository")
+    public interface UserRepository extends CrudRepository<User, Long> { }

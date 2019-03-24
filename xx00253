@@ -1,0 +1,1 @@
+|    CATALINA_HOME/bin/digest.[bat|sh] -a {algorithm} {cleartext-password}

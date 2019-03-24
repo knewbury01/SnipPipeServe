@@ -1,0 +1,2 @@
+|		byte[] tmp = new byte[10];		
+		String a = new String(tmp, "UTF-8");

@@ -1,0 +1,1 @@
+|    <a href="${request.contextPath}/logout">Logout</a>

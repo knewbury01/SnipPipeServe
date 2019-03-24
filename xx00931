@@ -1,0 +1,4 @@
+|     <https-listener name="https" socket-binding="https" security-
+      realm="SSLRealm"      
+      enabled-protocols="TLSv1.2"     
+      enabled-cipher-suites="TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, etc."/>

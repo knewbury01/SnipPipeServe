@@ -1,0 +1,13 @@
+|    Exception in thread "AWT-EventQueue-2" java.lang.AssertionError: java.lang.reflect.InvocationTargetException
+    	at twitter4j.TwitterFactory.<clinit>(TwitterFactory.java:76)
+        ...
+    Caused by: java.lang.reflect.InvocationTargetException
+    	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+    	... 42 more
+    Caused by: java.lang.ExceptionInInitializerError
+    	at twitter4j.internal.http.HttpClientWrapper.<init>(HttpClientWrapper.java:48)
+    	... 47 more
+    Caused by: java.security.AccessControlException: access denied 
+            (java.util.PropertyPermission twitter4j.http.httpClient read)
+    	at java.security.AccessControlContext.checkPermission(Unknown Source)
+    	at java.security.AccessController.checkPermission(Unknown Source)

@@ -1,0 +1,10 @@
+|    Access for java.lang.ThreadGroup[name=system,maxpri=10]
+    Permission (java.lang.RuntimePermission modifyThreadGroup)
+    [...]
+    Access for Thread[SIGTERM handler,9,system]
+    Permission (java.lang.RuntimePermission modifyThread)
+    [...]
+     java.security.Permissions@133c5982 (
+     (java.lang.RuntimePermission exitVM)
+     (java.io.FilePermission /path/to/current/working/directory/- read)
+    )

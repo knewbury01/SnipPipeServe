@@ -1,0 +1,5 @@
+|    <servlet>
+    <servlet-name>MySTSService</servlet-name>
+    <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+    <load-on-startup>0</load-on-startup>
+    </servlet>

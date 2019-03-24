@@ -1,0 +1,2 @@
+|    ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+    InputStream is = classloader.getResourceAsStream("credentials.json");

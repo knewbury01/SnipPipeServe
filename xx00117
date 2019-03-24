@@ -1,0 +1,1 @@
+|    new File("/Users/example/projects/sample/target", "../pom.xml").getCanonicalFile();

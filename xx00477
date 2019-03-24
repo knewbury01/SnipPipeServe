@@ -1,0 +1,2 @@
+|    MyDomainObject secured = new MyDomainObject();
+    ObjectIdentity securedIdentity = new ObjectIdentityImpl(secured);

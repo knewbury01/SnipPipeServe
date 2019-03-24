@@ -1,0 +1,5 @@
+|AccessController.doPrivileged(new PrivilegedAction() {
+            public Object run() {
+               .. do something that only works with signed applets ..
+            }
+        });

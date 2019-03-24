@@ -1,0 +1,3 @@
+|    ESAPI.httpUtilities().setCurrentHTTP(req, resp);
+    ESAPI.httpUtilities().sendRedirect(location);
+    ESAPI.httpUtilities().clearCurrent();

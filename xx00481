@@ -1,0 +1,8 @@
+|    <rule>
+        <id location="https://java.com/" />
+        <action permission="run" version="SECURE" />
+    </rule>
+    <rule>
+        <id location="http://climate.example.com/" />
+        <action permission="run" version="1.6.0_31" />
+    </rule>

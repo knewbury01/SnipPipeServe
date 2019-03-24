@@ -1,0 +1,1 @@
+|    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userID", email);

@@ -1,0 +1,1 @@
+|    byte[] encriptedSMS = Base64.decode(encodedSMS, Base64.DEFAULT)

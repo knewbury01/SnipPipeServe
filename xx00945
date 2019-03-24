@@ -1,0 +1,6 @@
+|    @PostAuthorize("returnObject.widget.owner.id == principal.id")
+    public Widget getWidgetById(long id) {
+       // ...
+    return widget;
+    }
+    

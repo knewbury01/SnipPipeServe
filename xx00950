@@ -1,0 +1,2 @@
+|    keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore keystore.jks -srckeystore myOwnCert.p12 -srcstoretype PKCS12 -srcstorepass changeit -alias myOwnAlias
+    keytool -importkeystore -deststorepass changeit -destkeypass changeit -destkeystore cacerts.jks -srckeystore myOwnCert.p12 -srcstoretype PKCS12 -srcstorepass changeit -alias myOwnAlias

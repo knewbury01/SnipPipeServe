@@ -1,0 +1,7 @@
+|    <http auto-config="true">
+    <intercept-url pattern="/**" access="ROLE_ADMIN"/>
+    <form-login login-processing-url="/j_spring_security_check" 
+        login-page="/views/login.xhtml" 
+        default-target-url="/views/index.xhtml"
+        authentication-failure-url="/views/error.xhtml" />
+    </http>

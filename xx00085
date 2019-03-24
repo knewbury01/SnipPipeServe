@@ -1,0 +1,1 @@
+|    var myJsValue = '<c:out value="${listValue}"/>';

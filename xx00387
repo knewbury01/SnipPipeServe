@@ -1,0 +1,1 @@
+|    String.format("%02x",(byteData[i] & 0xff))

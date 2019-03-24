@@ -1,0 +1,4 @@
+|    while (fgets(line, 2048, fp) != NULL) {
+		// search for '.dex'
+		if (strstr(line, ".dex") != NULL) {
+            // get starting and ending addresses of the DEX file region

@@ -1,0 +1,5 @@
+|    before(Privilege privilege, User user) : @annotation(privilege) &&
+                                      call(* *.*(User, User)) && args(.., user) {
+        if (!accessAllowed(privilege.getLevel(), user))
+            throw new InsufficientRightsException()
+    }

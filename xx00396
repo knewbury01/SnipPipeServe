@@ -1,0 +1,1 @@
+|    Jsoup.clean(richTextArea.getValue(), Whitelist.simpleText())

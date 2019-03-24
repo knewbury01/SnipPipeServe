@@ -1,0 +1,2 @@
+|    sudo netstat -anop | grep java  | wc -l
+    0

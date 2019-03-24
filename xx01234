@@ -1,0 +1,4 @@
+|    // Build signed URI w/ encrypted signature (need only for the 'toSend' String)
+    URI uriSigned = new URIBuilder(uri).setParameter("signature", signature).build();
+    // This is what we actually POST, includes the encrypted signature. Seems hack-y.
+    String toSend = uriSigned.toString().substring(uriSigned.toString().indexOf('?') + 1);

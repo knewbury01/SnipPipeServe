@@ -1,0 +1,3 @@
+|    int orderId = Integer.parseInt(request.getParameter("orderId"));
+    String username = request.getUserPrincipal().getName();
+    /*now you need to check if username match with the username of the order e.g. by using hibernate to get the order by id and check its user and if not throw PermissionDeniedException or similiar*/

@@ -1,0 +1,10 @@
+|    import M2Crypto
+    
+    # read privat key
+    privatKey = M2Crypto.RSA.load_key('privat.key')
+    # encrypt plaintext using privat key
+    ciphertext = privatKey.private_encrypt(data.encode('utf-8'), M2Crypto.RSA.pkcs1_padding)
+    
+    encrypted_message = str(base64.b64encode(ciphertext), 'utf8')
+    print(encrypted_message)
+   

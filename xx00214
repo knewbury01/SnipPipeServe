@@ -1,0 +1,2 @@
+|     byte[] salt = new byte[8];
+     System.arraycopy(randomString.getBytes("UTF-8"), 0, salt, 0, 8);

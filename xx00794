@@ -1,0 +1,4 @@
+|    PrivateKeyInfo pkInfo = PrivateKeyInfo.getInstance(pkPair.getPrivateKey().getEncodedKey());
+    ASN1Encodable privateKeyPKCS1ASN1Encodable = pkInfo.parsePrivateKey();
+    ASN1Primitive privateKeyPKCS1ASN1 = privateKeyPKCS1ASN1Encodable.toASN1Primitive();
+    byte[] privateKeyPKCS1 = privateKeyPKCS1ASN1.getEncoded();

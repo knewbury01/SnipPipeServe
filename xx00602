@@ -1,0 +1,2 @@
+|    // 0 inclusive to 100 exclusive.
+    int number = rand.nextInt(100);

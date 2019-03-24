@@ -1,0 +1,1 @@
+|    @WithMockUser(authorities="ADMIN")

@@ -1,0 +1,1 @@
+|     HADOOP_USER_NAME=hdfs hdfs fs -put /root/MyHadoop/file1.txt /

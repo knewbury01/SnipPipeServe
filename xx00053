@@ -1,0 +1,9 @@
+|    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Application</web-resource-name>
+            <url-pattern>/app/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>someRoleName</role-name>
+        </auth-constraint>
+    </security-constraint>

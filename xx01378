@@ -1,0 +1,3 @@
+|    <ns:binding-type xsi:type="ns:by-name-bean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <ns:xmlcomponent>t=custom-ldapdb-bean-apType@your.namespaces</ns:xmlcomponent>
+        <ns:javatype>fr.telecom.devices.ws.security.iap.MyAuthenticationMBeanImpl</ns:javatype>

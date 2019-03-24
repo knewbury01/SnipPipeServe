@@ -1,0 +1,4 @@
+|    <applet id="fpa"
+        code="SensorApplet" archive="FingerprintApplet.jar, Jarlib1.jar, Jarlib2.jar, Jarlib3.jar"
+        width="300" height="400">
+    </applet>

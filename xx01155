@@ -1,0 +1,2 @@
+|      String command = "C:\\setup.exe";
+      Runtime.getRuntime().exec("cmd /c "+command);

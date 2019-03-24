@@ -1,0 +1,38 @@
+|    net.sourceforge.jnlp.LaunchException: Fatal: Initialization Error: Could not initialize applet.
+            at net.sourceforge.jnlp.Launcher.createApplet(Launcher.java:604)
+            at net.sourceforge.jnlp.Launcher.getApplet(Launcher.java:548)
+            at net.sourceforge.jnlp.Launcher$TgThread.run(Launcher.java:729)
+    Caused by: net.sourceforge.jnlp.LaunchException: Fatal: Launch Error: Jars not verified.
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.checkTrustWithUser(JNLPClassLoader.java:467)
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.initializeResources(JNLPClassLoader.java:410)
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.<init>(JNLPClassLoader.java:168)
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.getInstance(JNLPClassLoader.java:249)
+            at net.sourceforge.jnlp.Launcher.createApplet(Launcher.java:575)
+            ... 2 more
+    Caused by: 
+    net.sourceforge.jnlp.LaunchException: Fatal: Launch Error: Jars not verified.
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.checkTrustWithUser(JNLPClassLoader.java:467)
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.initializeResources(JNLPClassLoader.java:410)
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.<init>(JNLPClassLoader.java:168)
+            at net.sourceforge.jnlp.runtime.JNLPClassLoader.getInstance(JNLPClassLoader.java:249)
+            at net.sourceforge.jnlp.Launcher.createApplet(Launcher.java:575)
+            at net.sourceforge.jnlp.Launcher.getApplet(Launcher.java:548)
+            at net.sourceforge.jnlp.Launcher$TgThread.run(Launcher.java:729)
+    java.lang.NullPointerException
+            at net.sourceforge.jnlp.NetxPanel.runLoader(NetxPanel.java:99)
+            at sun.applet.AppletPanel.run(AppletPanel.java:380)
+            at java.lang.Thread.run(Thread.java:636)
+    java.lang.NullPointerException
+            at sun.applet.AppletPanel.run(AppletPanel.java:430)
+            at java.lang.Thread.run(Thread.java:636)
+    java.lang.Exception: Applet initialization timeout
+            at sun.applet.PluginAppletViewer.handleMessage(PluginAppletViewer.java:637)
+            at sun.applet.PluginStreamHandler.handleMessage(PluginStreamHandler.java:270)
+            at sun.applet.PluginMessageHandlerWorker.run(PluginMessageHandlerWorker.java:82)
+    java.lang.RuntimeException: Failed to handle message: handle 60822154 for instance 2
+            at sun.applet.PluginAppletViewer.handleMessage(PluginAppletViewer.java:660)
+            at sun.applet.PluginStreamHandler.handleMessage(PluginStreamHandler.java:270)
+            at sun.applet.PluginMessageHandlerWorker.run(PluginMessageHandlerWorker.java:82)
+    Caused by: java.lang.Exception: Applet initialization timeout
+            at sun.applet.PluginAppletViewer.handleMessage(PluginAppletViewer.java:637)
+            ... 2 more

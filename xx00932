@@ -1,0 +1,11 @@
+|    <security-realm name="SSLRealm"> 
+        <server-identities> 
+          <ssl > 
+            <keystore
+         path="/var/mysite/ssl/mysite.jks"
+         keystore-password="******"
+         alias="mysite"
+         /> 
+          </ssl> 
+        </server-identities> 
+      </security-realm> 

@@ -1,0 +1,2 @@
+|    ContextHandler handler = contextHandlerCallback.getContextHandler();
+    HttpServletRequest request = (HttpServletRequest)handler.getValue("com.bea.contextelement.servlet.HttpServletRequest");

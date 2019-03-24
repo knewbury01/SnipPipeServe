@@ -1,0 +1,1 @@
+|    messageInfo.getMap().put("javax.servlet.http.registerSession", TRUE.toString());

@@ -1,0 +1,2 @@
+|    ECPrivateKey ecPrivKey = (ECPrivateKey) eckp.getPrivate();
+    System.out.println(ecPrivKey.getS().toString(16));

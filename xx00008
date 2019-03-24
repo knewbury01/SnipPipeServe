@@ -1,0 +1,2 @@
+|    PEMParser pemParser = new PEMParser(new FileReader("src/main/resources/cacert.crt"));
+    X509CertificateHolder caCertificate = (X509CertificateHolder) pemParser.readObject();

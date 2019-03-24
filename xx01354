@@ -1,0 +1,5 @@
+|    @Repository
+    public interface UserSocialRepository extends JpaRepository<SocialUser, Long> {
+      @Query("SELECT u FROM Users u WHERE u.username = ?1")
+      SocialUser findByUsername(String username);
+    }

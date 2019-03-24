@@ -1,0 +1,4 @@
+|    $in = 'abcdef12345';
+    $salt = 'test1';
+    $out = hash('sha256', $in.$salt,true); //3rd parameter says return raw result
+    echo 'Calculated: ' . base64_encode($out);

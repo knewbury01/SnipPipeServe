@@ -1,0 +1,2 @@
+|    BigInteger bi = new BigInteger("76292708057987193002565060032465481997");
+    System.out.println(bi.toString(16));

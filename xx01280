@@ -1,0 +1,8 @@
+|    <form:select path="plantId">
+        <form:option value="0" label="--- Select ---" />
+        <c:forEach var="thePlant" items="${plants}">
+            <security:authorize access="hasRole('ROLE_'+${thePlant.type})">
+                <form:option value="${thePlant.plantId.toString()}"><c:out value="${thePlant.name}"/></form:option>
+            </security:authorize>
+        </c:forEach>
+    </form:select>

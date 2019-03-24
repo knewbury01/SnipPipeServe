@@ -1,0 +1,8 @@
+|    live.users.enabled=true
+    #
+    # Set the following to true if users are allowed to have simultaneous logins
+    # from different sessions. This property is not used unless the property
+    # "live.users.enabled" is set to true.
+    #
+    auth.simultaneous.logins=false
+  

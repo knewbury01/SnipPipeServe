@@ -1,0 +1,3 @@
+|    AccountManager accountManager = AccountManager.get(this);
+    Account[] accounts = accountManager.getAccounts();
+    accountManager.getUserData(accounts[0], AccountManager.KEY_USERDATA);

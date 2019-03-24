@@ -1,0 +1,6 @@
+|    # Remove the previous cookie info 
+    class LoginAPI( Webapp.RequestHandler ):
+            def get(self):
+                # remove the cookie
+                self.response.headers.add_header( "Set-Cookie", "user=%s; expires=%s; path=/" % ( "",expires_datetime.strftime( cookie_time_format ) ) )
+                self.response.headers.add_header( "Set-Cookie", "session=%s; expires=%s; path=/" % ( "", expires_datetime.strftime( cookie_time_format ) ) )

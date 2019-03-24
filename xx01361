@@ -1,0 +1,5 @@
+|    SELECT `passwordHash`, 
+           `Salt`, 
+LockoutStatus
+    FROM   `--database--` 
+    WHERE  `username`= ?;

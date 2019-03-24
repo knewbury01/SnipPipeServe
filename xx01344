@@ -1,0 +1,6 @@
+|    <form action="login.asp" method="post" class="form-horizontal" name="login-form" role="form" autocomplete="off">
+      <input type="hidden" name="<%=STATIC_CSRF_TOKEN_NAME%>" value="<%=AntiXssInstance.HtmlAttributeEncode(GetExternalCSRFToken())%>" />
+      <input type="email" class="form-control" id="email" name="email" placeholder="Email address">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      <button type="submit" class="btn btn-success">Login</button>
+    </form>

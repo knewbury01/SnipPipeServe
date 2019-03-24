@@ -1,0 +1,1 @@
+|    String originalURI = (String) externalContext.getRequestMap().get(RequestDispatcher.FORWARD_REQUEST_URI);

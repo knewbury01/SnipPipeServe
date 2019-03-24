@@ -1,0 +1,5 @@
+|    MyUser loggedInUser = myUserDAO.getByUsername(principal.getName());
+    MyUserDetails loggedInUserUD = new MyUserDetails(loggedInUser);
+    if (loggedInUserUD.hasAnyPermission("perm1, perm2")){
+    //do stuff
+    }

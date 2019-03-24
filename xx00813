@@ -1,0 +1,5 @@
+|    <user-service>  
+      <user name="Sriram" password="12345" authorities="ROLE_USER" />  
+      <user name="Vignesh" password="12345" authorities="ROLE_ADMIN" />
+      <user name="Yogesh" password="12345" authorities="PARTNER_CUSTOMER" />
+     </user-service>

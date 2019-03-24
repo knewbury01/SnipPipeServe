@@ -1,0 +1,2 @@
+|    <module-option name="hashAlgorithm" value="SHA-1"/>
+    <module-option name="hashEncoding" value="hex"/>

@@ -1,0 +1,2 @@
+|    jarsigner myBundle.jar susan
+    jarsigner myBundle.jar kevin

@@ -1,0 +1,1 @@
+|    SELECT `passwordHash`, `Salt` FROM `--database--` WHERE `username`= ?;

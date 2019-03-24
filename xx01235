@@ -1,0 +1,1 @@
+|    StringEntity se = new StringEntity("signature=" + URLEncoder.encode(signature, ENCODING));

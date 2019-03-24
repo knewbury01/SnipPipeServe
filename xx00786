@@ -1,0 +1,2 @@
+|    InputStream caInput = new BufferedInputStream(context
+                    .getResources().openRawResource(R.raw.certfilename));

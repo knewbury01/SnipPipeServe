@@ -1,0 +1,2 @@
+|    Arrays.fill(password, ' ');
+    password = null;

@@ -1,0 +1,5 @@
+|    try {
+     Class.forName( "your.fqdn.class.name" );
+    } catch( ClassNotFoundException e ) {
+     //my class isn't there!
+    }

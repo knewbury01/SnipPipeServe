@@ -1,0 +1,3 @@
+|    <c:if test="${currentUser.id_profil == 1}">
+       <button label="Only id_profil 1"/>
+    </c:if>

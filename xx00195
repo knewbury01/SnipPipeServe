@@ -1,0 +1,1 @@
+|    $JAVA_HOME/bin/keytool -import -alias mycertificate -keystore path_to_keystore -file certificate_file 

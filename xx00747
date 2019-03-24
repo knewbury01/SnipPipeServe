@@ -1,0 +1,4 @@
+|    UrlValidator urlValidator = new UrlValidator(schemes);
+    if (urlValidator.isValid("http://somesite.com")) {
+       //valid
+    }

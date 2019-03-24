@@ -1,0 +1,1 @@
+|    InputStream is = AnyClassName.class.getResourceAsStream("credentials.json");

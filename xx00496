@@ -1,0 +1,8 @@
+|    <security-domain name="EncryptedPassword">
+      <authentication>
+        <login-module code="SecureIdentity" flag="required">
+          <module-option name="username" value="test"/>
+          <module-option name="password" value="encrypted_password"/>
+        </login-module>
+      </authentication>
+    </security-domain>

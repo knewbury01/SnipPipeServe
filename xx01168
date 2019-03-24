@@ -1,0 +1,19 @@
+|    # Get the session info from cookie. If the session info match the info stored in datastore
+    # Then user authenticate successfully.
+    class SomePage(Webapp.RequestHandler):
+        def get(self):
+            # get cookie info
+            username_from_cookie = self.request.cookies.get("user", "")
+            session_from_cookie = self.request.cookies.get("session", "")
+    
+            if username_from_cookie and session_from_cookie:
+                user = User.all().filter("username = ", username_from_cookie).get()
+                if user.session == session_from_cookie:
+                    # the user is login correctly
+                    pass
+                else:
+                    # the user is not login
+                    pass
+            else:
+                # the user is not login
+                pass

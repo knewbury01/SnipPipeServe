@@ -1,0 +1,4 @@
+|    String unfilteredInput = "</textarea><script>alert(\"Danger!\");</script>";
+    out.write("<textarea>");
+    out.write(content);
+    out.write("</textarea>");

@@ -1,0 +1,7 @@
+|     @PreAuthorize("isAuthenticated()")
+     @RequestMapping(params = "onlyForAuthenticated")
+     public ModelAndView onlyForAuthenticatedUsers() {
+         ....
+     }
+  
+  

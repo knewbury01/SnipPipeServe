@@ -1,0 +1,3 @@
+|    // Launch the activity to activate encryption.  May or may not return!
+    Intent intent = new Intent(DevicePolicyManager.ACTION_START_ENCRYPTION);
+    startActivityForResult(intent, REQUEST_CODE_START_ENCRYPTION);

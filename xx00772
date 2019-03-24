@@ -1,0 +1,6 @@
+|    @Secured("ROLE_ADMIN")
+    @RequestMapping(params = "onlyForAdmins")    
+    public ModelAndView onlyForAdmins() {
+        ....
+    }
+  

@@ -1,0 +1,1 @@
+|    <a href="@{Secure.logout2(request.url)}">logout</a>

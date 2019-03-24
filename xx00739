@@ -1,0 +1,4 @@
+|    String name = result['name'];
+    String acct = result['acct'];
+    String amt = result['amt'];
+    string query = "insert into payment_process (name,acct,amt) values('"+name+"','"+acct+"','"+amt+"');

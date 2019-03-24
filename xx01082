@@ -1,0 +1,4 @@
+|    	<j2se version="1.6.0+"
+			 initial-heap-size="${heap.init}"
+             max-heap-size="${heap.max}"
+			 java-vm-args="-Djava.security.policy=${jnlp.ip}${jnlp.port}/ed/security/java.policy"/>

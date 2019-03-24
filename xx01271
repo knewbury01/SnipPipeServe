@@ -1,0 +1,1 @@
+|    <safRoleMapper profilePattern="myprofile.%resource%.%role%" toUpperCase="true" />

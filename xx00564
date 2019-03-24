@@ -1,0 +1,2 @@
+|    String iv = payload.substring(0, 16);
+    String data = payload.substring(16);

@@ -1,0 +1,29 @@
+|    # Do the following step:
+    # 1. make sure user provide correct username and password
+    # 2. generate a random session key 
+    # 3. store the session key to datastore
+    # 4. set the session key and user name in cookie
+    class LoginAPI( Webapp.RequestHandler ):   
+        def get(self):
+            username = self.getVar( 'username', username )
+            password = self.getVar( 'password', password )
+    
+            user = User.all().filter("username = ", username).get()
+            password = encrypted_the_password(password) # encrypted your password with your own method!
+            
+            if user.password == password:
+                 # User login successfually
+                 session = generate_random_session_key() # generate your session key here
+                 user.session = session
+                 user.put()
+      
+                 expires_time = decide_your_expires_time() # decide how long the login session is alive.
+                 cookie_time_format = "%a, %d-%b-%Y %H:%M:%S GMT"
+                 expires_datetime = datetime.datetime.fromtimestamp(expires_time)
+            
+                 # set cookie as session
+                 self.response.headers.add_header( "Set-Cookie", "user=%s; expires=%s; path=/" % ( user.username,expires_datetime.strftime( cookie_time_format ) ) )
+                 self.response.headers.add_header( "Set-Cookie", "session=%s; expires=%s; path=/" % ( user.session, expires_datetime.strftime( cookie_time_format ) ) )
+            else:
+                 #User login failed
+                 pass

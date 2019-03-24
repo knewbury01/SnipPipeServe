@@ -1,0 +1,3 @@
+|    JPasswordField p1=new JPasswordField("pass",6);
+    p1.setEchoChar('*');
+    top.add(p1);

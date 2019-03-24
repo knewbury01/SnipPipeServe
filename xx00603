@@ -1,0 +1,1 @@
+|    String validatedAlertId = ESAPI.validator().getValidInput("alertId", alertId, "AlertIdRejex", 25, false);

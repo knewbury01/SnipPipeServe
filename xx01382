@@ -1,0 +1,5 @@
+|    class CSRFRequestMatcher implements RequestMatcher{
+        public boolean matches (HttpServletRequest req){
+            //Check if request contains valid header name & header value
+        }
+    }

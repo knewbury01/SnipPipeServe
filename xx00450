@@ -1,0 +1,5 @@
+|    //construct Facebook auth URI
+    $auth_url = sprintf("%s?redirect_uri=%s&client_id=%s&scope=email,publish_stream", 
+                $authorization_endpoint, 
+                $callback_url, 
+                $key);

@@ -1,0 +1,4 @@
+|    public static void logout2(String returnUrl) throws Throwable {
+    	flash.put("returnUrl", returnUrl == null ? "/" : returnUrl);
+    	logout();
+    }

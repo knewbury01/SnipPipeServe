@@ -1,0 +1,5 @@
+|    1.keytool -genkey -keyalg rsa -alias m4key  //m4key unique key
+    2.keytool -export -alias m4key -file bmcert.crt   //bmcert.crt certificate name
+    3.jar tvf Jarname.jar verify jar
+    4.jarsigner Jarname.jar m4key
+    5.jarsigner -verify -verbose -certs JarnameJarname.jar

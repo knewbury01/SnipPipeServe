@@ -1,0 +1,4 @@
+|    FILE:/etc/krb5.keytab:
+    Vno  Type                     Principal          Aliases
+      6  aes256-cts-hmac-sha1-96 host/test.com@TEST.COM 
+      6  arcfour-hmac-md5        host/test.com@TEST.COM 

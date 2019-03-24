@@ -1,0 +1,4 @@
+|    putty = App.open("path/to/putty.exe")
+    putty.focus()
+    password = Env.getClipboard()
+    rightClick("putty_window.png")

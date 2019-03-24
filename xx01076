@@ -1,0 +1,3 @@
+|    if(ctx.getFilter().toString().contains("objectClass=person")) {
+      //Somehow return entries that only correspond to persons on the data base (were you store your directory entries).
+    }

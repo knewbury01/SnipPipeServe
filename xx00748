@@ -1,0 +1,5 @@
+|    public void checkExec(String cmd) {
+        System.out.println(cmd); // prints "java"
+        if (cmd.toLowerCase().startsWith("java ") { ... } // is false
+        // no security exception is thrown, allowing your command
+    }

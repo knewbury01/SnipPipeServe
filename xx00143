@@ -1,0 +1,4 @@
+|    CSRF protection is enabled by default with Java configuration.
+    If you would like to disable CSRF, the corresponding Java configuration
+    can be seen below. Refer to the Javadoc of csrf() for additional
+    customizations in how CSRF protection is configured.

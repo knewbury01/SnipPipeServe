@@ -1,0 +1,1 @@
+|    TRACE [org.jboss.security.authorization.modules.ejb.EJBPolicyModuleDelegate] Exception:Insufficient method permissions, principal=myuser, ejbName=SecureServiceBean, method=save, interface=Local, requiredRoles=Roles(), principalRoles=Roles(Admin,)

@@ -1,0 +1,3 @@
+|    String queryString = "select * from EMP e where e.name = ?1";
+    Query query = em.createNativeQuery(queryString, Employee.class);
+    query.setParameter(1, "Mickey");

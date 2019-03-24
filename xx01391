@@ -1,0 +1,3 @@
+|   <PRE>xcrun altool --eval-app --primary-bundle-id &lt;bundle id&gt; -u &lt;iTunes Connect Account&gt; -f &lt;file path&gt;</PRE>
+     Which may look something like this:
+   <PRE>xcrun altool --eval-app --primary-bundle-id com.domain.appname -u john@domain.com -f appname.pkg</PRE>

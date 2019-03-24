@@ -1,0 +1,3 @@
+|    List<GrantedAuthority> grantedAuths = new ArrayList<GrantedAuthority>();
+	grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+    UsernamePasswordAuthenticationToken("aman", "12345",grantedAuths) ;

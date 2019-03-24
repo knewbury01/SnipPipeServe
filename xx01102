@@ -1,0 +1,6 @@
+|    <web-resource-collection>
+        <web-resource-name>SecretProtection</web-resource-name>
+        <url-pattern>/servlet/SalaryServer</url-pattern>
+        <url-pattern>/servlet/secret</url-pattern>
+        <url-pattern>/test</url-pattern>
+    </web-resource-collection>

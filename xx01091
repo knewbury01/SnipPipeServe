@@ -1,0 +1,2 @@
+|    permission java.net.SocketPermission "*", "resolve"; 
+    permission java.net.SocketPermission "localhost:5432", "connect,resolve";

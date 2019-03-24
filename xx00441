@@ -1,0 +1,1 @@
+|    antMatchers("/account/{\\d+}/download").access("hasAnyAuthority('ROLE_TOKENSAVED')")

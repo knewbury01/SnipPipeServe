@@ -1,0 +1,17 @@
+|    <jaxws:endpoint id="myService" implementor="#myServiceImpl" address="/myService">
+    <jaxws:inInterceptors>
+    <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor" />
+    <ref bean="myServiceInterceptor"/>
+    </jaxws:inInterceptors>
+    <jaxws:properties>
+    <entry key="ws-security.ut.validator" value-ref="myServiceUsernameTokenValidator"/>
+    <jaxws:properties>
+     </jaxws:endpoint>
+    <bean id=" myServiceInterceptor "   class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+     <constructor-arg>                              
+     <map>
+        <entry key="action" value="UsernameToken" />
+        <entry key="passwordType" value="PasswordText" />
+      </map>          
+    </constructor-arg>
+    </ bean>

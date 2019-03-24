@@ -1,0 +1,13 @@
+|    package com.company.testjar2;
+    
+    public class TestClass2 {
+    	private int value;
+        	
+    	public TestClass2(final int value) {
+       		this.value = value;
+       	}
+        	
+       	public int GetValue() {
+       		return value;
+       	}
+    }

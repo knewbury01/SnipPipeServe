@@ -1,0 +1,5 @@
+|    Use OWASP's [Java Encoder Project][3] `<e:forHtml value="${attr}" />` to escape output or JSTL's `<c:out value="${attr}"/>` and in `web.xml` set 
+        <context-param>
+            <param-name>defaultHtmlEscape</param-name>
+            <param-value>true</param-value>
+        </context-param>

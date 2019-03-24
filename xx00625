@@ -1,0 +1,3 @@
+|    grant codeBase "file:///C:/component/policytest.jar" {
+          permission java.security.AllPermission;
+    };

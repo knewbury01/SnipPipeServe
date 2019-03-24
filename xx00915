@@ -1,0 +1,5 @@
+|     String name = request.getBody(); // tainted
+     String cmd = "grep " + name + " customers.txt"; // also tainted
+     String cleanName = sanitize(name); // untainted
+     String cleanerName = validNameMap.get(name); // untainted
+     String literal = "a literal string"; // untainted

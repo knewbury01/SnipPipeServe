@@ -1,0 +1,8 @@
+|        <!-- Define a SSL Coyote HTTP/1.1 Connector on port 8443 -->
+        <Connector
+            protocol="org.apache.coyote.http11.Http11NioProtocol"
+            port="8443" maxThreads="200"
+            scheme="https" secure="true" SSLEnabled="true"
+            keystoreFile="${user.home}/.keystore" keystorePass="changeit"
+            clientAuth="false" sslProtocol="TLS"/>
+    This example is for Tomcat 7, but the process is similar for other Tomcat versions. See [Tomcat SSL](https://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html) for more information.

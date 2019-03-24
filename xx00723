@@ -1,0 +1,4 @@
+|    if (this is a development ColdFusion enviornment)
+    request.dsn = "development database";
+    else
+    request.dsn = "production database";

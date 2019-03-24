@@ -1,0 +1,3 @@
+|    ProcessBuilder pb = new ProcessBuilder("/bin/mount", "-o", "loop", /*...*/);
+    pb.redirectErrorStream(true); // equivalent of 2>&1
+    Process p = pb.start();

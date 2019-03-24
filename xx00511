@@ -1,0 +1,6 @@
+|    <pre>Permissions: sandbox
+    Codebase: *.myserver.com</pre>
+    These new attributes were introduced in Java 7 Update 25 and [are discussed here][1]. The first page linked above just shows `Codebase: myserver.com`, but most sites are going to want the wildcard above. (I don't know if the `Codebase` attribute is required for sandboxing the applet, but it seems like a good idea for most signed applets anyway.)
+    Then use that manifest file when building your jar, like:
+    <pre>jar cvfm YourJarFile.jar your_manifest_file.txt classes_and_such</pre>
+    Those attributes will wind up in the MANIFEST.MF file in the jar, which tells the Java runtime to keep the applet sandboxed.

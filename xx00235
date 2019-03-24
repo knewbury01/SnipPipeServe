@@ -1,0 +1,5 @@
+|    <Set name="ExcludeProtocols">
+        <Array type="java.lang.String">             
+           <Item>SSLv3</Item>
+        </Array>
+    </Set>

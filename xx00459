@@ -1,0 +1,2 @@
+|    <p><c:out value="${bean.userControlledValue}"></p>
+    <p><input name="foo" value="${fn:escapeXml(param.foo)}"></p>

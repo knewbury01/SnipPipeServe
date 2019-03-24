@@ -1,0 +1,1 @@
+|    pattern="\A/hero\.jsp/\$\?chooseHero=\Z"

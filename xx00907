@@ -1,0 +1,2 @@
+|    System.setProperty("javax.net.ssl.trustStore","~yourUser/MyLocalKeypass");
+    System.setProperty("javax.net.ssl.trustStorePassword","xyz");

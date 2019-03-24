@@ -1,0 +1,8 @@
+|    <http>
+      <session-management session-fixation-protection="none"/>
+      <custom-filter position="PRE_AUTH_FILTER" ref="preAuthenticationFilter"/>
+      <intercept-url pattern="/j_security_check" filters="none"/>
+      <intercept-url pattern="/ibm_security_logout" filters="none"/>
+      <!-- put authorization intercept-url elements here... -->
+    </http>
+    

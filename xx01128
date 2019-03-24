@@ -1,0 +1,5 @@
+|    String pem = new String(Files.readAllBytes(Paths.get("rsa.key")));
+    String privateKeyPEM = pem.replace(
+            "-----BEGIN RSA PRIVATE KEY-----\n", "")
+                 .replace("-----END RSA PRIVATE KEY-----", "");
+     byte[] encodedPrivateKey = Base64.getDecoder().decode(privateKeyPEM);

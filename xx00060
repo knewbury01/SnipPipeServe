@@ -1,0 +1,4 @@
+|    File file = new File( folder, path );
+    if( ! isParent( folder, file ) ) {
+        ... deny access ...
+    }

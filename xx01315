@@ -1,0 +1,3 @@
+|    SharedPreferences.Editor editor = prefs.edit();
+    editor.putInt("userPin", pin).commit();
+    int pin = prefs.getInt("userPin", default);

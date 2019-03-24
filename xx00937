@@ -1,0 +1,19 @@
+|    Manifest-Version: 1.0
+    Implementation-Title: MyApplet
+    Implementation-Version: applet build
+    Application-Name: Slide Show
+    Caller-Allowable-Codebase: *
+    Trusted-Library: true
+    Application-Library-Allowable-Codebase: *
+    Trusted-Only: true
+    Permissions: all-permissions  // <- ensure this bit is in the manifest!
+    Name: com/bifit/security/core/l.class
+    SHA1-Digest: d2WlbgJlgMWvzj4b5EjxPrd1IlA=
+    
+    Name: com/bifit/util/VerbalNumber_ua.class
+    SHA1-Digest: YZt7ca1OqSFbsVlrjH9+4acukFg=
+    
+    ...
+    
+    Name: com/bifit/security/token/CrystalNativeLoader$F2.class
+    SHA1-Digest: Fgczu0EVPvoSv5QKOqDSgIawfC0=

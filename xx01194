@@ -1,0 +1,40 @@
+|    ...
+    
+    <Engine name="Catalina" defaultHost="localhost">
+      
+      <Realm className="org.apache.catalina.realm.CombinedRealm">
+    
+        <!-- PRIMARY: tomcat-users.xml with critical system users
+                      that should always work, DB independent and without lockout
+                      NOTE: If the wrong password is given, the secondary path with
+                            lockout is still attempted, so that a lockout on that path
+                            will still occur and be logged. Still the primary path is not 
+                            locked for access by that happening.                           -->
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+    
+        <!-- SECONDARY: DataSourceRealm with DB with lockout functionality -->
+        <!-- (three level nesting of realms requires Tomcat >= 7.0.33)     -->
+        <Realm className="org.apache.catalina.realm.LockOutRealm" 
+          failureCount="5" lockOutTime="60" > <!-- note that when an account is locked correct password
+                                                   login is no longer possible (would otherwise defeat purpose of lockout),
+                                                   but also lockoutTime is still reset in each correct attempt -->
+                                                    
+          <Realm className="org.apache.catalina.realm.DataSourceRealm"
+             dataSourceName="jdbc/authority"
+             userTable="user" userNameCol="username" 
+             userCredCol="password" digest="SHA"
+             userRoleTable="user_role" roleNameCol="rolename" />
+                 
+        </Realm>
+        
+      </Realm>
+    
+      <Host >
+    
+        ...
+    
+      </Host>
+    </Engine>
+    
+    ...

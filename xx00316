@@ -1,0 +1,2 @@
+|    <import resource="classpath:/WEB-INF/spring/db-config.xml"/>
+    <import resource="classpath:/WEB-INF/spring/security-config.xml"/>

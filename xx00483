@@ -1,0 +1,2 @@
+|    PublicKey pubKey = myPair.getPublic();
+    byte[] keyBytes = pubKey.getEncoded();

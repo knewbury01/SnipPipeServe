@@ -1,0 +1,3 @@
+|    String digest = digester.digest(clave);
+    //Always fails at that point, I get different hash from compare clave
+    return digester.matches(digest, hash);

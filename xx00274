@@ -1,0 +1,1 @@
+|    <security:intercept-url pattern="/admin/get" access="ROLE_ADMIN"/>

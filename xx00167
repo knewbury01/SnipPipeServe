@@ -1,0 +1,3 @@
+|     <security-role>
+        <role-name>testing</role-name>
+     </security-role>

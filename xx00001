@@ -1,0 +1,3 @@
+|    ConcurrentHashMap<String, List<Long>> loginFails = new ConcurrentHashMap<>();
+    int ATTEMPTS_TO_FREEZE = 5;
+    int TIME_FRAME_IN_MINUTES = 5;

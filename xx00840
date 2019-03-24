@@ -1,0 +1,11 @@
+|	<!-- Configure realm for system administration users -->
+    <security:http pattern="/admin/**" create-session="stateless">
+		<security:intercept-url pattern='/**' access='ROLE_ADMIN' requires-channel="https" />
+		<security:http-basic/>	
+	</security:http>
+	<!-- Configure realm for standard users -->
+	<security:http auto-config="true" access-denied-page="/error/noaccess" use-expressions="true" create-session="ifRequired">
+		<security:form-login login-page="/login"
+                ...
+                ...
+    </security:http>

@@ -1,0 +1,1 @@
+|    generator.addCertificate(new X509CertificateHolder(serverCertificate.getEncoded()));

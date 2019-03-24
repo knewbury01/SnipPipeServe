@@ -1,0 +1,3 @@
+|    String[] splitToken = result.Value.Content.AuthorizationJWTToken.split("\\.");
+	Jwt parsedToken = Jwts.parser().parse(splitToken[0] + "." + splitToken[1] + ".");
+					

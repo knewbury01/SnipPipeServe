@@ -1,0 +1,3 @@
+|    Application-Name: Name
+    Application-Library-Allowable-Codebase: *
+    Caller-Allowable-Codebase: *

@@ -1,0 +1,5 @@
+|    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+    if (connection instanceof HttpsURLConnection) {
+        ((HttpsURLConnection)connection)
+             .setSSLSocketFactory(sc.getSSLSocketFactory());
+    }

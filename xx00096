@@ -1,0 +1,2 @@
+|     http.authorizeRequests()
+            .antMatchers("/api/**").authenticated();

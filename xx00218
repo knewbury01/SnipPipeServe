@@ -1,0 +1,3 @@
+|    grant codeBase "file:/C:/path/to/trusted/code/classes" {
+         permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+    };

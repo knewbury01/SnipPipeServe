@@ -1,0 +1,4 @@
+|    String safeCookieName = URLEncoder.encode(name, "UTF-8");
+    String safeCookieValue = URLEncoder.encode(value, "UTF-8");
+    response.addCookie(new Cookie(safeCookieName, safeCookieValue));
+    // ...

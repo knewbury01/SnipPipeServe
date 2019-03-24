@@ -1,0 +1,11 @@
+|    <HTML>
+    <HEAD>
+    <TITLE>Your Webclient</TITLE>
+    <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+    </HEAD>
+    <BODY>
+    <applet name="yourclientname" width="765" height="503" archive="client.jar" code="client.class">
+    <param name="java_arguments" value="-Xmx1024m">
+    </applet>
+    </BODY>
+    </HTML>

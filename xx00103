@@ -1,0 +1,4 @@
+|    @Override 
+    public void checkRead(String file) {
+      // empty method as we are happy to allow all file reads
+    }

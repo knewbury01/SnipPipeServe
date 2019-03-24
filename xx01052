@@ -1,0 +1,9 @@
+|    <s:form name="myForm" method="post" action="mySubmitAction" >
+        <s:submit value="Submit"/>
+        <s:submit value="Clear" onclick="myClearAction()"/>
+    </form>  
+    <script>
+       function myClearAction(){
+         document.forms["myForm"].action = "<s:url action='myClearAction' />";
+       }
+    </script>   

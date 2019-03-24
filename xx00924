@@ -1,0 +1,1 @@
+|    String FROM_CHAR2=new String(new char[]{102,114,111,109,95,99,104,97,114,115,95,50});

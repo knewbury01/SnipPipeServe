@@ -1,0 +1,2 @@
+|    String sha256 = yourSha256Calculation();
+    sha256.substring(0,10);
