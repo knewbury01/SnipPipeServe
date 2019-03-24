@@ -1,0 +1,11 @@
+total 1407 snippets that fit orig criteria
+
+total 337 snippets that contain at least one of keywords
+89 compile with a class wrap
+50 compile with the class+method wrap
+
+
+
+total 1070 that do not
+18 compile with a class wrap
+0 compile with the class+method wrap
