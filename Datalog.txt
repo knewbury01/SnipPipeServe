@@ -1,11 +1,37 @@
 total 1407 snippets that fit orig criteria
 
+#WITHOUT IMPORTS
 total 337 snippets that contain at least one of keywords
 89 compile with a class wrap
 50 compile with the class+method wrap
 
-
+COGNICRYPT:
+0 errors....?
 
 total 1070 that do not
 18 compile with a class wrap
+0 compile with the class+method wrap
+
+
+PROBLEMS that contribute to not being able to compile:
+sootppa == java 4 or less
+
+annotations in java 5.0
+java generics in java 5.0
+##############################
+
+#WITH IMPORTS
+total 337 snippets that contain at least one of keywords
+91 compile with a class wrap
+47 compile with the class+method wrap
+138 total
+
+COGNICRYPT:
+124 did not contain any error
+16 contain at least 1 error
+113 reports with "Number of Objects Analyzed: 0"
+so 25 had objects to analyze, 16 of those contained error, 9 did not 
+
+total 1070 that do not
+17 compile with a class wrap
 0 compile with the class+method wrap
