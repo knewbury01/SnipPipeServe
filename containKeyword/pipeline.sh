@@ -17,6 +17,15 @@ for file in *.java; do
     echo "trying for $file"
     #wrap just class attempt
     tempfile=X$file
+
+    #trying now with imports
+    echo "import javax.net.ssl.*;                                           
+import java.util.*;                                                            
+import java.lang.*;                                                            
+import java.io.*;                                                              
+import java.security.*;                                                        
+import java.net.*;" >> $tempfile
+
     echo "class ${tempfile%.java} {" >> $tempfile
     cat $file | sed '/@/d' >> $tempfile
     echo "}" >> $tempfile
@@ -29,7 +38,15 @@ for file in *.java; do
        mv $tempfile compileClass/$tempfile
     else
 	   #second try, with method and class
-	   rm $tempfile
+	rm $tempfile
+
+	echo "import javax.net.ssl.*;                                                   
+import java.util.*;                                                                     
+import java.lang.*;                                                                     
+import java.io.*;                                                                       
+import java.security.*;                                                                 
+import java.net.*;" >> $tempfile
+	
 	   echo "class ${tempfile%.java} {" >> $tempfile
 	   echo "public void placeholder(){" >> $tempfile
 	   cat $file | sed '/@/d' >> $tempfile
