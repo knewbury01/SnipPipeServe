@@ -12,9 +12,11 @@ mkdir compileClass
 mkdir compileMethodClass
 mkdir outputs
 
-for file in *.java; do
+for file in xx*.java; do
 
     echo "trying for $file"
+
+    
     #wrap just class attempt
     tempfile=X$file
 
@@ -24,10 +26,19 @@ import java.util.*;
 import java.lang.*;                                                            
 import java.io.*;                                                              
 import java.security.*;                                                        
-import java.net.*;" >> $tempfile
+import java.net.*;
+import javax.crypto.*;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import groovy.grape.Grape;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.spongycastle.util.io.pem.PemObject;
+import javax.ejb.EJBAccessException;
+import java.lang.reflect.Method;" >> $tempfile
 
     echo "class ${tempfile%.java} {" >> $tempfile
-    cat $file | sed '/@/d' >> $tempfile
+    #replace annotations, generics and imports 
+    cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d' >> $tempfile
     echo "}" >> $tempfile
 
     #check if this successfully compiled
@@ -45,11 +56,20 @@ import java.util.*;
 import java.lang.*;                                                                     
 import java.io.*;                                                                       
 import java.security.*;                                                                 
-import java.net.*;" >> $tempfile
+import java.net.*;
+import javax.crypto.*;                                                                                                   
+import java.math.BigInteger;                                                                                             
+import java.nio.charset.StandardCharsets;                                                                                
+import groovy.grape.Grape;                                                                                               
+import org.apache.shiro.crypto.hash.Sha256Hash;                                                                          
+import org.spongycastle.util.io.pem.PemObject;                                                                           
+import javax.ejb.EJBAccessException;                                                                                     
+import java.lang.reflect.Method;" >> $tempfile
 	
 	   echo "class ${tempfile%.java} {" >> $tempfile
 	   echo "public void placeholder(){" >> $tempfile
-	   cat $file | sed '/@/d' >> $tempfile
+	   #replace annotations, generics and imports
+	   cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d'  >> $tempfile
 	   echo "} }" >> $tempfile
 
 	   ./runPPA.sh $tempfile &> outputs/METHOD$outputfile
@@ -58,9 +78,20 @@ import java.net.*;" >> $tempfile
 	       mv $tempfile compileMethodClass/$tempfile
 	       fi
     fi
+
+    
 done
 
+#put all of the fails into own place
+./sortfails.sh
+
+
 echo -n "This number of files succeeded with just class wrapping: "
-ls -la compileClass | grep ".class" | wc -l
+ls compileClass | grep ".class" | wc -l
 echo -n "This number of files succeeded with method AND class wrapping: "
-ls -la compileMethodClass | grep ".class" | wc -l
+ls compileMethodClass | grep ".class" | wc -l
+#just a test
+echo -n "This number of X* files created: "
+ls X* | wc -l
+echo -n "This number of compile attempts failed: "
+ls fails/ | wc -l 
