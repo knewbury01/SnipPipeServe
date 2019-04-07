@@ -3,7 +3,7 @@
 # idea here: no point running ppa on things without the keywords
 #
 ###############
-
+mkdir containKeyword
 
 for file in xx*; do
     
