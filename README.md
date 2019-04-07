@@ -25,6 +25,7 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
     
   2) perform the following steps to obtain textual format of snippets:
 
+
       $ sqlite3
       sqlite> .open sotorrent18_12.sqlite3
       sqlite> .read snippetquery.sqlite
@@ -47,7 +48,8 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
   * X* files left in this dir will be the failed ones
   * But the corresponding PPA outputs are placed in fails dir
 
-  4) First try to compile snippets with minor modifications. Then iteratively try a few other things.
+  4) First try to compile snippets with minor modifications. Then iteratively try a few other things. Further details on what these modifications are can be found [here]().
+
 
      $ cd containKeyword
      $ ./pipelineNoWork.sh
@@ -59,4 +61,12 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
   * CogniCrypt produces reports of objects assessed, and errors found. These are piped ! into text files in CogniCryptResults
   5) Finally ready to assess correctness of crypto API usage in these snippets
 
-     $ ./runCogniCrypt.sh 
+
+     $ ./runCogniCrypt.sh
+
+  ## Produce a Summary:
+
+  6) For a lot of data it is nice to have a summary
+
+
+     $ ./summary.sh
