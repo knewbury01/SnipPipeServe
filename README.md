@@ -26,6 +26,7 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
   2) perform the following steps to obtain textual format of snippets:
 
 
+
       $ sqlite3
       sqlite> .open sotorrent18_12.sqlite3
       sqlite> .read snippetquery.sqlite
@@ -51,6 +52,7 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
   4) First try to compile snippets with minor modifications. Then iteratively try a few other things. Further details on what these modifications are can be found [here]().
 
 
+
      $ cd containKeyword
      $ ./pipelineNoWork.sh
      $ ./pipeline.sh
@@ -62,11 +64,13 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
   5) Finally ready to assess correctness of crypto API usage in these snippets
 
 
+
      $ ./runCogniCrypt.sh
 
   ## Produce a Summary:
 
   6) For a lot of data it is nice to have a summary
+
 
 
      $ ./summary.sh
