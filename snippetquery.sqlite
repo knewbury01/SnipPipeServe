@@ -4,7 +4,7 @@
 with javasecurityposts(javapostid) as (select distinct(Id) from Posts where Tags like "%<java>%" and Tags like "%<security>%")
 
 -- find ids and content of latest versions of code snippets found in accepted answers
-Select "---KNEWBURY---", Content c from PostBlockVersion, Posts p1 where
+Select "---UNIQUEIDFORSNIP---", Content c from PostBlockVersion, Posts p1 where
 p1.Id in
 (
 select AcceptedAnswerId from Posts
