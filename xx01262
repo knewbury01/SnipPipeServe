@@ -1,6 +1,0 @@
-|    <session-config>
-        <cookie-config>
-            <http-only>true</http-only>
-            <secure>true</secure>
-        </cookie-config>
-    </session-config>

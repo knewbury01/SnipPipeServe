@@ -1,2 +1,0 @@
-|    int numBuckets = s.readInt();
-    table = new Entry[numBuckets];

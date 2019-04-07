@@ -1,1 +1,0 @@
-|    cert.verify(interCA1.getPublicKey());

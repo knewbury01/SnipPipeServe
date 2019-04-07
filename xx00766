@@ -1,3 +1,0 @@
-|    System.out.println("Enter your pass phrase");  
-    String passPhrase = keyboard.next();
-    String encrypted = new DesEncrypter(passPhrase).encrypt(textToEncrypt);

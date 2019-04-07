@@ -1,4 +1,0 @@
-|	http.antMatcher("/api/**").authorizeRequests() //
-			.anyRequest().authenticated() //
-			.and()
-			.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);

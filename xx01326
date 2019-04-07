@@ -1,3 +1,0 @@
-|    <p>Welcome, <c:out value="${user.name}" />!</p>
-    ...
-    <input type="text" name="foo" value="${fn:escapeXml(param.foo)}" />

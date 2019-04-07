@@ -1,5 +1,0 @@
-|    public String getAlgorithmCode(String name) {
-        // locate the code. store it in a file, database, cache it in memory, etc.
-        // ...
-        return javascriptSourceCode;
-    }

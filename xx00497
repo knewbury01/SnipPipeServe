@@ -1,7 +1,0 @@
-|      <datasource ... >
-           .....
-           <security>
-                  <security-domain>EncryptedPassword</security-domain>
-           </security>
-      </datasource>
-                   

@@ -1,1 +1,0 @@
-|    String url = BuildConfig.SERVER_URL + "endpoint";

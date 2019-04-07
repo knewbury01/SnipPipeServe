@@ -1,4 +1,0 @@
-|    <pre>&lt;applet code='yourAppletClass' archive='YourJarFile.jar'>
-        &lt;param name="permissions" value="sandbox">
-    &lt;/applet></pre>
-    Without this second step, a signed applet requesting sandboxed permissions in the jar but not the tag is prevented from being run with a dialog box titled "The Application Cannot Be Run" giving "Reason: JAR manifest requested to run in sandbox only."

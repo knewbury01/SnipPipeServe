@@ -1,1 +1,0 @@
-|    String encodedSMS = Base64.encodeToString(encriptedSMS, Base64.DEFAULT)

@@ -1,5 +1,0 @@
-|    <VirtualHost www.mysite.com:80 >
-        RewriteEngine on
-        RewriteCond %{HTTP_HOST} www\.mysite\.com
-        RewriteRule ^/(.*)$ ajp://localhost:8009/myapp/$1 [P,QSA,L]
-    </VirtualHost>

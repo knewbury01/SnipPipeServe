@@ -1,4 +1,0 @@
-|    <application-desc main-class="com.example.app.Main">
-        <argument>--args</argument>
-        <argument>files.txt;;29;;true;;1384212567908</argument>
-    </application-desc>

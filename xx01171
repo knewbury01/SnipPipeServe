@@ -1,2 +1,0 @@
-|    cert.getExtensionValue(X509Extension.cRLDistributionPoints.getId());
-    String skiOid = X509Extension.authorityKeyIdentifier.getId();

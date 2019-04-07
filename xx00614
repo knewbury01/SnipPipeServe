@@ -1,1 +1,0 @@
-|    DataSource datasource = (DataSource) initialContext.lookup("jdbc/MyJDBCRealm");

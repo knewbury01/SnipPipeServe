@@ -1,2 +1,0 @@
-|    String concatenated = username + ":" + raw_password;
-    String schemeSpecificTextValue = base_64_encode(concatenated.toCharArray());

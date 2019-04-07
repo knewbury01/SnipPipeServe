@@ -1,7 +1,0 @@
-|    <dependency>
-      <groupId>us.physion</groupId>
-      <artifactId>osx-keychain</artifactId>
-      <version>1.0</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/external/osxkeychain.jar</systemPath>
-    </dependency>

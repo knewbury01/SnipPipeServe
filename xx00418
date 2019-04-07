@@ -1,4 +1,0 @@
-|    String htmlEscapedStr=ESAPI.encoder().encodeForHTML(content);
-    response.setContentType("text/plain");
-    response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(htmlEscapedStr);

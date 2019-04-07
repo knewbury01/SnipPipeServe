@@ -1,2 +1,0 @@
-|    FilePermission perm = new FilePermission("path/file", "read");
-    AccessController.checkPermission(perm);

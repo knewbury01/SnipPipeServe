@@ -1,3 +1,0 @@
-|    <sec:authorize ifAllGranted="ROLE_USER">
-         <!-- anything inside here will be visible to both users --> 
-    </sec:authorize>

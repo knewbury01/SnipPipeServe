@@ -1,3 +1,0 @@
-|    <http ...>
-    	<form-login login-page="/authenticate" ... />
-    </http>

@@ -1,3 +1,0 @@
-|    <bean id="userApprovalHandler" class="org.springframework.security.oauth2.provider.approval.TokenStoreUserApprovalHandler">
-        <property name="tokenStore" ref="tokenStore"/>
-    </bean>

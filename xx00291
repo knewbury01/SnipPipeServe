@@ -1,2 +1,0 @@
-|    Date date = user.getBirthDate();
-    date.setMonth(1);  // mutated!

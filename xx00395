@@ -1,1 +1,0 @@
-|    context.setLoader(new WebappLoader(getClass().getClassLoader()));

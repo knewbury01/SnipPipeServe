@@ -1,2 +1,0 @@
-|    String serial = UUID.randomUUID().toString().toUpperCase();
-	System.out.println(serial);

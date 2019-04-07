@@ -1,2 +1,0 @@
-|    PolicyFactory policy = Sanitizers.FORMATTING.and(Sanitizers.LINKS);
-    String safeHTML = policy.sanitize(untrustedHTML);

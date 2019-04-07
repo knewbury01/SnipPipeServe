@@ -1,1 +1,0 @@
-|String hexEncoded = Hex.encodeHexString(getEncryptedPassword(p,s,i,l)));

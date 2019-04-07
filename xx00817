@@ -1,1 +1,0 @@
-|    decryptedOut = new String(cipher.doFinal(encryptedOut));

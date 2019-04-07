@@ -1,5 +1,0 @@
-|    @RequestMapping(value = "/my/custom/url", method=RequestMethod.POST)
-    public String myFunction(HttpSession session,
-        HttpServletRequest request,
-        @RequestBody MyBean bean,
-        Errors errors, RedirectAttributes redirectAttributes)

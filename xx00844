@@ -1,6 +1,0 @@
-|    http
-     .authorizeRequests()
-     .antMatchers("/non-secure/**").permitAll()
-     .antMatchers("/secure/**").hasAuthority("user")
-     .and().requiresChannel().antMatchers("/non-secure/**").requiresInsecure()
-     .and().requiresChannel().antMatchers("/secure/**").requiresSecure()

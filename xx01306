@@ -1,3 +1,0 @@
-|    sudo netstat -anop | grep java
-    tcp6       0      0 :::56066                :::*                    LISTEN      18797/java       off (0.00/0/0)
-    unix  2      [ ]         STREAM     CONNECTED     30209    18797/java

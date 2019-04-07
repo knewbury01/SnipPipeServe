@@ -1,7 +1,0 @@
-|    Manifest-Version: 1.0
-    Application-Library-Allowable-Codebase: *
-    Application-Name: app-name
-    Build-Jdk: 1.7.0_79
-    Permissions: all-permissions
-    Caller-Allowable-Codebase: *
-    Codebase: *

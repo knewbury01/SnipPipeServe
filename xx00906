@@ -1,1 +1,0 @@
-|     /opt/jdk1.7.0_40/bin/keytool -import -file TomcatUser.pem.x509 -keystore ~yourUser/MyLocalKeypass -storepass xyz

@@ -1,3 +1,0 @@
-|    <@security.authorize ifAnyGranted="ROLE_USER">
-    	Your role is "ROLE_USER" <br/>
-    </@security.authorize>

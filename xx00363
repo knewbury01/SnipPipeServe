@@ -1,1 +1,0 @@
-|    if(request.getUserPrincipal() != null && request.isUserInRole("admin"))

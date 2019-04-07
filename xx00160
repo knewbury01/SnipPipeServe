@@ -1,1 +1,0 @@
-|    TimeStampRequest req = reqgen.generate(TSPAlgorithms.SHA1, digest);

@@ -1,1 +1,0 @@
-|$ keytool -import -alias myalias -keystore keystore -file myalias.crt

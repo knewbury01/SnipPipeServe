@@ -1,5 +1,0 @@
-|    Java_com_example_exampleApp_ExampleClass_getSecretKey(
-               JNIEnv* env, jobject thiz )
-    {
-        return (*env)->NewStringUTF(env, "mySecretKey".");
-    }

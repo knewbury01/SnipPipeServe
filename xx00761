@@ -1,1 +1,0 @@
-|    ssh-keygen -e -m PKCS8 -f id_rsa.pub >pub.pem # change filename as needed

@@ -1,6 +1,0 @@
-|	check c:\foo
-	file      Files.isWritable: true
-	directory Files.isWritable: false
-	check c:\bar
-	file      Files.isWritable: true
-	directory Files.isWritable: false

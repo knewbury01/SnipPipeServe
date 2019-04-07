@@ -1,3 +1,0 @@
-|    # Set compilation mode. JIT = at runtime; FORCE = before execution.
-    # Options: [JIT, FORCE, OFF, OFFIR], Default: JIT.
-    compile.mode=JIT

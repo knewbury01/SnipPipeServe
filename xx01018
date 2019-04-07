@@ -1,2 +1,0 @@
-|    if(URL.getProtocol().equalsIgnoreCase("https"))
-     then replace "www." with " secure." 

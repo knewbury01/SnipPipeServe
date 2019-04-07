@@ -1,2 +1,0 @@
-|    String encryptedPassword = passwordService.encryptPassword(signupForm.getPassword());
-    userService.createUser(signupForm.getFullName(), signupForm.getEmail(), encryptedPassword);

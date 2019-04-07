@@ -1,1 +1,0 @@
-|    context.addFilePermission(FileAccess.READ, AccessType.PERMIT, new FilePrefixPermission(""));

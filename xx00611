@@ -1,1 +1,0 @@
-|    writer.setEncryption(PdfWriter.ENCRYPTION_AES_128, finalpass, "TheOwnerPassword", PdfWriter.AllowPrinting);

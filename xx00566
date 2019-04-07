@@ -1,3 +1,0 @@
-|    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-    connection.setSSLSocketFactory(...);
-    connection.setHostnameVerifier(...);

@@ -1,3 +1,0 @@
-|    public ResultSet executeQuery(SQLQuery query, Object... arguments) {
-      // implementation left as an exercise for the reader
-    }

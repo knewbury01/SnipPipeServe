@@ -1,4 +1,0 @@
-|    if [ `id -u` = 0 ]; then
-      echo "You are root, go away!"
-      exit 1
-    fi

@@ -1,2 +1,0 @@
-|    @Priority(Priorities.AUTORIZATION + 100)
-    class SomeFilter implements ContainerRequestFilter {}

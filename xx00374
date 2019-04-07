@@ -1,2 +1,0 @@
-|    .antMatchers("/secure/**").access("hasRole('ADMIN')")
-    .requiresChannel().anyRequest().requiresSecure()

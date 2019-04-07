@@ -1,3 +1,0 @@
-|    http
-        .authorizeRequests()
-            .antMatchers("/admin/**").acces("hasRole('admin') and (hasIpAddress('127.0.0.1') or hasIpAddress('192.168.1.0/24') or hasIpAddress('0:0:0:0:0:0:0:1'))";

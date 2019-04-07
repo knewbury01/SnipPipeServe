@@ -1,4 +1,0 @@
-|    .authorizeRequests()
-                .antMatchers("/api/user/**", "/user").authenticated()
-                .antMatchers("/api/admin/**", "/templates/admin/**", "/admin/**").hasRole("ADMIN")
-                .anyRequest().permitAll();

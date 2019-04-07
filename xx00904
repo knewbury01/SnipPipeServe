@@ -1,1 +1,0 @@
-|    /opt/jdk1.7.0_40/bin/keytool -genkey -alias tomcat -keypass mypassword -keystore keystore.key -storepass mypassword -keyalg RSA

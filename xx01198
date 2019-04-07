@@ -1,6 +1,0 @@
-|    class A {
-      private String method1() {
-        return "Hello World!";
-      }
-    }
-    

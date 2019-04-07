@@ -1,3 +1,0 @@
-|     <PRE><code>xargs codesign -s &quot;P6DMU6694X&quot; -v dependency.dylib</code></PRE>
-     ... where `P6DMU6694X` is either the unique developer ID or the exact certificate Common Name (either will work).
-    * For a `.jar` file, this can be [particularly cumbersome](https://github.com/qzind/tray/pull/388/files) as each package needs to be extracted, signed and then zipped back up.

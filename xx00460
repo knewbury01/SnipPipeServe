@@ -1,3 +1,0 @@
-|    static boolean authenticate(String username, String password) {
-        return "abc@abc.com".equals(username) && "abc123".equals(password);
-    }

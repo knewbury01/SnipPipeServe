@@ -1,5 +1,0 @@
-|      In ldif file:
-        dc: xxxx
-        objectClass: yyyyy
-        userCertificate;binary:< file:///path/to/certificate.der
-  

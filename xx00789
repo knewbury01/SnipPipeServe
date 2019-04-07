@@ -1,5 +1,0 @@
-|    // spacing modified for readability
-    var $strongName = '02F159CD1F48EEB372B36E0BA704A0BE';
-    function __gwtStartLoadingFragment(frag) {
-        return $moduleBase + 'deferredjs/'  + $strongName + '/' + frag + '.cache.js';
-    }

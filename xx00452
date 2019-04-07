@@ -1,9 +1,0 @@
-|    <system-properties>
-        <property name="java.net.preferIPv4Stack" value="true"/>
-        <property name="javax.net.ssl.trustStore" value="cacerts.jks"/>
-        <property name="javax.net.ssl.trustStorePassword" value="Password1"/>
-        <property name="javax.net.ssl.keyStore" value="/keystore.jks"/>
-        <property name="javax.net.ssl.keyStorePassword" value="Password1"/>
-        <property name="java.naming.referral" value="follow"/>
-        <property name="java.security.policy" value="server.policy"/>
-    </system-properties>

@@ -1,2 +1,0 @@
-|    Use [Hibernate Validator][2] (you don't need to use Hibernate ORM to use this) with the `@SafeHtml` annotation on all user-supplied String fields.
-    You could validate all request headers, post params and query params in one Interceptor for simplistic XSS validation. 

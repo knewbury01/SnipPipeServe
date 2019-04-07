@@ -1,4 +1,0 @@
-|    <application-desc main-class="com.example.app.Main">
-        <argument>--args</argument>
-        <argument>*</argument>
-    </application-desc>

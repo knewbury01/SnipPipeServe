@@ -1,6 +1,0 @@
-|    <form method="https://www.example.com/requestHandler">
-    
-    <input type="action" value="navigateToLoginForm" />
-    <input type="token" value="qwerty1234" />
-    
-    </form>

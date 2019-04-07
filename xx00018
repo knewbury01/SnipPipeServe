@@ -1,3 +1,0 @@
-|    final String[] rolesAllowed = {"USER"};
-    methodBuilder.produces(MediaType.TEXT_PLAIN_TYPE)
-                .handledBy(new AuthorizationInflector(rolesAllowed, new TestInflector()));

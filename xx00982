@@ -1,5 +1,0 @@
-|        server.port=8443
-        server.ssl.key-store=classpath:keystore.jks
-        server.ssl.key-store-password=secret
-        server.ssl.key-password=another-secret
-    Where keystore.jks is the path to your Java keystore that holds your SSL certificate. See [Spring Boot Docs](http://docs.spring.io/spring-boot/docs/current/reference/html/howto-embedded-servlet-containers.html#howto-configure-ssl) for more info.

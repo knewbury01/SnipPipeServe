@@ -1,2 +1,0 @@
-|    <security:intercept-url pattern="/student/add.faces" access="ROLE_STUDENTADMIN" />
-    <security:intercept-url pattern="/student/createLearningObservation.faces" access="ROLE_USER" />

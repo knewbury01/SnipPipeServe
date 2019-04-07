@@ -1,2 +1,0 @@
-|    File dir = new File (System.getProperty("java.home") + SEP + "lib" + SEP + "security");
-    File keystoreFile = new File(dir, "cacerts"); <-- file name missing, 'cacerts' is a directory

@@ -1,5 +1,0 @@
-|    <RentalPaymentPref>
-    <PaymentCard CardType="1" CardCode="VI" CardNumber="xxxxxxxxxxxx8899" ExpireDate="0912" SeriesCode="123">
-    <CardHolderName>Ruchira kariyawasam</CardHolderName>
-    </PaymentCard>
-    </RentalPaymentPref>

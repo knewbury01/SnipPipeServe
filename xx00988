@@ -1,5 +1,0 @@
-|    List<MaliciousDate> dates = new ArrayList<>()
-    Date start = new MaliciousDate(dates);
-    Date end = new MaliciousDate(dates);
-    Period p = new Period(start, end);
-    dates.get(1).setYear(78); // Modifies internals of p!

@@ -1,5 +1,0 @@
-|    <error-page>
-        <!-- Forbidden directory listing -->
-        <error-code>403</error-code>
-        <location>/general-error.html</location>
-    </error-page>

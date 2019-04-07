@@ -1,1 +1,0 @@
-|<a href="http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/7-b147/sun/reflect/ReflectionFactory.java#72">72</a>  <font color="#7f0055"><b>private</b></font> <font color="#7f0055"><b>static</b></font> <font color="#7f0055"><b>int</b></font>     inflationThreshold = 15;<br/>

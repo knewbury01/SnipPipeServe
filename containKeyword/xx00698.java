@@ -1,1 +1,0 @@
-|    EncryptedBase64EncodedString -> (convert from base64 to normal string [Use Default parameters only! No Padding or other constants for decoding base64 string]) -> Pass private_key & decoded string to Cipher -> Profit.

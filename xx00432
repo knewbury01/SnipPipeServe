@@ -1,3 +1,0 @@
-|    if (filename.endsWith(".txt") {
-        store(filename, data);
-    }

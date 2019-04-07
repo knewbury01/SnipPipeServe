@@ -1,4 +1,0 @@
-|    dependencies {
-        compile 'com.scottyab:secure-preferences-lib:0.1.4'
-    }
-    

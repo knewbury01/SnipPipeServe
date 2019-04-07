@@ -1,6 +1,0 @@
-|    <@security.authorize access="isAuthenticated()">
-        logged in as <@security.authentication property="principal.username" /> 
-    </@security.authorize>
-    <@security.authorize access="! isAuthenticated()">
-    	Not logged in
-    </@security.authorize>

@@ -1,3 +1,0 @@
-|    byte[] cipherData = Base64.decode(encodedString);
-    byte[] plainBytes = cipher.doFinal(cipherData);
-    return new String(plainBytes, "UTF-8");

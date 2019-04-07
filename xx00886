@@ -1,7 +1,0 @@
-|    Manifest-Version: 1.0
-        Created-By: 1.7.0_51
-        Permissions: all-permissions
-        Application-Name: My Farming Business
-        Application-Library-Allowable-Codebase: www.mycompany.com/where_the_applet_jar_actually_lives
-        Caller-Allowable-Codebase:www.mycompany.com
-        Codebase: *

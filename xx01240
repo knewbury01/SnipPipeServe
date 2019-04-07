@@ -1,3 +1,0 @@
-|    <bean id="proxyAuthenticationHandler"
-          class="org.jasig.cas.authentication.handler.support.HttpBasedServiceCredentialsAuthenticationHandler"
-          p:httpClient-ref="httpClient" p:requireSecure="false"/>

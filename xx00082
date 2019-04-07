@@ -1,4 +1,0 @@
-|	<valve>
-		<class-name>com.lifecycle.framework.valve.SecureRequestModifyingValve
-		</class-name>
-	</valve>

@@ -1,1 +1,0 @@
-|    g.modPow(u1,p).multiply(y.modPow(u2,p)).mod(p)

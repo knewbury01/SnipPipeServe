@@ -1,4 +1,0 @@
-|    String badInput = rawInput.replace("'","''");
-    String badInteger = rawInteger.replace("'","''");
-    ResultSet rs = statement.executeQuery("SELECT * FROM records WHERE" +
-     "int1 = " + badInteger + " OR col1 = '"+badInput+"'");

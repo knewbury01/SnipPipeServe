@@ -1,3 +1,0 @@
-|    bb.clear();
-    while(bb.remaining() >= 8) bb.putLong(0);
-    while(bb.remaining() > 0) bb.put((byte) 0);

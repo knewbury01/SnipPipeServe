@@ -1,1 +1,0 @@
-|    openssl s_client -connect <server>:<port> -CAfile <trust-anchor.pem>

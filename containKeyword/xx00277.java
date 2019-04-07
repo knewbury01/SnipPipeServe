@@ -1,3 +1,0 @@
-|Disabled indicates an account has been administratively or automatically disabled for some reason. Usually some action is required to release it.
-Locked indicates an account has been automatically suspended due to invalid login attempts. Usually the passage of time or (less often) requesting manual unlocking is required to release it.
-The distinction is not used by Acegi Security code aside from providing more informative errors to the user. There is also an order in which different exceptions should be returned, so that a disabled or locked account for instance will not return a bad credentials exception. Refer to the JavaDocs for more details.

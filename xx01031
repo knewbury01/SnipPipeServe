@@ -1,2 +1,0 @@
-|    String keystorePath = "local.keystore";
-    System.setProperty("javax.net.ssl.trustStore", keystorePath);

@@ -1,3 +1,0 @@
-|    @Autowired
-    @Qualifier("jdbcUserService")  // <-- this references the bean id
-    public UserDetailsManager userDetailsManager;

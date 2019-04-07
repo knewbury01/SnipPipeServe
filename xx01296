@@ -1,2 +1,0 @@
-|    $('form')[0].submit();
-    //or e.target.submit();

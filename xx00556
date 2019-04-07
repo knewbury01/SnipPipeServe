@@ -1,3 +1,0 @@
-|    <sec:authorize ifAllGranted="ROLE_USER, ROLE_ADMIN">
-         <!-- html, jsp scriplets, jstl tags inside here will be visible to user B only --> 
-    </sec:authorize>

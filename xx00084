@@ -1,2 +1,0 @@
-|    String jsEscapedValue = ESAPI.encoder().encodeForJavaScript(results.getListValue());
-    request.setAttribute("listValue", jsEscapedValue);

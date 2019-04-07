@@ -1,5 +1,0 @@
-|    # simply add an property to store the session key
-    class User(db.Model):    
-        username = db.StringProperty()
-        password = db.StringProperty()
-        session = db.StringProperty()

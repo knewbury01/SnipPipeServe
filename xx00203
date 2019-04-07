@@ -1,2 +1,0 @@
-|    Set<String> tokens = new HashSet<String>();
-    event.getSession().setAttribute("tokens", tokens);

@@ -1,2 +1,0 @@
-|            /* Skip the code below for --skip-user-management */
-            if (this.skipUserManagement && (this.applicationType !== 'monolith' || this.authenticationType !== 'oauth2')) return;

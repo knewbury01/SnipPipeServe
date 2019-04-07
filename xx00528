@@ -1,2 +1,0 @@
-|    ASN1InputStream ais = new ASN1InputStream(derOctetString.getOctetStream());
-    KeyUsage ku = new KeyUsage((DERBitString) ais.readObject());

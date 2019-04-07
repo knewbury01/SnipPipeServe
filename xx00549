@@ -1,3 +1,0 @@
-|    <beans:bean 
-        id="passwordEncoder" 
-        class="my.awesome.package.MyAwesomeShaPasswordEncoder"/>

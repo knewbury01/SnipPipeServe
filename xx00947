@@ -1,3 +1,0 @@
-|    @PreAuthorize("(hasRole('ROLE_USER') and #post.text.length() <= 140)
-      or hasRole('ROLE_PREMIUM')")
-    

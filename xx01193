@@ -1,4 +1,0 @@
-|    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public void deleteUser(User user) {
-      ...
-    }

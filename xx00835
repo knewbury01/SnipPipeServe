@@ -1,3 +1,0 @@
-|    cd /
-    keytool -genkey -dname "cn=CN, ou=OU, o=O, l=L, st=ST, c=C" -alias mykey -keypass mypass -keystore mystore -validity 3650 -storepass mypass
-    jarsigner -keystore c:\mystore -storepass mypass C:\path\to\applet.jar mykey

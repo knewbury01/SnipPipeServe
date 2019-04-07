@@ -1,5 +1,0 @@
-|    //construct Gowalla auth URI
-    $auth_url = sprintf("%s?redirect_uri=%s&client_id=%s", 
-                $authorization_endpoint, 
-                $callback_url, 
-                $key);

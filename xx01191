@@ -1,4 +1,0 @@
-|    <Directory /home/*/public_html>	-- You can change this location
-    	MaxConnPerIP 1	
-    	OnlyIPLimit audio/mpeg video
-    </Directory>

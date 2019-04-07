@@ -1,2 +1,0 @@
-|    openssl x509 -in example-com.cert.pem -text -noout
-    openssl req -in example-com.req.pem -text -noout

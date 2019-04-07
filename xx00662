@@ -1,1 +1,0 @@
-|    @RequestMapping(value = "/my/custom/url", method=RequestMethod.POST)

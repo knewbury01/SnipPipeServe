@@ -1,2 +1,0 @@
-|    openssl rsa -in pub.pem -out pub.der -outform der # any version
-    openssl pkey -pubin -in pub.pem -out pub.der -outform der # 1.0.0 up

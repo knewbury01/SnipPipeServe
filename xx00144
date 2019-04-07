@@ -1,2 +1,0 @@
-|    The last step is to ensure that you include the CSRF token in all
-    PATCH, POST, PUT, and DELETE methods.

@@ -1,6 +1,0 @@
-|    <security-role>
-    	 <role-name>Admin</role-name>
-    </security-role>
-    <security-role>
-    	 <role-name>Author</role-name>
-    </security-role>

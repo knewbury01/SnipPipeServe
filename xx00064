@@ -1,1 +1,0 @@
-|    if (AuthUtils.isAuthenticated(request, "ROLE1", "ROLE2"))

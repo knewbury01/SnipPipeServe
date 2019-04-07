@@ -1,2 +1,0 @@
-|    BigInteger modulus = new BigInteger(1, Base64.decodeBase64(jsonKey.getN()));
-    BigInteger exponent = new BigInteger(1, Base64.decodeBase64(jsonKey.getE()));

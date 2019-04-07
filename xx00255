@@ -1,5 +1,0 @@
-|    public interface ObjectRepository<T extends DomainObject>
-    {
-        public T save(T object);
-        ...
-    }

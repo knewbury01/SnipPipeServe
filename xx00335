@@ -1,3 +1,0 @@
-|    keytool -importkeystore -srckeystore myKeystore.jks -destkeystore myKeystore.p12 
-    -deststoretype PKCS12 -srcalias someAlias -srcstorepass 12345678 -deststorepass 
-    1122334455 -destkeypass 1122334455    

@@ -1,2 +1,0 @@
-|    String salt = generateLongRandomString();
-    String hashToStore = sha1(sha1(password) + salt);

@@ -1,1 +1,0 @@
-|     keyStore.load(new FileInputStream(privateKeyFile), Constants.JKS_PRIVATE_FILE_PASSWORD);

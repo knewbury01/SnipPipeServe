@@ -1,1 +1,0 @@
-|    Log.e("ERROR", "AFTER: "+ CryptUtils.decrypt( pojo.getName() ));

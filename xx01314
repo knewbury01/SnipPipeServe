@@ -1,1 +1,0 @@
-|    SharedPreferences prefs = new SecurePreferences(context, null, "my_custom_prefs.xml");

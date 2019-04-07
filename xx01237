@@ -1,3 +1,0 @@
-|    (println (sb '(do
-                    clojure.lang.RT
-                    (RT/errPrintWriter))))

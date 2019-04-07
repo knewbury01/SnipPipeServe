@@ -1,2 +1,0 @@
-|    FILE *fp;
-    fp = fopen("/proc/self/maps", "r");

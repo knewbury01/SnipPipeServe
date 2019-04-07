@@ -1,3 +1,0 @@
-|    for (Permission permission : role.getPermissions()) {
-    		  permissions.add(new GrantedAuthorityImpl(permission.getName()));
-    		}

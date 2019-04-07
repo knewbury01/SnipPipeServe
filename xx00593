@@ -1,2 +1,0 @@
-|    import { Http } from '@angular/http'; // old version
-    import { HttpClient } from '@angular/common/http'; // new version

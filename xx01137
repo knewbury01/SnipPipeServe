@@ -1,1 +1,0 @@
-|    addFilterChain("/secure/**", AUTHC, config(ROLES, "admin"));

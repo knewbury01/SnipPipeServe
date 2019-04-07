@@ -1,4 +1,0 @@
-|    <context-param> 
-    <param-name>com.sun.faces.sendPoweredByHeader</param-name> 
-    <param-value>false</param-value> 
-    </context-param>

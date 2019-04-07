@@ -1,1 +1,0 @@
-|        cipherText = cipher.doFinal(text.getBytes());

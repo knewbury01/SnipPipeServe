@@ -1,8 +1,0 @@
-|    security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Some authentification required</web-resource-name>
-            <url-pattern>/services/MyService</url-pattern>
-    		<http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint><role-name>somebody</role-name></auth-constraint>          
-    </security-constraint>

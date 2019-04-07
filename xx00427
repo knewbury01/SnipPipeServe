@@ -1,2 +1,0 @@
-|    Context context = Context.enter();
-    context.setOptimizationLevel(-1);

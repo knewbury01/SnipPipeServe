@@ -1,4 +1,0 @@
-|    public UserDetails findByUsername(String username) {
-        Users user = userSocialRepository.findByUsername(username);
-        return new SocialUser(user.getUsername(), ...);
-    }

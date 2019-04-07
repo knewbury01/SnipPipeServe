@@ -1,2 +1,0 @@
-|		text = "<span style=\"width: expression(alert('XSS'));\">";
-		System.out.println(Jsoup.clean(text, org.jsoup.safety.Whitelist.relaxed().addTags("span").addAttributes(":all","style")));

@@ -1,3 +1,0 @@
-|    runas /noprofile /user:Administrator cmd
-    cd c:\myapp
-    play run

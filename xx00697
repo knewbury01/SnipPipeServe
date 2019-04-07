@@ -1,1 +1,0 @@
-|    String -> (Encrypt) -> Encrypted String -> (convert to base64) -> EncryptedBase64EncodedString -> (Decrypt) -> Original String

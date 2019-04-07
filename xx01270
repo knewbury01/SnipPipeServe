@@ -1,1 +1,0 @@
-|    $ sed -i "s/ DH keySize < 1024,//" /usr/lib/jvm/default-java/jre/lib/security/java.security

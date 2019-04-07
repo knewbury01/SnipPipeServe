@@ -1,5 +1,0 @@
-|    callNoArgMethod("getSigningData", jar);
-    makeHardLink("signingDataRef", jar);
-    
-    callNoArgMethod("getManifest", jar);
-    makeHardLink("manRef", jar, n);

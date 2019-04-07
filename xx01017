@@ -1,4 +1,0 @@
-|    Set<String> roles = (Set<String>) session.getAttribute("userRoles");
-    if(roles.contains("ROLE_ADMIN")) {
-        putReadersInModel(model);
-    }

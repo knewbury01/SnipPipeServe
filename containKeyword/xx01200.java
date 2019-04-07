@@ -1,6 +1,0 @@
-|    Exception in thread "main" java.security.AccessControlException: access denied ("java.lang.reflect.ReflectPermission" "suppressAccessChecks")
-            at java.security.AccessControlContext.checkPermission(Unknown Source)
-            at java.security.AccessController.checkPermission(Unknown Source)
-            at java.lang.SecurityManager.checkPermission(Unknown Source)
-            at java.lang.reflect.AccessibleObject.setAccessible(Unknown Source)
-            at B.main(B.java:8)

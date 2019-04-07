@@ -1,8 +1,0 @@
-|    <security-constraint>
-        <web-resource-collection>
-            <url-pattern>#Some URL PATTERN#</url-pattern>
-        </web-resource-collection>
-        <auth-constraint>
-            <security-role-name>CalendarUser</security-role-name>
-        </auth-constraint>
-    </security-constraint>

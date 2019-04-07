@@ -1,3 +1,0 @@
-|    @RolesAllowed({"ROLE1", "ROLE"})
-    @GET
-    public Response getResource() throws Exception

@@ -1,8 +1,0 @@
-|    All definitive response messages SHALL be digitally signed. The key
-    used to sign the response MUST belong to one of the following:
-    
-    -- the CA who issued the certificate in question
-    -- a Trusted Responder whose public key is trusted by the requester
-    -- a CA Designated Responder (Authorized Responder) who holds a specially
-       marked certificate issued directly by the CA, indicating that the responder
-       may issue OCSP responses for that CA

@@ -1,4 +1,0 @@
-|        @Bean
-        public TicketValidator ticketValidator() {
-            return new Cas20ServiceTicketValidator("https://localhost:8443/cas/p3");
-        }

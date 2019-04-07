@@ -1,1 +1,0 @@
-|    @PreAuthorize("hasPermission(#opetussuunnitelmaDto, 'LUONTI')")

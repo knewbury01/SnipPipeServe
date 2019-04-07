@@ -1,3 +1,0 @@
-|    keytool -genkeypair -dname "cn=Mark Jones, ou=Java, o=Oracle, c=US"
-      -alias business -keypass <new password for private key> -keystore /working/mykeystore
-      -storepass <new password for keystore> -validity 180

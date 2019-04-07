@@ -1,5 +1,0 @@
-|    <manifest file="${source}/META-INF/MANIFEST.MF" mode="update">
-	  <attribute name="Permissions" value="all-permissions"/>
-	  <attribute name="Codebase" value="${jnlp.codebase}"/>
-	  <attribute name="Application-Name" value="${app.name}"/>
-    </manifest>

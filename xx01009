@@ -1,2 +1,0 @@
-|    hasPermission('#targetDomainObject', 'permission')    // method1
-    hasPermission('targetId', 'targetType', 'permission') // method2

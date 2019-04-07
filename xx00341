@@ -1,1 +1,0 @@
-|    keytool -export myservercert.crt -alias myalias -keystore mykeystore.jks

@@ -1,3 +1,0 @@
-|    String text = request.getParameter("text");
-    String safe = Jsoup.clean(text, Whitelist.basic());
-    // Persist 'safe' in DB instead.

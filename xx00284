@@ -1,4 +1,0 @@
-|    bool allowedMove() {
-      return true;
-      ... remaining original check code here
-    }

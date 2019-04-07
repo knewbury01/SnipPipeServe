@@ -1,6 +1,0 @@
-|    id
-    username
-    password
-    failedAttempts (int)
-    lastFailed (date)
-    lastLogin (date)

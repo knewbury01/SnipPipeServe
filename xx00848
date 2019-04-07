@@ -1,8 +1,0 @@
-|    <subsystem xmlns="urn:jboss:domain:infinispan:1.4">
-        <cache-container name="security" default-cache="auth-cache">
-            <local-cache name="auth-cache" batching="true">
-                <expiration lifespan="*INSERT_CACHE_TIMEOUT_IN_MILLIS"/>
-            </local-cache>
-        </cache-container>
-    ...
-    <security-domain name="myJaasDomain" cache-type="infinispan">

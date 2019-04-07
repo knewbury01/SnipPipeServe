@@ -1,4 +1,0 @@
-|    http
-      .post('/api/items/add', body, {
-        headers: new HttpHeaders().set('Authorization', 'my-auth-token'),
-      })

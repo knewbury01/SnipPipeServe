@@ -1,3 +1,0 @@
-|    Field field = safe.getClass().getDeclaredField("secret");
-    field.setAccessible(true);
-    String secret = (String) field.get(safe);

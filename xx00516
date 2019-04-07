@@ -1,1 +1,0 @@
-|    -javaagent:notsoserial.jar -Dnotsoserial.whitelist=empty.txt 

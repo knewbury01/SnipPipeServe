@@ -1,3 +1,0 @@
-|    Query query = em.createQuery("DELETE Order WHERE customer = :customer");
-    query.setParameter("customer", customer);
-    query.executeUpdate();

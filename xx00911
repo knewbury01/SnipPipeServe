@@ -1,5 +1,0 @@
-|    CREATE VIEW vUsers AS  
-    SELECT userid, password from Users where userid IS NOT NULL  
-    UNION ALL  
-    SELECT email, password from Users where email IS NOT NULL 
-  

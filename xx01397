@@ -1,1 +1,0 @@
-|    PdfReader reader = new PdfReader(src, getPublicCertificate("C:\\Users\\USER\\Documents\\NetBeansPr‌​ojects\\test\\src\\l‌​k_encb64.cer"), getPrivateKey(), "SunPKCS11-eToken"); 

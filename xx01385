@@ -1,7 +1,0 @@
-|    <http>
-      ...
-      <session-management>
-          <concurrency-control max-sessions="1" />
-      </session-management>
-    </http>
-        

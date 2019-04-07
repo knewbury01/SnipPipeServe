@@ -1,3 +1,0 @@
-|    $ git clone https://github.com/physion/osx-keychain-java
-    $ mvn install
-    $ cp dist/osxkeychain.jar ~/myproject/external

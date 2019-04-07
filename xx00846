@@ -1,1 +1,0 @@
-|String base64encoded = Base64.getEncoder().encodeToString(getEncryptedPassword(p,s,i,l)));

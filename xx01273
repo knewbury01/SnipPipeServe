@@ -1,3 +1,0 @@
-|    <% if (request.isUserInRole("role")) { %>
-      <!-- Content to display for users in role 'role' -->
-    <% } %>

@@ -1,1 +1,0 @@
-|    String sql = "Select * from tblUsers where Username = '" + usern + " and password = '" + pwd + "'";

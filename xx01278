@@ -1,1 +1,0 @@
-|    @PowerMockIgnore("javax.net.ssl.*")

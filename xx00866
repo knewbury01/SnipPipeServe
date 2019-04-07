@@ -1,5 +1,0 @@
-|    <cxf:bus>
-     <cxf:outInterceptors>
-       <bean class="---------------------.WebsphereSslOutInterceptor" />
-    </cxf:outInterceptors>
-    </cxf:bus>

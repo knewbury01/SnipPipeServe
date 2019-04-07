@@ -1,4 +1,0 @@
-|    import zipfile
-    z = zipfile.ZipFile('c:/a_zip_file')
-    print 'total files size=', sum(e.file_size for e in z.infolist())
-    z.close()

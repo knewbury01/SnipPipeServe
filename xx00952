@@ -1,3 +1,0 @@
-|    $GLASSFISH_HOME/bin/asadmin enable-secure-admin --adminalias=myOwnAlias --instancealias myOwnAlias
-    
-    $GLASSFISH_HOME/bin/asadmin restart-domain

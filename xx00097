@@ -1,2 +1,0 @@
-|    http.authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/api/password/reset").permitAll();

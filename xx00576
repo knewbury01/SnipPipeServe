@@ -1,1 +1,0 @@
-|    ((X509Certificate) certificate).getIssuerX500Principal().getName();

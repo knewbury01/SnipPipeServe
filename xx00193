@@ -1,1 +1,0 @@
-|    c2.multiply(c1.modPow(x.negate(), p)).mod(p)

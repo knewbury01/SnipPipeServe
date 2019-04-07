@@ -1,7 +1,0 @@
-|    [main]
-    shiro.loginURL = /login.xhtml
-    myRealm = com.example.shiro.MyRealm
-    securityManager.realms = $myRealm
-    [urls]
-    /account/** = authc
-    /logout = logout

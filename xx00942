@@ -1,3 +1,0 @@
-|    <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
-                 resourceName="UserDatabase"/>
- 

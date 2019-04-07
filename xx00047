@@ -1,2 +1,0 @@
-|    openssl req -config example-com.conf -new -newkey rsa:2048 \
-        -nodes -keyout example-com.key.pem -days 365 -out example-com.req.pem

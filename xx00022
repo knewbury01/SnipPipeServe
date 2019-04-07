@@ -1,2 +1,0 @@
-|    ProgrammaticLogin pl = new ProgrammaticLogin();
-    pl.login(usernameCombo.getSelectedItem().toString(), passwordText.getPassword());

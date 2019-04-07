@@ -1,7 +1,0 @@
-|    <mvc:annotation-driven/>
-    <mvc:interceptors>
-        <bean id="webContentInterceptor" 
-              class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-            <property name="X-Content-Type-Options" value="nosniff"/>
-        </bean>
-    </mvc:interceptors>

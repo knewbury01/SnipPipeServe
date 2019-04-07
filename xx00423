@@ -1,7 +1,0 @@
-|    ...
-    Acceptable client certificate CA names
-    /C=PL/O=company/OU=xx/CN=host/emailAddress=email@example.com
-    /C=PL/O=company/OU=xx/CN=ca/emailAddress=email@example.com
-    ---
-    SSL handshake has read 2536 bytes and written 116 bytes
-    ...

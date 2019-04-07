@@ -1,9 +1,0 @@
-|	<security:http create-session="stateless"
-		entry-point-ref="digestEntryPoint" pattern="/provider/**"
-		use-expressions="true">
-		<security:intercept-url pattern="/provider/**"
-			access="isAuthenticated()" />
-		<security:http-basic />
-		<security:custom-filter ref="digestFilter"
-			after="BASIC_AUTH_FILTER" />
-	</security:http>

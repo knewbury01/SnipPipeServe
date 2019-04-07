@@ -1,1 +1,0 @@
-|    encoded = s.bytes.encodeBase64().toString()
