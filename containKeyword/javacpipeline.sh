@@ -19,14 +19,8 @@ for file in xx*.java; do
     #wrap just class attempt
     tempfile=J$file
 
-    #trying now with imports
-    echo "import javax.net.ssl.*;                                           
-import java.util.*;                                                            
-import javax.crypto.*;
-import java.lang.*;                                                            
-import java.io.*;                                                              
-import java.security.*;                                                        
-import java.net.*;" >> $tempfile
+    #trying now with imports                                               
+    cat imports.txt >> $tempfile
 
     echo "class ${tempfile%.java} {" >> $tempfile
     cat $file | sed '/@/d' >> $tempfile
@@ -43,13 +37,7 @@ import java.net.*;" >> $tempfile
     else
 	   #second try, with method and class
 	rm $tempfile
-
-	echo "import javax.net.ssl.*;                                          
-import java.util.*;                                                                    import javax.crypto.*;
-import java.lang.*;                                                            
-import java.io.*;                                                             
-import java.security.*;                                                        
-       import java.net.*;" >> $tempfile
+	cat imports.txt >> $tempfile
 	
 	   echo "class ${tempfile%.java} {" >> $tempfile
 	   echo "public void placeholder(){" >> $tempfile
