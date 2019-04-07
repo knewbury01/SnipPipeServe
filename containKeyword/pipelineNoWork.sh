@@ -10,9 +10,8 @@
 mkdir Original
 mkdir OrigsFailed
 
-for file in Xxx*.java; do
+for file in xx*.java; do
 
-    file=${file#X}
     #complex, but we gotta extract the class name from the file to name it
     #gotta deal with ... chopping off extends/implements
     #and sometimes the brace is there and sometimes not
