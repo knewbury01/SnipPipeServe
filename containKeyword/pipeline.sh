@@ -16,25 +16,11 @@ for file in xx*.java; do
 
     echo "trying for $file"
 
-    
     #wrap just class attempt
     tempfile=X$file
 
-    #trying now with imports
-    echo "import javax.net.ssl.*;                                           
-import java.util.*;                                                            
-import java.lang.*;                                                            
-import java.io.*;                                                              
-import java.security.*;                                                        
-import java.net.*;
-import javax.crypto.*;
-import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
-import groovy.grape.Grape;
-import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.spongycastle.util.io.pem.PemObject;
-import javax.ejb.EJBAccessException;
-import java.lang.reflect.Method;" >> $tempfile
+    #add imports
+    cat imports.txt >> $tempfile
 
     echo "class ${tempfile%.java} {" >> $tempfile
     #replace annotations, generics and imports 
@@ -50,21 +36,8 @@ import java.lang.reflect.Method;" >> $tempfile
     else
 	   #second try, with method and class
 	rm $tempfile
-
-	echo "import javax.net.ssl.*;                                                   
-import java.util.*;                                                                     
-import java.lang.*;                                                                     
-import java.io.*;                                                                       
-import java.security.*;                                                                 
-import java.net.*;
-import javax.crypto.*;                                                                                                   
-import java.math.BigInteger;                                                                                             
-import java.nio.charset.StandardCharsets;                                                                                
-import groovy.grape.Grape;                                                                                               
-import org.apache.shiro.crypto.hash.Sha256Hash;                                                                          
-import org.spongycastle.util.io.pem.PemObject;                                                                           
-import javax.ejb.EJBAccessException;                                                                                     
-import java.lang.reflect.Method;" >> $tempfile
+         
+	cat imports.txt >> $tempfile
 	
 	   echo "class ${tempfile%.java} {" >> $tempfile
 	   echo "public void placeholder(){" >> $tempfile

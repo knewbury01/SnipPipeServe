@@ -1,3 +1,12 @@
+#####################
+#trys to compile the snippets
+#with no wrap
+#still performs the same tweaks as full pipeline
+#separate bc ... complexity?
+#
+#
+######################
+
 mkdir Original
 mkdir OrigsFailed
 
@@ -12,20 +21,7 @@ for file in Xxx*.java; do
     
     echo "trying for $file, named as $tempfile"
     
-    echo "import javax.net.ssl.*;                                              
-import java.util.*;                                                            
-import java.lang.*;                                                            
-import java.io.*;                                                              
-import java.security.*;                                                        
-import java.net.*;                                                             
-import javax.crypto.*;                                                         
-import java.math.BigInteger;                                                   
-import java.nio.charset.StandardCharsets;                                      
-import groovy.grape.Grape;                                                     
-import org.apache.shiro.crypto.hash.Sha256Hash;                                
-import org.spongycastle.util.io.pem.PemObject;                                 
-import javax.ejb.EJBAccessException;                                           
-import java.lang.reflect.Method;" >> $tempfile
+    cat imports.txt >> $tempfile
 
     cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d' >> $tempfile
 
