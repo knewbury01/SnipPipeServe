@@ -23,8 +23,8 @@ for file in xx*.java; do
     cat imports.txt >> $tempfile
 
     echo "class ${tempfile%.java} {" >> $tempfile
-    #replace annotations, generics and imports 
-    cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d' >> $tempfile
+    #replace annotations, generics and imports and elipses and packages
+    cat $file | sed '/@/d' | sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//' | sed '/import/d' | sed '/\.\.\./d'  | sed '/package/d' >> $tempfile
     echo "}" >> $tempfile
 
     #check if this successfully compiled
@@ -41,8 +41,8 @@ for file in xx*.java; do
 	
 	   echo "class ${tempfile%.java} {" >> $tempfile
 	   echo "public void placeholder(){" >> $tempfile
-	   #replace annotations, generics and imports
-	   cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d'  >> $tempfile
+	   #replace annotations, generics and imports and elipses and packages
+	   cat $file | sed '/@/d' | sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//' | sed '/import/d'  | sed '/\.\.\./d' | sed '/package/d'  >> $tempfile
 	   echo "} }" >> $tempfile
 
 	   ./runPPA.sh $tempfile &> outputs/METHOD$outputfile
@@ -58,13 +58,5 @@ done
 #put all of the fails into own place
 ./sortfails.sh
 
-
-echo -n "This number of files succeeded with just class wrapping: "
-ls compileClass | grep ".class" | wc -l
-echo -n "This number of files succeeded with method AND class wrapping: "
-ls compileMethodClass | grep ".class" | wc -l
-#just a test
-echo -n "This number of X* files created: "
-ls X* | wc -l
-echo -n "This number of compile attempts failed: "
-ls fails/ | wc -l 
+#print a summary
+./pipesummary.sh
