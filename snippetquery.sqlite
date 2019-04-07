@@ -1,0 +1,20 @@
+.output IndividualSnippets.txt
+
+-- a temp table of posts tagged with java and security
+with javasecurityposts(javapostid) as (select distinct(Id) from Posts where Tags like "%<java>%" and Tags like "%<security>%")
+
+-- find ids and content of latest versions of code snippets found in accepted answers
+Select "---KNEWBURY---", Content c from PostBlockVersion, Posts p1 where
+p1.Id in
+(
+select AcceptedAnswerId from Posts
+)
+--latest versions of posts
+and SuccCount = 0
+--post block type is code snippet
+and PostBlockTypeId = 2
+and PostId = p1.Id
+--connect these answers to parent posts with java+security tags
+and ParentId in
+(select * from javasecurityposts)
+;
