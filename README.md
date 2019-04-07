@@ -27,10 +27,10 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
 
-      $ sqlite3
-      sqlite> .open sotorrent18_12.sqlite3
-      sqlite> .read snippetquery.sqlite
-      $ ./splitsnippets.sh IndividualSnippets.txt
+    $ sqlite3
+    sqlite> .open sotorrent18_12.sqlite3
+    sqlite> .read snippetquery.sqlite
+    $ ./splitsnippets.sh IndividualSnippets.txt
 
   ## Sort Snippets:
 
@@ -53,9 +53,9 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
 
-     $ cd containKeyword
-     $ ./pipelineNoWork.sh
-     $ ./pipeline.sh
+    $ cd containKeyword
+    $ ./pipelineNoWork.sh
+    $ ./pipeline.sh
 
 
   ## Assess Security:
@@ -65,7 +65,7 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
 
-     $ ./runCogniCrypt.sh
+    $ ./runCogniCrypt.sh
 
   ## Produce a Summary:
 
@@ -73,4 +73,4 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
 
-     $ ./summary.sh
+    $ ./summary.sh
