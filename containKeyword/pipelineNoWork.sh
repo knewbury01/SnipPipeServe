@@ -1,11 +1,17 @@
 mkdir Original
+mkdir OrigsFailed
 
 for file in Xxx*.java; do
 
     file=${file#X}
-    tempfile=O$file
-    echo "trying for $file"
-
+    #complex, but we gotta extract the class name from the file to name it
+    #gotta deal with ... chopping off extends/implements
+    #and sometimes the brace is there and sometimes not
+    tempfile=$(cat $file | grep "class" | sed -e 's/.*class\(.*\){/\1/' | sed -e 's/.*\(.*\)extends/\1/' | sed -e 's/.*\(.*\)implements/\1/' | sed 's/.*class//' | sed 's/ //g')
+    tempfile=${tempfile}.java
+    
+    echo "trying for $file, named as $tempfile"
+    
     echo "import javax.net.ssl.*;                                              
 import java.util.*;                                                            
 import java.lang.*;                                                            
@@ -23,17 +29,14 @@ import java.lang.reflect.Method;" >> $tempfile
 
     cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d' >> $tempfile
 
-    #check if this successfully compiled                                        
     outputfile=${tempfile%.java}.txt
     ./runPPA.sh $tempfile &> outputs/ORIG$outputfile
-    if cat outputs/ORIG$outputfile | grep "Soot finished"; then
+    if cat outputs/ORIG$outputfile | grep -q "Soot finished"; then
        mv classes/${tempfile%.java}.class Original/${tempfile%.java}.class
        mv $tempfile Original/$tempfile
-    else
-           
-    rm $tempfile
-
-    
+    else  
+       mv $tempfile OrigsFailed/$tempfile
+    fi
 done
 
 echo -n "This number of files succeeded with no alterations: "
