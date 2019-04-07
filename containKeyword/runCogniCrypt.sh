@@ -2,6 +2,8 @@
 #Rules from release 2.0
 #build from 5f531d1d4377aefd35cec6658ae95308c6594244
 ######################################
+mkdir CogniCryptResults
+mkdir isolateclass
 
 for file in compileClass/*.class; do
 
