@@ -7,7 +7,7 @@
 # imports are also removed, as sootPPA allows for phantom-refs
 #
 #############
-
+mkdir Original
 mkdir compileClass
 mkdir compileMethodClass
 mkdir outputs
@@ -16,6 +16,27 @@ for file in xx*.java; do
 
     echo "trying for $file"
 
+    #first attempt with no wrap alterations
+    tempfile=$(cat $file | grep "class" | sed -e 's/.*class\(.*\){/\1/' | sed -e 's/.*\(.*\)extends/\1/' | sed -e 's/.*\(.*\)implements/\1/' | sed 's/.*class//' | sed 's/ //g')
+    tempfile=${tempfile}.java
+
+    echo "Rename $file as $tempfile"
+
+    cat imports.txt >> $tempfile
+
+    cat $file | sed '/@/d' | sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//' | sed '/import/d' | sed '/\.\.\./d'  | sed '/package/d' >> $tempfile
+
+    outputfile=${tempfile%.java}.txt
+    ./runPPA.sh $tempfile &> outputs/ORIG$outputfile
+    if cat outputs/ORIG$outputfile | grep -q "Soot finished"; then
+       mv classes/${tempfile%.java}.class Original/${tempfile%.java}.class
+       mv $tempfile Original/$tempfile
+
+       else
+
+	   rm $tempfile
+
+    #SECOND TRY
     #wrap just class attempt
     tempfile=X$file
 
@@ -34,7 +55,7 @@ for file in xx*.java; do
        mv classes/${tempfile%.java}.class compileClass/${tempfile%.java}.class
        mv $tempfile compileClass/$tempfile
     else
-	   #second try, with method and class
+	#THIRD TRY, with method and class
 	rm $tempfile
          
 	cat imports.txt >> $tempfile
@@ -50,6 +71,8 @@ for file in xx*.java; do
 	       mv classes/${tempfile%.java}.class compileMethodClass/${tempfile%.java}.class
 	       mv $tempfile compileMethodClass/$tempfile
 	       fi
+    fi
+
     fi
 
     
