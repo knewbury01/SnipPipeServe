@@ -7,7 +7,7 @@
 # so if ran twice on same file can result in removing
 # a character that was actually supposed to be there
 #############################
-for file in xx*.java; do
+for file in xx*; do
 
     #for linux: sed -i 's/|//' $file
     sed -i '' 's/|//' $file
