@@ -22,7 +22,7 @@ for file in xx*.java; do
     
     cat imports.txt >> $tempfile
 
-    cat $file | sed '/@/d' | sed 's/<.*>//' | sed '/import/d' >> $tempfile
+    cat $file | sed '/@/d' | sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//' | sed '/import/d' | sed '/\.\.\./d'  | sed '/package/d' >> $tempfile
 
     outputfile=${tempfile%.java}.txt
     ./runPPA.sh $tempfile &> outputs/ORIG$outputfile
