@@ -1,0 +1,964 @@
+---UNIQUEIDFORSNIP---|    if (!JceSecurityManager.INSTANCE.isCallerTrusted()) {
+        throw new NullPointerException();
+    }
+---UNIQUEIDFORSNIP---|    public static final byte[] Long2ByteArray(long paramLong, ByteOrder paramByteOrder) {
+        // create new byte array of the same size as a Java long (64 bit signed integer)
+        byte[] arrayOfByte = new byte[8];
+        // wrap it using a wrapper class
+        ByteBuffer localByteBuffer = ByteBuffer.wrap(arrayOfByte);
+        // put it in LITTLE_ENDIAN order, (only effects the next put and get methods)
+        localByteBuffer.order(paramByteOrder);
+        // put in the long, where the least significant bits are in arrayOfByte[0]
+        // and the most significant (as well as the sign bit) in arrayOfByte[7]
+        // this is different from the default BIG_ENDIAN encoding used by Java
+        localByteBuffer.putLong(paramLong);
+        // return it
+        return arrayOfByte;
+    }
+---UNIQUEIDFORSNIP---|    // initSeed is just zero valued bytes
+    byte[] initSeed = new byte[16];
+    SecureRandom secureRandom = SecureRandom.getInstance("SHA1PRNG");
+    secureRandom.setSeed(initSeed);
+    byte[] seed = secureRandom.generateSeed(16);
+    byte[] data = new byte[16];
+    secureRandom.nextBytes(data);
+    
+    System.out.printf("Seed: %s%n", Hex.toHexString(seed));
+    System.out.printf("Data: %s%n", Hex.toHexString(data));
+---UNIQUEIDFORSNIP---|    MyAESKey myAESKey = new MyAESKey(new byte[16]);
+	Cipher aes = Cipher.getInstance("AES");
+	aes.init(Cipher.ENCRYPT_MODE, myAESKey);
+	aes.doFinal("owlstead".getBytes());
+	myAESKey.destroy();
+	aes.doFinal("owlstead".getBytes());
+	aes.init(Cipher.ENCRYPT_MODE, myAESKey);
+	aes.doFinal("owlstead".getBytes());
+---UNIQUEIDFORSNIP---|    BigInteger modulus = new BigInteger(1, Base64.decodeBase64(jsonKey.getN()));
+    BigInteger exponent = new BigInteger(1, Base64.decodeBase64(jsonKey.getE()));
+---UNIQUEIDFORSNIP---|    BigInteger modulus = new BigInteger(1, Base64.getUrlDecoder().decode(jsonKey.getN()));
+    BigInteger exponent = new BigInteger(1, Base64.getUrlDecoder().decode(jsonKey.getE()));
+---UNIQUEIDFORSNIP---|    m = 10001621865  c = 31116156015
+    m = 10001621866  c = 33031668326
+    m = 10001621867  c = 37351399313
+    m = 10001621868  c = 6071714212
+    m = 10001621869  c = 1188523761
+    m = 10001621870  c = 18341011998
+    m = 10001621871  c = 7620400191
+    m = 10001621872  c = 36106912203
+    m = 10001621873  c = 37615263725
+    m = 10001621874  c = 7795237418
+    m = 10001621875  c = 34774459868
+    m = 10001621876  c = 4555747045
+    m = 10001621877  c = 33123599635
+    m = 10001621878  c = 34836418207
+    m = 10001621879  c = 33962453633
+    m = 10001621880  c = 6258371439
+    m = 10001621881  c = 7500991556
+    m = 10001621882  c = 5071836635
+    m = 10001621883  c = 911495880
+    m = 10001621884  c = 39558568485
+---UNIQUEIDFORSNIP---|    import java.io.IOException;
+    import java.io.UnsupportedEncodingException;
+    import java.security.AlgorithmParameters;
+    import java.security.GeneralSecurityException;
+    import java.security.NoSuchAlgorithmException;
+    import java.security.spec.InvalidKeySpecException;
+    import java.util.Base64;
+    import javax.crypto.Cipher;
+    import javax.crypto.SecretKey;
+    import javax.crypto.SecretKeyFactory;
+    import javax.crypto.spec.IvParameterSpec;
+    import javax.crypto.spec.PBEKeySpec;
+    import javax.crypto.spec.SecretKeySpec;
+    
+    public class ProtectedConfigFile {
+    
+        public static void main(String[] args) throws Exception {
+            String password = System.getProperty("password");
+            if (password == null) {
+                throw new IllegalArgumentException("Run with -Dpassword=<password>");
+            }
+    
+            // The salt (probably) can be stored along with the encrypted data
+            byte[] salt = new String("12345678").getBytes();
+    
+            // Decreasing this speeds down startup time and can be useful during testing, but it also makes it easier for brute force attackers
+            int iterationCount = 40000;
+            // Other values give me java.security.InvalidKeyException: Illegal key size or default parameters
+            int keyLength = 128;
+            SecretKeySpec key = createSecretKey(password.toCharArray(),
+                    salt, iterationCount, keyLength);
+    
+            String originalPassword = "secret";
+            System.out.println("Original password: " + originalPassword);
+            String encryptedPassword = encrypt(originalPassword, key);
+            System.out.println("Encrypted password: " + encryptedPassword);
+            String decryptedPassword = decrypt(encryptedPassword, key);
+            System.out.println("Decrypted password: " + decryptedPassword);
+        }
+    
+        private static SecretKeySpec createSecretKey(char[] password, byte[] salt, int iterationCount, int keyLength) throws NoSuchAlgorithmException, InvalidKeySpecException {
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            PBEKeySpec keySpec = new PBEKeySpec(password, salt, iterationCount, keyLength);
+            SecretKey keyTmp = keyFactory.generateSecret(keySpec);
+            return new SecretKeySpec(keyTmp.getEncoded(), "AES");
+        }
+    
+        private static String encrypt(String property, SecretKeySpec key) throws GeneralSecurityException, UnsupportedEncodingException {
+            Cipher pbeCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            pbeCipher.init(Cipher.ENCRYPT_MODE, key);
+            AlgorithmParameters parameters = pbeCipher.getParameters();
+            IvParameterSpec ivParameterSpec = parameters.getParameterSpec(IvParameterSpec.class);
+            byte[] cryptoText = pbeCipher.doFinal(property.getBytes("UTF-8"));
+            byte[] iv = ivParameterSpec.getIV();
+            return base64Encode(iv) + ":" + base64Encode(cryptoText);
+        }
+    
+        private static String base64Encode(byte[] bytes) {
+            return Base64.getEncoder().encodeToString(bytes);
+        }
+    
+        private static String decrypt(String string, SecretKeySpec key) throws GeneralSecurityException, IOException {
+            String iv = string.split(":")[0];
+            String property = string.split(":")[1];
+            Cipher pbeCipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+            pbeCipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(base64Decode(iv)));
+            return new String(pbeCipher.doFinal(base64Decode(property)), "UTF-8");
+        }
+    
+        private static byte[] base64Decode(String property) throws IOException {
+            return Base64.getDecoder().decode(property);
+        }
+    }
+---UNIQUEIDFORSNIP---|    Installed providers:
+        1: SunRsaSign
+        2: SunJSSE
+        3: SunEC
+        4: SunJCE
+        5: SUN
+        6: nCipherKM
+---UNIQUEIDFORSNIP---|    public static void main(String args[]) throws Exception{
+        
+        String password = "Secret Passphrase";
+        String salt = "222f51f42e744981cf7ce4240eeffc3a";
+        String iv = "2b69947b95f3a4bb422d1475b7dc90ea";
+        String encrypted = "CQVXTPM2ecOuZk+9Oy7OyGJ1M6d9rW2D/00Bzn9lkkehNra65nRZUkiCgA3qlpzL";
+            
+        byte[] saltBytes = hexStringToByteArray(salt);
+        byte[] ivBytes = hexStringToByteArray(iv);
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(ivBytes);        
+        SecretKeySpec sKey = (SecretKeySpec) generateKeyFromPassword(password, saltBytes);
+        System.out.println( decrypt( encrypted , sKey ,ivParameterSpec));
+    }
+        
+    public static SecretKey generateKeyFromPassword(String password, byte[] saltBytes) throws GeneralSecurityException {
+        
+        KeySpec keySpec = new PBEKeySpec(password.toCharArray(), saltBytes, 100, 128);
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey secretKey = keyFactory.generateSecret(keySpec);
+        
+        return new SecretKeySpec(secretKey.getEncoded(), "AES");
+    }
+    
+    public static byte[] hexStringToByteArray(String s) {
+        
+        int len = s.length();
+        byte[] data = new byte[len / 2];
+        
+        for (int i = 0; i < len; i += 2) {
+            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
+                    + Character.digit(s.charAt(i+1), 16));
+        }
+        
+        return data;
+    }
+    
+    public static String decrypt(String encryptedData, SecretKeySpec sKey, IvParameterSpec ivParameterSpec) throws Exception { 
+                 
+        Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        c.init(Cipher.DECRYPT_MODE, sKey, ivParameterSpec);
+        byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedData);
+        byte[] decValue = c.doFinal(decordedValue);
+        String decryptedValue = new String(decValue);
+        
+        return decryptedValue;
+    }
+ 
+---UNIQUEIDFORSNIP---|    function  generateKey(){
+        var salt = CryptoJS.lib.WordArray.random(128/8);
+        var iv = CryptoJS.lib.WordArray.random(128/8);
+        console.log('salt  '+ salt );
+        console.log('iv  '+ iv );
+        var key128Bits100Iterations = CryptoJS.PBKDF2("Secret Passphrase", salt, { keySize: 128/32, iterations: 100 });
+        console.log( 'key128Bits100Iterations '+ key128Bits100Iterations);
+        var encrypted = CryptoJS.AES.encrypt("Message", key128Bits100Iterations, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7  });
+    }
+    
+    function  decrypt(){
+        var salt = CryptoJS.enc.Hex.parse("4acfedc7dc72a9003a0dd721d7642bde");
+        var iv = CryptoJS.enc.Hex.parse("69135769514102d0eded589ff874cacd");
+        var encrypted = "PU7jfTmkyvD71ZtISKFcUQ==";
+        var key = CryptoJS.PBKDF2("Secret Passphrase", salt, { keySize: 128/32, iterations: 100 });
+        console.log( 'key '+ key);
+        var decrypt = CryptoJS.AES.decrypt(encrypted, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 });
+        var ddd = decrypt.toString(CryptoJS.enc.Utf8); 
+        console.log('ddd '+ddd);
+    }
+---UNIQUEIDFORSNIP---|    private static void removeCryptographyRestrictions() {
+        if (!isRestrictedCryptography()) {
+            return;
+        }
+        try {
+            java.lang.reflect.Field isRestricted;
+            try {
+                final Class<?> c = Class.forName("javax.crypto.JceSecurity");
+                isRestricted = c.getDeclaredField("isRestricted");
+            } catch (final ClassNotFoundException e) {
+                try {
+                    // Java 6 has obfuscated JCE classes
+                    final Class<?> c = Class.forName("javax.crypto.SunJCE_b");
+                    isRestricted = c.getDeclaredField("g");
+                } catch (final ClassNotFoundException e2) {
+                    throw e;
+                }
+            }
+            isRestricted.setAccessible(true);
+            isRestricted.set(null, false);
+        } catch (final Throwable e) {
+            logger.log(Level.WARNING,
+                    "Failed to remove cryptography restrictions", e);
+        }
+    }
+    private static boolean isRestrictedCryptography() {
+        return "Java(TM) SE Runtime Environment"
+                .equals(System.getProperty("java.runtime.name"));
+    }
+---UNIQUEIDFORSNIP---|    import javax.crypto.Cipher;
+    import javax.crypto.spec.SecretKeySpec;
+    
+    public class MainClass {
+      public static void main(String[] args) throws Exception {
+        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());    
+        byte[] input = "www.java2s.com".getBytes();
+        byte[] keyBytes = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 
+                     0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 
+                     0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 
+                     0x15, 0x16, 0x17 };
+    
+        SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
+    
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS7Padding", "BC");
+    
+        System.out.println(new String(input));
+    
+        // encryption pass
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+    
+        byte[] cipherText = new byte[cipher.getOutputSize(input.length)];
+        int ctLength = cipher.update(input, 0, input.length, cipherText, 0);
+        ctLength += cipher.doFinal(cipherText, ctLength);
+        System.out.println(new String(cipherText));
+        System.out.println(ctLength);
+    
+        // decryption pass
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        byte[] plainText = new byte[cipher.getOutputSize(ctLength)];
+        int ptLength = cipher.update(cipherText, 0, ctLength, plainText, 0);
+        ptLength += cipher.doFinal(plainText, ptLength);
+        System.out.println(new String(plainText));
+        System.out.println(ptLength);
+      }
+    }
+         
+---UNIQUEIDFORSNIP---|    static { Security.addProvider(new BouncyCastleProvider());  }
+---UNIQUEIDFORSNIP---|        public byte[] concatKDF(String hashAlg, byte[] z, int keyDataLen, byte[] algorithmID, byte[] partyUInfo, byte[] partyVInfo, byte[] suppPubInfo, byte[] suppPrivInfo) throws NoSuchAlgorithmException
+	{
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		try {
+			baos.write(algorithmID);
+			baos.write(partyUInfo);
+			baos.write(partyVInfo);
+			baos.write(suppPubInfo);
+			baos.write(suppPrivInfo);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		
+		byte[] otherInfo = baos.toByteArray();
+		return concatKDF(hashAlg, z, keyDataLen, otherInfo);
+	}
+	
+	public byte[] concatKDF(String hashAlg, byte[] z, int keyDataLen, byte[] otherInfo) throws NoSuchAlgorithmException
+	{
+		byte[] key = new byte[keyDataLen];
+		MessageDigest md = MessageDigest.getInstance(hashAlg);
+		int hashLen = md.getDigestLength(); 
+		int reps = keyDataLen / hashLen;
+		for(int i=1;i<=reps;i++){
+			md.reset();
+			md.update(intToFourBytes(i));
+			md.update(z);
+			md.update(otherInfo);
+			byte[] hash = md.digest();
+			if(i<reps){
+				System.arraycopy(hash, 0, key, hashLen*(i-1), hashLen);
+			}else{
+				if(keyDataLen % hashLen == 0){
+					System.arraycopy(hash, 0, key, hashLen*(i-1), hashLen);
+				}else{
+					System.arraycopy(hash, 0, key, hashLen*(i-1), keyDataLen % hashLen);
+				}
+			}
+		}
+		return key;
+	}
+	public byte[] intToFourBytes(int i){
+		byte[] res = new byte[4];
+		res[0] = (byte) (i >>> 24);
+		res[1] = (byte) ((i >>> 16) & 0xFF);
+		res[2] = (byte) ((i >>> 8) & 0xFF);
+		res[3] = (byte) (i & 0xFF);
+		return res;
+	}
+---UNIQUEIDFORSNIP---|    public static void testKeyStore() throws Exception {
+      try {
+        String storeName = "path/to/store";
+        java.security.KeyPairGenerator keyPairGenerator = KeyPairGenerator
+            .getInstance("RSA");
+        keyPairGenerator.initialize(2048);
+        KeyPair keyPair = keyPairGenerator.generateKeyPair();
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
+        X509Certificate selfCert = createCertificate("CN=Client", "CN=Client",
+            publicKey, privateKey);
+        // Note: if you just want to store this certificate then write the
+        // contents of selfCert.getEncoded() to file
+  
+        java.security.cert.Certificate[] outChain = { selfCert };
+        KeyStore outStore = KeyStore.getInstance("PKCS12");
+        outStore.load(null, PASSWORD.toCharArray());
+        outStore.setKeyEntry("mykey", privateKey, PASSWORD.toCharArray(),
+            outChain);
+        OutputStream outputStream = new FileOutputStream(storeName);
+        outStore.store(outputStream, PASSWORD.toCharArray());
+        outputStream.flush();
+        outputStream.close();
+  
+        KeyStore inStore = KeyStore.getInstance("PKCS12");
+        inStore.load(new FileInputStream(storeName), PASSWORD.toCharArray());
+      } catch (Exception e) {
+        e.printStackTrace();
+        throw new AssertionError(e.getMessage());
+      }
+    }
+---UNIQUEIDFORSNIP---|    String iv = payload.substring(0, 16);
+    String data = payload.substring(16);
+---UNIQUEIDFORSNIP---|    Security.addProvider(new ERACOMProvider());
+---UNIQUEIDFORSNIP---|    security.provider.#=org.bouncycastle.jce.provider.BouncyCastleProvider 
+---UNIQUEIDFORSNIP---|    Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+---UNIQUEIDFORSNIP---|    security.provider.5=org.bouncycastle.jce.provider.BouncyCastleProvider 
+---UNIQUEIDFORSNIP---|    KeyPairGenerator mcElieceKeyPairGenerator = KeyPairGenerator.getInstance("McEliece");
+    mcElieceKeyPairGenerator.initialize(keysize, new SecureRandom());
+    kp = mcElieceKeyPairGenerator.generateKeyPair();
+    final byte[] publicKeyData = kp.getPublic().getEncoded(); 
+    X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(publicKeyData);
+    KeyFactory mcElieceKeyFactory = KeyFactory.getInstance("McEliece");
+    PublicKey regeneratedPublicKey = mcElieceKeyFactory.generatePublic(publicKeySpec);
+    
+    final byte[] privateKeyData = kp.getPrivate().getEncoded();
+    PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(privateKeyData);
+    PrivateKey regeneratedPrivateKey = mcElieceKeyFactory.generatePrivate(privateKeySpec);
+---UNIQUEIDFORSNIP---|    SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+    sr.setSeed("abcdefghijklmnop".getBytes("us-ascii"));
+---UNIQUEIDFORSNIP---|    import java.util.Scanner;
+---UNIQUEIDFORSNIP---|    public static void main(String args[]){
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("Enter your text");  
+        String textToEncrypt = keyboard.next();
+        
+        String encrypted = DesEncrypter.NAGASAKTI.encrypt(textToEncrypt);
+        System.out.println("encrypted text=  "+ encrypted);
+    }
+       
+---UNIQUEIDFORSNIP---|    System.out.println("Enter your pass phrase");  
+    String passPhrase = keyboard.next();
+    String encrypted = new DesEncrypter(passPhrase).encrypt(textToEncrypt);
+---UNIQUEIDFORSNIP---|    import java.security.SecureRandom;
+        
+    public class Main{
+        public static void main(String[] args){
+        
+          SecureRandom seedMaker = new SecureRandom();  
+          byte[] seed = seedMaker.generateSeed(20);
+          SecureRandom r1 = new SecureRandom(seed);
+          SecureRandom r2 = new SecureRandom(seed);
+      
+          byte[] b1 = new byte[4];
+          byte[] b2 = new byte[4];
+          for (int i=0;i<10;i++) {
+            r1.nextBytes(b1);
+            r2.nextBytes(b2);
+        
+            System.out.println(java.util.Arrays.toString(b1)+" == "+java.util.Arrays.toString(b2));
+          }
+        }
+    }
+---UNIQUEIDFORSNIP---|    private static Cipher AESCipher = null;
+	private static Cipher RSACipher = null;
+	static {
+		try {
+			AESCipher = Cipher.getInstance("AES");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			e.printStackTrace();
+		}
+	}
+	static {
+		try {
+			RSACipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			e.printStackTrace();
+		}
+	}
+---UNIQUEIDFORSNIP---|KeyStore.getInstance("PKCS12","BC")
+---UNIQUEIDFORSNIP---|    import java.util.HashMap;
+    import java.util.Map.Entry;
+    public class Encrypt {
+	/**
+	 * @param args
+	 */
+	static HashMap<String, String> hm = new HashMap();
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		hm.put("a", "b");	
+		hm.put("b", "c");	
+		hm.put("c", "d");	
+		hm.put("d", "e");	
+		hm.put("e", "f");	
+		hm.put("f", "g");
+		hm.put("g", "h");	
+		hm.put("h", "i");	
+		hm.put("i", "j");	
+		hm.put("j", "k");	
+		hm.put("k", "l");	
+		hm.put("l", "m");
+		hm.put("m", "n");	
+		hm.put("1", "4");	
+		hm.put("2", "3");	
+		hm.put("3", "2");	
+		hm.put("4", "1");	
+		hm.put("5", "0");
+		
+		String input = "this is a simple text";
+		String text = encode(input);
+		System.out.println(text);
+		System.out.println(decode(text));
+		
+	}
+	private static String decode(String input) {
+		// TODO Auto-generated method stub
+		StringBuffer output = new StringBuffer();
+		for(int i = 0; i < input.length(); i++)
+		{
+			String ch = input.charAt(i)+"";
+			if(hm.containsValue(ch))
+			{
+				for (Entry<String, String> entry : hm.entrySet()) {
+		            if (entry.getValue().equals(ch)) {
+		            	output.append(entry.getKey());
+		            }
+				}
+			}
+			else
+			{
+				output.append(ch);
+			}
+		}
+		return output.toString();
+	}
+	private static String encode(String input) {
+		// TODO Auto-generated method stub
+		StringBuffer output = new StringBuffer();
+		for(int i = 0; i < input.length(); i++)
+		{
+			String ch = input.charAt(i)+"";
+			if(hm.containsKey(ch))
+			{
+				output.append(hm.get(ch));
+			}
+			else
+			{
+				output.append(ch);
+			}
+		}
+		return output.toString();
+	}
+---UNIQUEIDFORSNIP---|    SecureRandom saltRandomizer = new SecureRandom();
+---UNIQUEIDFORSNIP---|    SecureRandom.getInstance("SHA1PRNG", "SUN");
+---UNIQUEIDFORSNIP---|    ...     
+    cipher.init(Cipher.ENCRYPT_MODE, secret);
+    InputStream is = new FileInputStream(choosedFile);
+    OutputStream os = new CipherOutputStream(new FileOutputStream(choosedFile+".encrypted"), cipher);
+    byte[] buffer = new byte[1024];
+    int len;
+    while ((len = is.read(buffer)) != -1) {
+        os.write(buffer, 0, len);
+    }
+    is.close();
+    os.close();
+    ...
+---UNIQUEIDFORSNIP---|    1. Matches a local configuration of OCSP signing authority for the
+    certificate in question; or
+---UNIQUEIDFORSNIP---|    2. Is the certificate of the CA that issued the certificate in
+    question; or
+---UNIQUEIDFORSNIP---|    3. Includes a value of id-ad-ocspSigning in an ExtendedKeyUsage
+    extension and is issued by the CA that issued the certificate in
+    question."
+---UNIQUEIDFORSNIP---|    All definitive response messages SHALL be digitally signed. The key
+    used to sign the response MUST belong to one of the following:
+    
+    -- the CA who issued the certificate in question
+    -- a Trusted Responder whose public key is trusted by the requester
+    -- a CA Designated Responder (Authorized Responder) who holds a specially
+       marked certificate issued directly by the CA, indicating that the responder
+       may issue OCSP responses for that CA
+---UNIQUEIDFORSNIP---|    AES_cipherInstance.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(new byte[16]);
+---UNIQUEIDFORSNIP---|    AES_cipherInstance.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(new byte[16]));
+---UNIQUEIDFORSNIP---|	import javax.crypto.*;
+	import javax.crypto.spec.GCMParameterSpec;
+	import java.security.*;
+	import java.io.UnsupportedEncodingException;
+	public class EncryptDecrypt1 {
+		
+		public static void main(String[] args) throws Exception {
+			EncryptDecrypt1 a = new EncryptDecrypt1();
+			String encrypted = a.encrypt("My text");
+			System.out.println(encrypted);		
+		}
+		public String encrypt(String cleartext) throws Exception {
+			try 
+			{
+				// encoding format needs thought
+				byte[] clearTextbytes = cleartext.getBytes("UTF-8");
+				final SecureRandom secureKeyRandomness = SecureRandom.getInstanceStrong();
+				final KeyGenerator AES_keyInstance = KeyGenerator.getInstance("AES");
+				AES_keyInstance.init(128, secureKeyRandomness);
+				final SecretKey secretKey = AES_keyInstance.generateKey();
+				final Cipher AES_cipherInstance = Cipher.getInstance("AES/GCM/NoPadding");
+				AES_cipherInstance.init(Cipher.ENCRYPT_MODE, secretKey);
+				byte[] encryptedText = AES_cipherInstance.doFinal(clearTextbytes);
+				
+				byte[] iv = AES_cipherInstance.getIV();
+				byte[] message = new byte[12 + clearTextbytes.length + 16];
+				System.arraycopy(iv, 0, message, 0, 12);
+				System.arraycopy(encryptedText, 0, message, 12, encryptedText.length);
+				
+				return decrypt(message, secretKey);
+			} 
+			catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) 
+			{
+				e.printStackTrace();
+			}
+			return "something went wrong with encrypt";
+		} // encrypt.
+		public String decrypt(byte[] encryptedText, SecretKey secretKey) throws Exception {
+			try 
+			{
+				final Cipher AES_cipherInstance = Cipher.getInstance("AES/GCM/NoPadding");
+				GCMParameterSpec params = new GCMParameterSpec(128, encryptedText, 0, 12);
+				AES_cipherInstance.init(Cipher.DECRYPT_MODE, secretKey, params);
+				byte[] decryptedText = AES_cipherInstance.doFinal(encryptedText, 12, encryptedText.length - 12);
+				return new String(decryptedText, "UTF-8");
+			} 
+			catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | UnsupportedEncodingException e) 
+			{
+				e.printStackTrace();
+			}
+			return "something went wrong with decrypt";
+		}
+	}
+---UNIQUEIDFORSNIP---|    FileInputStream fin = new FileInputStream("PathToCertificate");
+    CertificateFactory f = CertificateFactory.getInstance("X.509");
+    X509Certificate certificate = (X509Certificate)f.generateCertificate(fin);
+    PublicKey pk = certificate.getPublicKey();
+  
+---UNIQUEIDFORSNIP---|    byte[] base64String = Base64.decode(encodedString);
+    byte[] plainBytes = new String(base64String).getBytes("UTF-8");
+    byte[] cipherData = cipher.doFinal(plainBytes);
+    System.out.println(cipherData);
+    return cipherData.toString();
+---UNIQUEIDFORSNIP---|    byte[] cipherData = Base64.decode(encodedString);
+    byte[] plainBytes = cipher.doFinal(cipherData);
+    return new String(plainBytes, "UTF-8");
+---UNIQUEIDFORSNIP---|	@Test
+	public void testKey() throws Exception {
+		String privKeyStr = "MIICXQIBAAKBgQCE3pA746UfpC8sFk8ZJp0yupyJqj5jy6cjdxUYoP7mCm7c0mqQDeCcDNBYW2eSozCioPrH/9L+CDQEPLYakoem+jFnUKDH5+pru/0PJTJJF8Xh/ZT9eJlvsYBr1/qSfICf6RTs7kzwq9IuSZBw7/tfNEF9i0A8FVox6HOopXod1QIDAQABAoGANOFrYBqK5lvu1koOswDWQZFZqcSSzh8IZyoGwGWa7S0r0EECXlDXmuPSq8e9IfRG8ALHrH+ZlrbnFOSgyVSWHfpj3aH+qknoSX5TW2rMQHih8865xuqheMQ+RTZ7+BRDqNsYkzxB/Z8mqzpoJQSYf+H7nWxdDCgAJVYZzxl3DmUCQQD32iEjnwiwUjii8slcmvCEZl+z84DWNdvJOg6Z38sI4AvrfpKc1WAcDg1rNZCKrRgokh54wpLt08cpFcrD04c3AkEAiTzDmc0bdgfg5wj6xHFZpYlBwiGm/bjOR2PS57P0GNU5PsDllRbFqIuzArITutO5lvZZImzuYz7Lf+cQ73pxUwJBAOdEwmdaneDo17A0m2+to3/nhqWDMVSwLMU3RyiNigZeCMFU+bkd4PBMrHi9IoJDwacZsRU9eZwxYEUV8H2Jg0ECQEEkOqRSm2pXKwX/WSjNtQPCNxhy6NUeV6vDUmTxIjh3XYjP/ynZeVEbnoj1BjB0N2/U11Jj6nPpZqb7gyppMEkCQQCoGdVYDipU+hMMnvxa0zOIyQc/a+HE0lESqn+2ZPafYi9Z1RldRMvUXhP8U7s+OuhRwprdw2ivvOFrnWyz9lL2";
+		byte[] data = Base64.getDecoder().decode(privKeyStr);
+		/* Add PKCS#8 formatting */
+		ASN1EncodableVector v = new ASN1EncodableVector();
+		v.add(new ASN1Integer(0));
+		ASN1EncodableVector v2 = new ASN1EncodableVector();
+		v2.add(new ASN1ObjectIdentifier(PKCSObjectIdentifiers.rsaEncryption.getId()));
+		v2.add(DERNull.INSTANCE);
+		v.add(new DERSequence(v2));
+		v.add(new DEROctetString(data));
+		ASN1Sequence seq = new DERSequence(v);
+		byte[] privKey = seq.getEncoded("DER");
+		PKCS8EncodedKeySpec spec = new  PKCS8EncodedKeySpec(privKey);
+		KeyFactory fact = KeyFactory.getInstance("RSA");
+		PrivateKey key = fact.generatePrivate(spec);
+		Assert.assertNotNull("Failed to generate the private key", key);
+	}
+---UNIQUEIDFORSNIP---|    Cipher.getInstance("RSA")
+---UNIQUEIDFORSNIP---|    Cipher.getInstance("RSA/ECB/OAEPWithSHA-256AndMGF1Padding");
+---UNIQUEIDFORSNIP---|    final Provider bc = new BouncyCastleProvider();
+    // generating the key from modulus & private exponent
+    KeyFactory rsaFactory = KeyFactory.getInstance("RSA", bc);
+    RSAPrivateKeySpec spec = new RSAPrivateKeySpec(key.getModulus(), key.getPrivateExponent());
+    RSAPrivateKey testKey = (RSAPrivateKey) rsaFactory.generatePrivate(spec);
+    // using it in a raw cipher
+    Cipher c= Cipher.getInstance("RSA/ECB/NoPadding", bc);
+    c.init(Cipher.DECRYPT_MODE, testKey);
+    c.doFinal(new byte[] {(byte) 0x7F, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, });
+---UNIQUEIDFORSNIP---|    public static void main(String[] args) throws UnsupportedEncodingException {
+       AESKeyGenerator aes = new AESKeyGenerator();
+       String sharedKey = "Bar12345Bar12345Bar12345Bar12345";
+       aes.generate_r(sharedKey.getBytes("US-ASCII"), "Hello World");
+    }
+---UNIQUEIDFORSNIP---|    import java.security.*;
+    import java.security.cert.*;
+    import java.security.interfaces.*;
+    import java.security.spec.*;
+    import javax.crypto.*;
+    import javax.crypto.interfaces.*;
+    import javax.crypto.spec.*;
+    import java.io.*;
+    /**
+     *	AES
+     */
+    public class SymmetricAES {
+        
+        public SymmetricAES() {
+        }
+        
+        public static void main(String args[]){
+            BufferedReader ch = new BufferedReader(new InputStreamReader(System.in));
+            char[] toCode;
+            byte[] toCode2;
+            byte[] Coded;
+            char[] Coded2;
+            byte[] decoded;
+            char[] deco2;
+            
+            try{
+                System.out.print("Text to Encrypt : ");
+                String toMake = ch.readLine();
+                
+                /** Arxikopoihsh antikeimenou KeyGenerator gia AES
+                 * 	kai dhmhourgia Kleidioy */
+                KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+                SecretKey aesKey = keyGen.generateKey();
+                
+                /* Arxikopoihsh aesCipher gia AES */
+                Cipher aesCipher = Cipher.getInstance("AES");
+                
+                /* Orismos aesCipher se ENCRYPT_MODE me to aesKey */
+                aesCipher.init(Cipher.ENCRYPT_MODE, aesKey);
+                System.out.println("The Key : " + aesKey.getEncoded());
+                
+                /* Metatroph antikeimenou String se pinaka Char
+                 * kai o ka8e xarakthras gineta Cast se Byte kai eisagwgh
+                 * se pinaka Byte isou mege8ous me ton prwto pinaka */
+                toCode = toMake.toCharArray();
+                toCode2 = new byte[toCode.length];
+                Coded = new byte[toCode.length];
+                for(int i=0;i<toCode.length;i++)
+                    toCode2[i] = (byte)toCode[i];
+                    
+                /* Teliko stadio Kryptografhshs */
+                Coded = aesCipher.doFinal(toCode2);
+                
+                /* byte[] --> char[] kai ektypwsh*/
+                Coded2 = new char[Coded.length];
+                for(int i=0;i<Coded.length;i++)
+                    Coded2[i] = (char)Coded[i];
+                System.out.println("Test Encrypt: " + new String(Coded2));
+                
+                
+                Cipher aesCipher2 = Cipher.getInstance("AES");
+                
+                /* Orismos aesCipher2 se DECRYPT_MODE me to aesKey */
+                aesCipher2.init(Cipher.DECRYPT_MODE, aesKey);
+                
+                decoded = aesCipher2.doFinal(Coded);
+                
+                /* byte[] --> char[] kai ektypwsh*/
+                deco2 = new char[decoded.length];
+                for(int i=0;i<decoded.length;i++)
+                    deco2[i] = (char)decoded[i];
+                System.out.println("Test Decrypt: " + new String(deco2));
+            }
+            catch(Exception e){
+                System.out.println(e);
+            }   
+        }
+    }
+---UNIQUEIDFORSNIP---|               Security.addProvider(new BouncyCastleProvider());
+               Security.addProvider(new BouncyCastlePQCProvider());
+---UNIQUEIDFORSNIP---|    recoveredHMACTag.equals(newHMACTag)
+---UNIQUEIDFORSNIP---|    java.util.Arrays.equals(recoveredHMACTag, newHMACTag)
+---UNIQUEIDFORSNIP---|    try {
+            String test = encrypt("My name is Nam");
+            Log.e("TEST", "xxxx encrypted: "+ test);
+            Log.e("TEST", "xxxx decrypted: "+ decrypt(test));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+---UNIQUEIDFORSNIP---|    Log.e("ERROR", "AFTER: "+ pojo.getName());
+---UNIQUEIDFORSNIP---|    Log.e("ERROR", "AFTER: "+ securityPOJO.getName());
+---UNIQUEIDFORSNIP---|    Log.e("ERROR", "AFTER: "+ CryptUtils.decrypt( pojo.getName() ));
+---UNIQUEIDFORSNIP---|	// Generate Keys
+	ECGenParameterSpec ecGenSpec = new ECGenParameterSpec("secp256r1");
+	KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("ECDSA", "BC");
+	keyPairGenerator.initialize(ecGenSpec, new SecureRandom());
+	java.security.KeyPair pair = keyPairGenerator.generateKeyPair();
+	ECPrivateKey privateKey = (ECPrivateKey) pair.getPrivate();
+	ECPublicKey publicKeyExpected = (ECPublicKey) pair.getPublic();
+	// Expected public key
+	System.out.print("Expected Public Key: " +
+	        BaseEncoding.base64Url().encode(publicKeyExpected.getEncoded()));
+	// Generate public key from private key
+	KeyFactory keyFactory = KeyFactory.getInstance("ECDSA", "BC");
+	ECParameterSpec ecSpec = ECNamedCurveTable.getParameterSpec("secp256r1");
+	ECPoint Q = ecSpec.getG().multiply(privateKey.getD());
+	byte[] publicDerBytes = Q.getEncoded(false);
+	ECPoint point = ecSpec.getCurve().decodePoint(publicDerBytes);
+	ECPublicKeySpec pubSpec = new ECPublicKeySpec(point, ecSpec);
+	ECPublicKey publicKeyGenerated = (ECPublicKey) keyFactory.generatePublic(pubSpec);
+	// Generated public key from private key
+	System.out.print("Generated Public Key: " +
+	        BaseEncoding.base64Url().encode(publicKeyGenerated.getEncoded()));
+---UNIQUEIDFORSNIP---|    NoSuchPaddingException, NoSuchAlgorithmException
+    InvalidAlgorithmParameterException, InvalidKeyException,
+    BadPaddingException, IllegalBlockSizeException
+---UNIQUEIDFORSNIP---|    // salt and masterHash can be cached for multiple requests
+    salt = SecureRandom().nextBytes(8 bytes)
+    // adjust iterations (65336) according to appropriate performance:
+    masterHash = pbkdf2(password, salt, 65336)
+    iv = SecureRandom().nextBytes(16 bytes)
+    sessionKey = SecureRandom().nextBytes(16 bytes)
+    encKey = hmacSha256(masterHash, "enc") // crop according to intended AES key size
+    macKey = hmacSha256(masterHash, "mac")
+    ciphertext = AES(encKey, iv, sessionKey + ts.length + ts)
+    tag = hmacSha256(macKey, username + salt + iv + ciphertext)
+    return salt + iv + ciphertext + tag
+---UNIQUEIDFORSNIP---|    ECPrivateKey ecPrivKey = (ECPrivateKey) eckp.getPrivate();
+    System.out.println(ecPrivKey.getS().toString(16));
+---UNIQUEIDFORSNIP---|    new SecureRandom(seed);
+---UNIQUEIDFORSNIP---|    package nl.owlstead.stackoverflow;
+    
+    import java.nio.ByteBuffer;
+    import java.util.Random;
+    
+    import javax.crypto.Cipher;
+    import javax.crypto.SecretKey;
+    import javax.crypto.ShortBufferException;
+    import javax.crypto.spec.IvParameterSpec;
+    import javax.crypto.spec.SecretKeySpec;
+    
+    /**
+     * A well-defined pseudo-random generator that is based on a stream cipher.
+     * <p>
+     * This class mimics the {@link Random} class method signatures; it however does currently not provide:
+     * <ul>
+     * <li>operations returning floats or doubles including returning a Gaussian value in the range [0, 1.0) </li>
+     * <li>streams of integers or longs</li>
+     * </ul>
+     * due to laziness of the developer.
+     * It does not allow for re-seeding as re-seeding is not defined for a stream cipher;
+     * the same goes from retrieving a seed from the underlying entropy source as it hasn't got one.
+     * <p>
+     * It is assumed that most significant (leftmost) bytes are taken from the stream cipher first.
+     * All the algorithms used to return the random values are well defined, so that compatible implementations can be generated.
+     * <p>
+     * Instances of this class are stateful and not thread safe.
+     * 
+     * @author Maarten Bodewes
+     */
+    public class StreamCipherPseudoRandom {
+        
+        private static final long TWO_POW_48 = 1L << 48;
+        
+        private final Cipher streamCipher;
+        
+        // must be a buffer of at least 6 bytes
+        // a buffer that is x times 16 is probably most efficient for AES/CTR mode encryption within getBytes(byte[])
+        private final ByteBuffer zeros = ByteBuffer.allocate(64);
+        
+        /**
+         * Creates a SecureRandom from a stream cipher.
+         * 
+         * @param streamCipher an initialized stream cipher
+         * @throws NullPointerException if the cipher is <code>null</code>
+         * @throws IllegalStateException if the cipher is not initialized
+         * @throws IllegalArgumentException if the cipher is not a stream cipher
+         */
+        public StreamCipherPseudoRandom(final Cipher streamCipher) {
+            if (streamCipher.getOutputSize(1) != 1) {
+                throw new IllegalArgumentException("Not a stream cipher");
+            }
+            this.streamCipher = streamCipher;
+        }
+        
+        /**
+         * Generates a pseudo-random number of bytes by taking exactly the required number of bytes from the stream cipher.
+         * 
+         * @param data the buffer to be randomized
+         */
+        public void nextBytes(final byte[] data) {
+            generateRandomInBuffer(ByteBuffer.wrap(data));
+        }
+    
+        /**
+         * Generates a pseudo-random boolean value by taking exactly 1 byte from the stream cipher,
+         * returning true if and only if the returned value is odd (i.e. if the least significant bit is set to 1), false otherwise.
+         * 
+         * @return the random boolean
+         */
+        public boolean nextBoolean() {
+            return (generateRandomInBuffer(ByteBuffer.allocate(Byte.BYTES)).get() & 1) == 1;
+        }
+    
+        /**
+         * Generates a pseudo-random <code>int</code> value by taking exactly 4 bytes from the stream cipher.
+         * 
+         * @return the random <code>int</code> value
+         */
+        public int nextInt() {
+            return generateRandomInBuffer(ByteBuffer.allocate(Integer.BYTES)).getInt();
+        }
+    
+        /**
+         * Generates a pseudo-random <code>long</code> value by taking exactly 8 bytes from the stream cipher.
+         * 
+         * @return the random <code>long</code> value
+         */
+        public long nextLong() {
+            return generateRandomInBuffer(ByteBuffer.allocate(Long.BYTES)).getLong();
+        }
+        
+        /**
+         * Generates a pseudo-random <code>int</code> value with <code>bits</code> random bits in the lower part of the returned integer.
+         * This method takes the minimum number of bytes required to hold the required number of bits from the stream cipher (e.g. 13 bits requires 2 bytes to hold them).
+         * 
+         * @param bits the number of bits in the integer, between 0 and 32 
+         * @return the random <code>int</code> value in the range [0, 2^n) where n is the number of bits
+         */
+        public int next(final int bits) {
+            final int bytes = (bits + Byte.SIZE - 1) / Byte.SIZE;
+            final ByteBuffer buf = ByteBuffer.allocate(Integer.BYTES);
+            buf.position(Integer.BYTES - bytes);
+            generateRandomInBuffer(buf);
+            final long l = buf.getInt(0);
+            final long m = (1L << bits) - 1;
+            return (int) (l & m);
+        }
+        
+        /**
+         * Generates a pseudo-random <code>int</code> value in a range [0, n) by:
+         * 
+         * <ol>
+         * <li>taking 6 bytes from the stream cipher and converting it into a number y</li>
+         * <li>restart the procedure if y is larger than x * n where x is the largest value such that x * n <= 2^48
+         * <li>return y % n
+         * </ol>
+         * 
+         * An exception to this rule is for n is 1 in which case this method direct returns 0, without taking any bytes from the stream cipher.
+    
+         * @param n the maximum value (exclusive) - n must be a non-zero positive number
+         * @return the random <code>int</code> value in the range [0, n)
+         * @throws IllegalArgumentException if n is zero or negative 
+         */
+        public int nextInt(final int n) {
+            if (n <= 0) {
+                throw new IllegalArgumentException("max cannot be negative");
+            } else if (n == 1) {
+                // only one choice
+                return 0;
+            }
+            
+            final ByteBuffer buf = ByteBuffer.allocate(48 / Byte.SIZE);
+            long maxC = TWO_POW_48 - TWO_POW_48 % n;
+    
+            long l;
+            do {
+                buf.clear();
+                generateRandomInBuffer(buf);
+                // put 16 bits into position 32 to 47
+                l = (buf.getShort() & 0xFFFFL) << Integer.SIZE;
+                // put 32 bits into position 0 to 31
+                l |= buf.getInt() & 0xFFFFFFFFL;
+            } while (l > maxC);
+    
+           return (int) (l % n);
+        }
+        
+        /**
+         * Retrieves random bytes from the underlying stream cipher.
+         * All methods that affect the stream cipher should use this method.
+         * The bytes between the position and the limit will contain the random bytes; position and limit are left unchanged.
+         * <p>
+         * The buffer may not be read only and must support setting a mark; previous marks are discarded.
+         * 
+         * @param buf the buffer to receive the bytes between the position and limit 
+         * @return the same buffer, to allow for 
+         */
+        protected ByteBuffer generateRandomInBuffer(final ByteBuffer buf) {
+            while (buf.hasRemaining()) {
+                // clear the zeros buffer
+                zeros.clear();
+                // set the number of zeros to process
+                zeros.limit(Math.min(buf.remaining(), zeros.capacity()));
+                try {
+                    // process the zero's into buf (note that the input size is leading)
+                    buf.mark();
+                    streamCipher.update(zeros, buf);
+                } catch (ShortBufferException e) {
+                    // not enough output size, which cannot be true for a stream cipher
+                    throw new IllegalStateException(
+                            String.format("Cipher %s not behaving as a stream cipher", streamCipher.getAlgorithm()));
+                }
+            }
+            buf.reset();
+            return buf;
+        }
+    
+        public static void main(String[] args) throws Exception {
+            Cipher streamCipher = Cipher.getInstance("AES/CTR/NoPadding");
+            // zero key and iv for demo purposes only
+            SecretKey aesKey = new SecretKeySpec(new byte[24], "AES");
+            IvParameterSpec iv = new IvParameterSpec(new byte[16]);
+            streamCipher.init(Cipher.ENCRYPT_MODE, aesKey, iv);
+    
+            StreamCipherPseudoRandom rng = new StreamCipherPseudoRandom(streamCipher);
+            // chosen by fair dice roll, guaranteed to be random
+            System.out.println(rng.nextInt(6) + 1);
+        }
+    }
+---UNIQUEIDFORSNIP---|    Cipher cipher = Cipher.getInstance("RSA");
+---UNIQUEIDFORSNIP---|    Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
+---UNIQUEIDFORSNIP---|    Cipher cipher = Cipher.getInstance("RSA/None/PKCS1PADDING");
+---UNIQUEIDFORSNIP---|    import M2Crypto
+    
+    # read privat key
+    privatKey = M2Crypto.RSA.load_key('privat.key')
+    # encrypt plaintext using privat key
+    ciphertext = privatKey.private_encrypt(data.encode('utf-8'), M2Crypto.RSA.pkcs1_padding)
+    
+    encrypted_message = str(base64.b64encode(ciphertext), 'utf8')
+    print(encrypted_message)
+   
