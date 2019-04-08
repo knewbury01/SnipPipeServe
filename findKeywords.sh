@@ -13,3 +13,8 @@ for file in xx*; do
     fi
 
 done
+
+echo -n "This many snippets contained at least one keyword: "
+ls containKeyword/xx* | wc -l
+echo -n "This many snippets did not contain at least one keyword: "
+ls xx* | wc -l
