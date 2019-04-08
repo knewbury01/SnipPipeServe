@@ -14,6 +14,7 @@
   * for this one it is assumed that there are max 2 instances of <.*> generic syntax per line
 
 
+
     sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//'
 
 ## Random Oddities:
@@ -28,10 +29,12 @@
   * these end up in quite a few snippets, here we remove the entire line containing one
 
 
+
     sed '/\.\.\./d'
 
 ### Packages:
   * not relevant here
+
 
 
     sed '/package/d'
