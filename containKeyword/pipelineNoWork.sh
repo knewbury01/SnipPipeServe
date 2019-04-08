@@ -6,7 +6,7 @@
 #
 #
 ######################
-
+mkdir outputs
 mkdir Original
 mkdir OrigsFailed
 
