@@ -9,15 +9,20 @@
 # BSD split limit behaviour is different
 #
 # usage:
-#    ./splitsnippets.sh <file-with-all-snippet-content>
+#    ./splitsnippets.sh <file-with-all-snippet-content> <expected-number-snippets>
 ##########################
 
 
 #first use the split identifier to split content into uniqe code snippets 
 echo "SPLITTING $1"
-#currently config'd for this exact dataset
-#should be able to use {*} (untested)
-csplit -n 5 $1 '/---UNIQUEIDFORSNIP---/' {1407} #&>/dev/null
+
+#counts the number of expected snips and uses for csplit
+#in GNU distribution, a {*} would suffice...
+#for Mac, this always errors on EOF, so added a keep results...
+numsnips=$(cat $1 | grep "UNIQUEIDFORSNIP" | wc -l | sed 's/ //g')
+#numsnips=$((numsnips+1))
+echo "number of expected snippets: $numsnips"
+csplit -k -n 5 $1 '/---UNIQUEIDFORSNIP---./' {$numsnips} #&>/dev/null
 
 #then remove this identifier
 for file in xx*;
