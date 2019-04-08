@@ -6,22 +6,32 @@
 ## Soot PPA Requirements:
 
 ### Annotations:
-  sed '/@/d'
+
+
+    sed '/@/d'
 
 ### Generics:
   * for this one it is assumed that there are max 2 instances of <.*> generic syntax per line
-  sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//'
+
+
+    sed 's/<[^<>]*>//' | sed 's/<[^<>]*>//'
 
 ## Random Oddities:
 
 ### Imports:
   * all of the actual imports are also collected to determine what extra imports should be added to heurisitc list. these are removed because with wrap technique they would otherwise be in the wrong place.
-  sed '/import/d'
+
+
+    sed '/import/d'
 
 ### Elipses:
   * these end up in quite a few snippets, here we remove the entire line containing one
-  sed '/\.\.\./d'
+
+
+    sed '/\.\.\./d'
 
 ### Packages:
   * not relevant here
-  sed '/package/d'
+
+
+    sed '/package/d'
