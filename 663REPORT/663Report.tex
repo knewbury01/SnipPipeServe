@@ -26,28 +26,31 @@ Stack Overflow (SO) is a valuable platform for information for application devel
 
 Recent work has applied manual classification to determine the security status of SO snippets. Other  work has applied machine learning to determine the security of code snippets on SO. There has also been work using static analysis on Android applications on Google Play that are considered to contain SO code snippets. No previous work has applied static analysis to accomplish automatically detecting insecure versions of Stack Overflow (SO) code snippets with respect to Cryptographic API usage.
 
-In this study we aim to assess the viability of automating assessment of security directly on code snippets using a static analysis tool, CogniCrypt. We have extracted a sample of Java code snippets that use the cryptographic API, JCA, from SO and evaluated this sample of snippets to determine if there are misuses of cryptographic APIs present. We have found that of the code snippets we analyzed contain insecure usage of crypto APIs. 
+In this study we aim to assess the viability of automating assessment of security directly on code snippets using a static analysis tool, CogniCrypt. We have extracted a sample of Java code snippets that use the cryptographic API, JCA, from SO and evaluated this sample of snippets to determine if there are misuses of cryptographic APIs present. We have found that 50\% of the total code snippets we were successful applying a relevant analysis to contained insecure usage of cryptographic APIs. 
 \end{abstract}
 
 \section{Introduction}
-While previous studies have found that Stack Overflow is a valuable source of information for developers, the same study has found that it may not be the best source of information when it comes to performing security related application tasks.
+SO code snippets can be categorized as secure or insecure based on the viability of the code as a solution to security related task. Sometimes it is the case that a code snippet that objectively completes a task is insecure \cite{}. Insecurity in SO code snippets have a great implication. This is because it can be hard to concretely measure the cascading impact of an individual code snippet. 
+Clearly posts with more views and answers that are accepted can be seen as sources of information with a higher likelihood of reaching many locations of use, but if  these end locations are proprietary, or if a snippet is pasted into code that is subsequently reused, it may be hard to trace eventually arising faults to the SO snippet.
 
-Insecurity in SO code snippets has a great implication. This is because it can be hard to concretely measure the impact of such an insecurity. 
-Clearly posts with more views and acceptance can be seen as sources with a higher likelihood of reaching many locations of use, but if  these locations are proprietary it may be hard to trace eventually arising faults to the SO source.
+Previous work \cite{} has looked at reasons that insecurity can arise in applications programming, specifically in terms of API usage. One insight of this study was that official API documentation can be lengthy and complex or non-present or insufficient as a resource for developers who are required to perform particular software development tasks. Another previous study \cite{} has found that SO has potential to be a valuable alternative source of information for developers. In a software development world where deadlines are real and efficiency of development processes are championed, SO is an attractive software development resource as it can enable developers to perform tasks quickly and efficiently. However, the same study also has found that it may not be the best source of information when it comes to performing security related application tasks.
+
 
 A discussion of an ideal solution to assessing SO code snippet security is presented by these authors. As they mention, an ideal solution would be to have a full automation of secure categorization. This ideal solution could be applied in two potential ways: as a check on all of the SO code snippets as they currently stand at any point in time, with the goal of alerting the poster to their presence, or even automatically suggesting a fix , or as a tool integrated into the workflow of submission of posts to SO. The idea here is that the user submits a post, and in almost instant time the post is assessed for secureness and feedback is delivered if the post is insecure. Perhaps the submission is even rejected. In particular this second usage of such a pipeline tool could foster an awareness for good security practices in the software development community.
 
  Recent work \cite{7958574} has used machine learning to classify security of code snippets traced from SO to Android applications on Google Play. 
  
  More recent work has focused on the security of code snippets on SO \cite{DBLP:journals/corr/abs-1901-01327}. This has also led us to consider specifically the security related relationships of SO posts to GH projects, as we believe this is a valuable avenue of investigation that has yet to be totally covered.
+ 
+Lastly we must acknowledge the inherently multifaceted nature of the notion of security. Security is complex, in that every layer of a system is affected by it, and even within layers there are multiple dimensions to the notion of security. One previous work \cite{} has observed that there are five main topics relating to security discussions in SO, some of these topics include web security, system security and cryptography. In this study we restrict our focus to application security, and specifically cryptographic security, via an evaluation of cryptographic API usage.
 
 In order to concretely investigate this area we have formulated the following research questions.
 
 
 \begin{itemize}
-\item  RQ1: Can we detect cryptographic API misuses in code snippets from Stack Overflow?
+\item  RQ1: Do cryptographic API misuses exist in code snippets from Stack Overflow?
 
-\item  RQ2: What is the most common error in code snippets?
+\item  RQ2: What is the most common error detected in code snippets?
 
 
 \end{itemize}
