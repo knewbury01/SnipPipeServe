@@ -1,0 +1,124 @@
+\documentclass[10pt, conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[backend=biber]{biblatex}
+\addbibresource{mycite.bib}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{Automatic Detection of Cryptographic API Misuses in Stack Overflow Java Code Snippets\\}
+
+\author{\IEEEauthorblockN{Kristen Newbury}
+\IEEEauthorblockA{University of Alberta \\
+knewbury@ualberta.ca}
+}
+
+\maketitle
+
+\begin{abstract}
+Stack Overflow (SO) is a valuable platform for information for application developers. For this reason it is impertinent that the software development community considers the utility of code snippets distributed on the platform with a variety of metrics of software quality in mind. One crucial, but easily overlooked, metric of software quality is security. 
+
+Recent work has applied manual classification to determine the security status of SO snippets. Other  work has applied machine learning to determine the security of code snippets on SO. There has also been work using static analysis on Android applications on Google Play that are considered to contain SO code snippets. No previous work has applied static analysis to accomplish automatically detecting insecure versions of Stack Overflow (SO) code snippets with respect to Cryptographic API usage.
+
+In this study we aim to assess the viability of automating assessment of security directly on code snippets using a static analysis tool, CogniCrypt. We have extracted a sample of Java code snippets that use the cryptographic API, JCA, from SO and evaluated this sample of snippets to determine if there are misuses of cryptographic APIs present. We have found that of the code snippets we analyzed contain insecure usage of crypto APIs. 
+\end{abstract}
+
+\section{Introduction}
+While previous studies have found that Stack Overflow is a valuable source of information for developers, the same study has found that it may not be the best source of information when it comes to performing security related application tasks.
+
+Insecurity in SO code snippets has a great implication. This is because it can be hard to concretely measure the impact of such an insecurity. 
+Clearly posts with more views and acceptance can be seen as sources with a higher likelihood of reaching many locations of use, but if  these locations are proprietary it may be hard to trace eventually arising faults to the SO source.
+
+A discussion of an ideal solution to assessing SO code snippet security is presented by these authors. As they mention, an ideal solution would be to have a full automation of secure categorization. This ideal solution could be applied in two potential ways: as a check on all of the SO code snippets as they currently stand at any point in time, with the goal of alerting the poster to their presence, or even automatically suggesting a fix , or as a tool integrated into the workflow of submission of posts to SO. The idea here is that the user submits a post, and in almost instant time the post is assessed for secureness and feedback is delivered if the post is insecure. Perhaps the submission is even rejected. In particular this second usage of such a pipeline tool could foster an awareness for good security practices in the software development community.
+
+ Recent work \cite{7958574} has used machine learning to classify security of code snippets traced from SO to Android applications on Google Play. 
+ 
+ More recent work has focused on the security of code snippets on SO \cite{DBLP:journals/corr/abs-1901-01327}. This has also led us to consider specifically the security related relationships of SO posts to GH projects, as we believe this is a valuable avenue of investigation that has yet to be totally covered.
+
+In order to concretely investigate this area we have formulated the following research questions.
+
+
+\begin{itemize}
+\item  RQ1: Can we detect cryptographic API misuses in code snippets from Stack Overflow?
+
+\item  RQ2: What is the most common error in code snippets?
+
+
+\end{itemize}
+
+
+
+\section{Dataset and Processing}
+
+The starting point dataset used for this study was an sqlite import of the SOTorrent dataset \cite{wong_2019}. However, in order to evaluate security of code snippets it was necessary to define a concrete state space for both security and code snippets. We evaluated security as either the presence or lack thereof cryptographic API misuses. We used the static analysis tool CogniCrypt \cite{krger_et_al:LIPIcs:2018:9215} to evaluate for this. CogniCrypt is a tool that can analyze compiled Java bytecode that use cryptographic APIs and assess whether there exists some misuses of the API. Misuse is defined in a Domain Specific Language as a set of specifications over the entities that are relevant to that API. The version of CogniCrypt that we used contains a ruleset for the Java Cryptography Architecture (JCA), and therefore we had to carefully define our dataset as follows.
+
+In gathering data we performed the following steps in order to gather a relevant and reasonable set of posts and projects to evaluate.
+
+\subsection{Identifying Answer Posts Containing Java Snippets}
+In the process of identifying java code snippets, only snippets from answer posts were considered. This was because of the intuition that answer posts are more likely to be a source for code that will be copied into a project, as noted in previous work \cite{7958574}. Code snippets were identified as Java related if they originated from answers to posts that were labelled with the “java” tag on Stack Overflow. Posts annotated with java-ee and java-se were not explicitly sought out, from the intuition that posts with these tags mostly also had the java tag as well.
+
+Secure tag/
+
+The search for answer posts containing code snippets, with parent question posts tagged “java” yielded a total of 
+
+\subsection{Identifying Security Related Posts}
+In order to collect usages of crypto APIs specifically, considering that CogniCrypt (v) uses a ruleset tailored to the JCA, we also searched the original dataset for answer posts with a particular set of keywords in the body of their text (not differentiating between code and plaintext portions of the post). Some other work \cite{Meng:2018:SCP:3180155.3180201} used terms such as “security” to search for posts of interest, however we chose a different set of key terms to narrow the search to a set more relevant to cryptographic API usage. The keywords used were "". 
+
+This filter results in .
+ 
+
+\subsection{Necessary Conditions of The Dataset}
+
+
+After assessing which snippets could not be successfully compiled, we were left with a sample of to run CogniCrypt on. 
+
+\section{Evaluation}
+
+\subsection{RQ1}
+
+
+
+
+\subsection{RQ2}
+
+
+
+
+
+
+\subsection{RQ3}
+
+
+
+\section{Threats to Validity}
+
+\subsection{External Validity}
+As well, we may suffer some external validity due to sample size. We may have overlimited our data sample in the following ways:
+
+\begin{itemize}
+\item
+It is possible that while extracting our dataset, we may miss some relevant posts, for example if they were not actually labelled with the java or security tag but still contain a usage of the JCA. 
+
+
+\end{itemize}
+
+\subsection{Discriminant Construct Validity}
+
+
+
+\section{Future Improvements}
+Some things that could be done to improve this study would be to additionally utilize the alternative version of CogniCrypt that can analyze Android applications, investigate further into cases where the tool was unable to run on some project (there may be a configuration that would prevent the errors incurred in this study), and, reconsider the heuristics that were used to prune the original search space of SO posts to a sample of “interest” as described in the Methodology section. 
+
+\section{Conclusion}
+
+
+%\nocite{*}%not sure if you are needed.
+\printbibliography
+
+\end{document}
