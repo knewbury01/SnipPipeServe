@@ -12,8 +12,8 @@ total=0
 for keyword in "${arr[@]}"; do 
 
     echo -n "$keyword=" >> wordCountTable.txt
-    grep -l -R --include="xx*.java" " $keyword " . | wc -l >> wordCountTable.txt
-    add=$(grep -l -R --include="xx*.java" " $keyword " . | wc -l)
+    grep -l -R --include="xx*.java" "\<$keyword\>" . | wc -l >> wordCountTable.txt
+    add=$(grep -l -R --include="xx*.java" "\<$keyword\>" . | wc -l)
     total=$((total+add))
   done
 
