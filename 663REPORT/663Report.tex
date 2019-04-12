@@ -73,7 +73,7 @@ Soot' partial program analysis (PPA) tool \cite{SootPPA} was used to perform com
 
 From this point we must define relevant code snippets for this study as code snippets containing Java code only, since CogniCrypt performs analysis upon Java bytecode. There is also the resulting requirement that the code snippets must be compilable. The previous studies that we have mentioned earlier that handle code snippet analysis of any sort have relied upon either AST or IR representation of the snippets, as the lowest level representation handled. They did not require the snippets to be compiled. This presents an additional complexity to our study. Code snippets, by definition, are partial programs. They often do not contain sufficient context to compile. Below we discuss in further detail the efforts necessary to deal with this, however these insights guide the rest of the data processing steps.
 
-The dataset used for SO snippet collection this study was an sqlite import \cite{wong_2019} of the SOTorrent dataset released previously in an MSR submission \cite{}. In order to evaluate security of code snippets with CogniCrypt we collected snippets related to both security and java. 
+The dataset used for SO snippet collection this study was an sqlite import \cite{wong_2019} of the SOTorrent dataset released previously in an MSR submission \cite{DBLP:conf/msr/BaltesDT008}. In order to evaluate security of code snippets with CogniCrypt we collected snippets related to both security and java. 
 
 In gathering data we performed the following steps in order to gather a relevant and reasonable set of code snippets to evaluate.
 
@@ -84,29 +84,22 @@ In the process of identifying java code snippets, only snippets from answer post
 \subsection{Identifying Crypto Security Related Posts}
 In order to collect usages of crypto APIs specifically, considering that CogniCrypt uses a ruleset tailored to the JCA, we also filtered our dataset for snippets using a particular set of keywords. 
 Normally a reasonable process to identify API usage of a piece of java software would be to look at the import statements listed in the project, however because of the partial nature of code snippets this technique would not work. We found that only approximately 6\% of the code snippets of our sample contained at least one import. It is likely that SO authors assume that the user of the code snippet can obtain the resolution of Objects themselves, and that they will supply the missing import statement.
-In order to then identify usages of cryptographic libraries we only retained code snippets that contained at least one of the following keywords:
+In order to then identify usages of cryptographic libraries we only retained code snippets that contained at least one of the following keywords.
 
-\begin{itemize}
-  \item Provider
-  \item Security
-  \item SecureRandom
-  \item MessageDigest
-  \item Signature
-  \item Cipher
-  \item KeyFactory
-  \item KeyGenerator
-  \item KeyAgreement
-  \item KeyStore
-  \item CertificateFactory
-  \item KeyPair
-  \item KeySpec
-  \item AlgorithmParameter
-\end{itemize}
+\begin{table}[h]
+\begin{center}
+\includegraphics[width=0.5\linewidth]{KeywordCounts.png}
+\caption{Counts of Snippets Containing Each Keyword}
+\end{center}
+\end{table}
 
+Admittedly this search was performed over the entire content of the snippet and as such may result in false positive cases. For example a code snippet that contains a comment mentioning one of the classes, but not actually using it will be included in our data sample. A possible remedy to this would have been to remove comments from snippets as a preprocessing step. 
+
+The counts presented in Table 1 have been obtained as the total of each from the entire set of snippets, as a result it is certainly possible for one snippet to include multiple keywords. As a result of this these counts may not necessarily give us a complete idea of the distribution of topics in posts, however we can potentially view the discrepancy in counts as interesting nonetheless. For example from the distribution we can see that it appears that more people are posting about Cipher, KeyStore SecureRandom, and, MessageDigest, as opposed to KeyAgreement and AlgorithmParameter. This makes a lot of sense, since, as listed on the JCA website, the "most useful high-level classes" include Cipher and MessageDigest. Classes such as AlgorithmParameter are moreso a support class for classes such as Cipher, so it is perhaps the case that they are more straightforward to use and therefore there will not be as many code snippets demonstrating the usage of these classes.
  
 These keywords were chosen as they are listed by in the JCA documentation \cite{JCA} as the core classes and interfaces of the JCA.
 
-One issue here that we considered is that the names of methods and objects in a partial program are only identified by partially quantified names (PQN). A complete program will have full quantified names (FQN) for objects at the compilation step. The problem here is that there logically cannot be a constraint on Java as a programming language that would prevent multiple classes from different packages from having the same name, and in fact that is completely unnecessary, as a FQN is unique. The problem only arises when we are not provided information about the provider of a class (recall that only 6\% of the snippets had an import). One example of this can be seen in java.util.Date and java.sql.Date. Both classnames are Date, however they are clearly provided by different packages and should be handled as unique.
+One issue here that we considered is that the names of methods and objects in a partial program are only identified by partially quantified names (PQN). A complete program will have full quantified names (FQN) for objects at the compilation step. The problem here is that there logically cannot be a constraint on Java as a programming language that would prevent multiple classes from different packages from having the same name, and in fact that is completely unnecessary, as a FQN is unique. The problem only arises when we are not provided information about the provider of a class (recall that only 6\% of the snippets had an import). One example of this can be seen in javax.ws.rs.ext.Provider and java.security.Provider. Both classnames are Provider, however they are clearly provided by different packages and have different functionality. The java.security.Provider implementation "represents a "provider" for the Java Security API" \cite{Security.Provider}, while the javax.ws.rs.ext.Provider is an implementation of "providers are application components that allow for customization of runtime behavior in three key areas: data binding, exception mapping, and context resolution" \cite{jax.Provider}. Thus these classes must be handled as unique.
 
 Previous works \cite{} have investigated resolving PQN to FQN by using variants of oracles to determine which possible types the ambiguous class name or method name could actually resolve to. In many cases, given a concrete implementation of a standard library, it is easy to tell if a class name corresponds to a valid type in that library. 
 
@@ -124,10 +117,24 @@ After assessing which snippets could not be successfully compiled, we were left 
 
 \subsection{RQ1}
 
-We discovered that we were indeed able to analyze some of the snippets. 
+We discovered that we were indeed able to analyze some of the snippets and from these we did find a noteworthy number of cryptographic misuses. As previously discussed there are two significant barriers to analyzing the snippets. First the snippets must be compiled. Then they must have been compiled in such a way that they contain an analyzable object. That is to say they must be valuable to analyze. 
+
+Lastly, we discuss the evaluation of our heuristic of relevant snippet selection. From Table 1 we have a total of 138 keywords occurring in our snippets. This should roughly correspond to the number of objects that we can analyze. However we were only able to find even one object to analyze in 19\% of the compiled snippets, and found a total of 59 objects that were analyzed across all of the snippets. 
+
+
+In Figure 1 we can see that most snippets contained only one analyzed object. This makes sense, in that each snippet is demonstrating the functionality of only one object, and is not a complete demonstration of a complete piece of code. 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=.75\linewidth]{Pie.png}
+\includegraphics[width=0.7\linewidth]{ObjectDist.png}
+\caption{Counts of Objects Analyzed in all Compiled Snippets}
+\end{center}
+\end{figure}
+
+However if we compare this to the distribution of number of keywords in each snippet, as shown in Figure 2 we will see that . Our hypothesis for this discrepancy is that it arises from the type inference strategy of Soot PPA, and that it inherently cannot infer all types in incomplete programs, however a more thorough investigation would be required in order to conclude on this matter and ultimately improve the pipeline process described in this work. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{Pie.png}
 \caption{Counts of Snippets at Each Level of Processing}
 \end{center}
 \end{figure}
@@ -138,7 +145,7 @@ The distribution of errors as reported by CogniCrypt is presented in Fig 2.
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=.9\linewidth]{Dist.png}
+\includegraphics[width=0.9\linewidth]{Dist.png}
 \caption{Error types generated by CogniCrypt}
 \end{center}
 \end{figure}
