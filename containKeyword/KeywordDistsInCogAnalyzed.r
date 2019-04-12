@@ -12,7 +12,7 @@ table(counts$V1)
 
 barplot(table(counts$V1),
 
-main ="Distribution of Keyword Occurrences Found in Compiled Snippets",
+main ="Distribution of Keyword Found in Compiled Snippets (Partial Match)",
 ylab="Number of Compiled Snippet Containing Keyword Count",
 xlab="Number of Keyword per File",
 ylim=c(0, 100)
