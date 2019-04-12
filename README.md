@@ -50,7 +50,11 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
     
+
 	    grep 'Provider' <file>
+
+
+
 
   3) Moves snippets containing at least one of the keywords into own dir;
 
