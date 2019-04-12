@@ -40,13 +40,17 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
     * "pure match" which uses grep on only the keyword itself (or symbolic adjacent tokens, but not alphanumeric adjacent tokens), as depicted below:
 
 
-        grep '\<Provider\>' <file>
+
+
+      	    grep '\\<Provider\\>' <file>
 
 
     * or a partial match, which is a plain grep for any string as a substring
 
 
-      grep 'Provider' <file>
+
+
+      	 grep 'Provider' <file>
 
   3) Moves snippets containing at least one of the keywords into own dir;
 
