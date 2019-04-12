@@ -2,6 +2,11 @@
 # Filters files into other directory if the contain interesting keywords
 # idea here: no point running ppa on things without the keywords
 #
+# partial match approach                                                            
+#                                                                                    
+# example: term: Provider                                                            
+# will match: @Provider and Provider(anything                                        
+# will also match: FakeProvider 
 ###############
 mkdir containKeyword
 

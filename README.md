@@ -36,10 +36,36 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
   * As this project focuses on **cryptographic** security, the snippets of interest are ones that use cryptographic APIs. To detect these we filter based on textual content, if the snippet contains a core class or interface keyword from the [JCA](https://docs.oracle.com/javase/9/security/java-cryptography-architecture-jca-reference-guide.htm#JSSEC-GUID-2BCFDD85-D533-4E6C-8CE9-29990DEB0190)
 
+  * There were two alternative keyword filter techniques utilized in this study
+    * "pure match" which uses grep on only the keyword itself (or symbolic adjacent tokens, but not alphanumeric adjacent tokens), as depicted below:
+
+
+
+
+      	    grep '\<Provider\>' <file>
+
+
+    * or a partial match, which is a plain grep for any string as a substring:
+
+
+
+    
+
+
+	    grep 'Provider' <file>
+
+
+
   3) Moves snippets containing at least one of the keywords into own dir;
 
 
-    $ ./findKeywords.sh
+
+    $ ./findKeywordsPureMatch.sh
+
+    or
+
+
+    $ ./findKeywordsPartialMatch.sh
 
 
   ## Compile Snippets:
@@ -54,7 +80,6 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
     $ cd containKeyword
-    $ ./pipelineNoWork.sh
     $ ./pipeline.sh
 
 
@@ -73,7 +98,7 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
 
 
-    $ ./summary.sh
+    $ ./summary.sh <dir-to-summarize>
 
 
 # Quickstart:
