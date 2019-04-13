@@ -13,7 +13,7 @@ mkdir javaccompileMethodClass
 mkdir javacoutputs
 mkdir javacclasses
 
-for file in xx*.java; do
+for file in ../xx*.java; do
 
     echo "trying for $file"
 

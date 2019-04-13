@@ -85,7 +85,9 @@ Disclaimer: This project was developed on Mac OSX. There are some differences be
 
   ## Assess Security:
 
-  * CogniCrypt produces reports of objects assessed, and errors found. These are piped ! into text files in CogniCryptResults
+  * CogniCrypt produces reports of objects assessed, and errors found. These are piped ! into text files in CogniCryptResults.
+  * We supply the version of CogniCrypt that we use, however we did not distribute the rules, as they are a bit larger. You will have to obtain them from [here](https://github.com/CROSSINGTUD/CryptoAnalysis/releases/download/2.0/JCA_rules.zip)
+  * then unzip in the containKeyword directory.
   5) Finally ready to assess correctness of crypto API usage in these snippets
 
 

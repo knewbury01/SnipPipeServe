@@ -18,5 +18,6 @@ total=$(ls xx* | wc -l)
 percent=$(echo "$success/$total" | bc -l)
 echo "Total succeeding compilations: $success , and as a fraction: $percent"
 
-fails=$((337-total))
+allsnip=$(ls ../xx* | wc -l)
+fails=$((allsnip-total))
 echo "This number of compile attempts failed: $fails"
