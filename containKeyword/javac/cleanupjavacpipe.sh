@@ -10,3 +10,4 @@ rm javaccompileClass/*
 rm javaccompileMethodClass/*
 rm javacoutputs/*
 rm javacclasses/*
+rm J*

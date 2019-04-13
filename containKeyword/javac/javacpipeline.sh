@@ -35,7 +35,7 @@ for file in ../xx*.java; do
        else
 	   rm $tempfile
     #wrap just class attempt
-    tempfile=J$file
+    tempfile=J${file#../}
 
     #trying now with imports                                               
     cat javacimports.txt  >> $tempfile
