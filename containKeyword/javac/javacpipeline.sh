@@ -7,7 +7,7 @@
 # imports are also removed, as sootPPA allows for phantom-refs
 #
 #############
-
+mkdir javacOrigs
 mkdir javaccompileClass
 mkdir javaccompileMethodClass
 mkdir javacoutputs
@@ -16,14 +16,32 @@ mkdir javacclasses
 for file in xx*.java; do
 
     echo "trying for $file"
+
+    tempfile=$(cat $file | grep "class" | sed -e 's/.*class\(.*\){/\1/' | sed -e 's/.*\(.*\)extends/\1/' | sed -e 's/.*\(.*\)implements/\1/' | sed 's/.*class//' | sed 's/ //g')
+    tempfile=${tempfile}.java
+    rm $tempfile
+    echo "Rename $file as $tempfile"
+
+    cat javacimports.txt  >> $tempfile
+
+    cat $file | sed '/import/d' | sed '/\.\.\./d'  | sed '/package/d' >> $tempfile
+
+    outputfile=${tempfile%.java}.txt
+    javac -d javacclasses $tempfile &> javacoutputs/ORIG$outputfile
+    if ! grep -q "error" javacoutputs/ORIG$outputfile; then
+       mv classes/${tempfile%.java}.class javacOrigs/${tempfile%.java}.class
+       mv $tempfile javacOrigs/$tempfile
+
+       else
+	   rm $tempfile
     #wrap just class attempt
     tempfile=J$file
 
     #trying now with imports                                               
-    cat imports.txt >> $tempfile
+    cat javacimports.txt  >> $tempfile
 
     echo "class ${tempfile%.java} {" >> $tempfile
-    cat $file | sed '/@/d' >> $tempfile
+    cat $file | sed '/import/d' | sed '/\.\.\./d'  | sed '/package/d' >> $tempfile
     echo "}" >> $tempfile
 
     #check if this successfully compiled
@@ -37,11 +55,11 @@ for file in xx*.java; do
     else
 	   #second try, with method and class
 	rm $tempfile
-	cat imports.txt >> $tempfile
+	cat javacimports.txt  >> $tempfile
 	
 	   echo "class ${tempfile%.java} {" >> $tempfile
 	   echo "public void placeholder(){" >> $tempfile
-	   cat $file | sed '/@/d' >> $tempfile
+	   cat $file | sed '/import/d' | sed '/\.\.\./d'  | sed '/package/d' >> $tempfile
 	   echo "} }" >> $tempfile
 
 	   javac -d javacclasses $tempfile &> javacoutputs/METHOD$outputfile
@@ -50,9 +68,8 @@ for file in xx*.java; do
 	       mv $tempfile javaccompileMethodClass/$tempfile
 	       fi
     fi
+    fi
 done
 
-echo -n "This number of files succeeded with just class wrapping: "
-ls -la javaccompileClass | grep ".class" | wc -l
-echo -n "This number of files succeeded with method AND class wrapping: "
-ls -la javaccompileMethodClass | grep ".class" | wc -l
+#print a summary                                                               
+./javacpipesummary.sh
