@@ -1,6 +1,7 @@
 ######################
 #
-# cleans up the files
+# cleans up the compilation result files
+# and also the cognicrypt result files
 # produced from prev pipeline run
 #
 #######################
@@ -11,3 +12,4 @@ rm compileMethodClass/*
 rm outputs/*
 rm X*
 rm classes/*
+rm CogniCryptResults/*
