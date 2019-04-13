@@ -4,7 +4,12 @@ import java.lang.*;
 import java.io.*;                                                                                       
 import java.security.*;                                                                                 
 import java.net.*;                                                                                      
-import javax.crypto.*;                                                                                  
+import javax.crypto.*;
+
+import javax.crypto.spec.*;
+
+import javax.crypto.interfaces.*;
+
 import java.math.BigInteger;                                                                            
 import java.nio.charset.StandardCharsets;                                                               
 import groovy.grape.Grape;                                                                              
