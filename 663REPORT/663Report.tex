@@ -123,7 +123,7 @@ In order to then identify usages of cryptographic libraries we only retained cod
 \begin{table}[h]
 \begin{center}
 \includegraphics[width=0.5\linewidth]{KeywordCounts.png}
-\caption{Counts of Snippets Containing Each Keyword}
+\caption{Counts of Snippets Containing Each Keyword From Pure Match Condition \label{table:keywordCount}}
 \end{center}
 \end{table}
 
@@ -135,7 +135,7 @@ Admittedly this search was performed over the entire content of the snippet and 
 We also evaluate two variants of technique for searching for keywords. The first technique accepted the keywords as matching in any portion of a string. For example SecurityManager would match on the keyword Security. This approach is a bit generous though, and potentially not necessary for the collection process. The reason that we initially considered this approach is that it may be better to attempt to process more snippets than necessary, in a batch processing style, so that it is less likely that we miss some relevant data. However upon second thought it appears that this approach will have no added benefit over a search that disallows matches on adjacent alphanumeric characters, but accepts symbols. For example SecurityManager would not match on the keyword Security, but Security.setProperty("someproperty") will match. We believe that this technique is more realistic for modelling the possible usages of class identifiers in Java, however we maintain the results of both strategies throughout the rest of the results for comparison purposes. 
 From this point we will refer to the first strategy as partial match, and pure match.
 
-The counts presented in Table 1 have been obtained as the pure match total of each from the entire set of snippets, as a result it is certainly possible for one snippet to include multiple keywords. As a result of this these counts may not necessarily give us a complete idea of the distribution of topics in posts, however we can potentially view the discrepancy in counts as interesting nonetheless. For example from the distribution we can see that it appears that more people are posting about Cipher, KeyStore SecureRandom, and, MessageDigest, as opposed to KeyAgreement and AlgorithmParameter. This makes a lot of sense, since, as listed on the JCA website, the "most useful high-level classes" include Cipher and MessageDigest. Classes such as AlgorithmParameter are moreso a support class for classes such as Cipher, so it is perhaps the case that they are more straightforward to use and therefore there will not be as many code snippets demonstrating the usage of these classes.
+The counts presented in Table \ref{table:keywordCount} have been obtained as the pure match total of each from the entire set of snippets, as a result it is certainly possible for one snippet to include multiple keywords. As a result of this these counts may not necessarily give us a complete idea of the distribution of topics in posts, however we can potentially view the discrepancy in counts as interesting nonetheless. For example from the distribution we can see that it appears that more people are posting about Cipher, KeyStore SecureRandom, and, MessageDigest, as opposed to KeyAgreement and AlgorithmParameter. This makes a lot of sense, since, as listed on the JCA website, the "most useful high-level classes" include Cipher and MessageDigest. Classes such as AlgorithmParameter are moreso a support class for classes such as Cipher, so it is perhaps the case that they are more straightforward to use and therefore there will not be as many code snippets demonstrating the usage of these classes.
  
 
 One issue here that we considered is that the names of methods and objects in a partial program are only identified by partially quantified names (PQN). A complete program will have full quantified names (FQN) for objects at the compilation step. The problem here is that there logically cannot be a constraint on Java as a programming language that would prevent multiple classes from different packages from having the same name, and in fact that is completely unnecessary, as a FQN is unique. The problem only arises when we are not provided information about the provider of a class (recall that only 6\% of the snippets had an import). One example of this can be seen in javax.ws.rs.ext.Provider and java.security.Provider. Both classnames are Provider, however they are clearly provided by different packages and have different functionality. The java.security.Provider implementation "represents a "provider" for the Java Security API" \cite{Security.Provider}, while the javax.ws.rs.ext.Provider is an implementation of "providers are application components that allow for customization of runtime behavior in three key areas: data binding, exception mapping, and context resolution" \cite{jax.Provider}. Thus these classes must be handled as unique. 
@@ -210,58 +210,83 @@ import java.lang.reflect.Method;
 \end{lstlisting}
 This is fine for Soot PPA, however if attempting to use the javac compiler, the imports that are not from the standard java library will need to be removed again.
 
+\subsubsection{Matching Filenames to Classnames}
+For those snippets that were compilable at the first level, with no wrapping, we had to extract the pre-existing class name from the file and then rename the file to align with this name. This is a Java convention, that the filenames match the class declared in such file.
 
-After assessing which snippets could not be successfully compiled, we were left with a sample of 173 snippets to run CogniCrypt on in the partial match condition, and 96 snippets to run CogniCrypt on in the pure match condition. 
+After assessing which snippets could be successfully compiled, we were left with a sample of 173 snippets to run CogniCrypt on in the partial match condition, and 96 snippets to run CogniCrypt on in the pure match condition. This is a compile success rate of 51\% and 56\% respectively.
 
 
 \subsection{Comparison on Search Techniques}
-Before discussing our interpretation of results, we first revist a slightly more empirical comparison of the two applied snippet search techniques. The following distributions are obtained by applying a pure match approach to collect a count of keywords existences in each snippet that has been compiled.
+Before discussing our interpretation of results, we first revist a slightly more empirical comparison of the two applied snippet search techniques. The following distributions are obtained by applying a pure match approach to collect a count of keywords existences in each snippet that has been compiled, but originally obtained from the listed search strategy. So for example, Figure \ref{fig:KeywordDistPureMatch} depicts the snippets resulting from a pure match filter, which have then been preprocessed, and then successfully compiled. From those snippets the pure match approach is used to obtain the count of keywords.
 
-Now that we have fully described our technique for obtaining 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{CompiledKeywordDistPureMatch.png}
 \caption{Counts of Keyword Matches in Compiled Snippets}
+\label{fig:KeywordDistPureMatch}
 \end{center}
 \end{figure}
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{CompiledKeywordDistPartialMatch.png}
-\caption{Counts of Keyword Matches in Compiled Snippets}
+\caption{Counts of Keyword Matches in Compiled Snippets \label{fig:KeywordDistPartialMatch}}
 \end{center}
 \end{figure}
 
-From these distributions we can see that pure match and partial match, not surprisingly find the same number of snippets containing one through four keywords. However the partial match technique detects 76 more snippets as relevant, however these snippets indeed have 0 keywords. It may also seem surprising to note that the pure match filtering condition can still yield snippets with no keywords once they are compiled. But if we consider the example listed earlier in our discussion of FQN/PQN, this actually makes sense. The example here was involving javax.ws.rs.ext.Provider is relevant because "Each JAX-RS provider class must be annotated with the @Provider annotation" \cite{jax.Provider}. However since Soot PPA cannot deal with Java annotations, as previously mentioned, these lines in the snippet will be removed in order to compile. Therefore even the pure match technique will inevitably yield an initial input set of snippets with no relevance to our pipeline process.
+From these distributions we can see that pure match and partial match, not surprisingly find the same number of snippets containing one through four keywords. However the partial match technique, depicted in Figure \ref{fig:KeywordDistPartialMatch}, detects 76 more snippets as relevant, however these snippets indeed have 0 keywords. It may also seem surprising to note that the pure match filtering condition can still yield snippets with no keywords once they are compiled. But if we consider the example listed earlier in our discussion of FQN/PQN, this actually makes sense. The example here was involving javax.ws.rs.ext.Provider is relevant because "Each JAX-RS provider class must be annotated with the @Provider annotation" \cite{jax.Provider}. However since Soot PPA cannot deal with Java annotations, as previously mentioned, these lines in the snippet will be removed in order to compile. Therefore even the pure match technique will inevitably yield an initial input set of snippets with no relevance to our pipeline process.
 
 \subsection{Comparison Alternative Compilers}
+
+One benefit of considering alternative compilers is that we will no longer be constrained to treat the snippets as if they are Java 1.4. For this reason we briefly investigate substituting Soot PPA as the compiler in our pipeline with the following. The following results are presented for the pure match condition only.
 
 \subsection{Javac}
 
 The Javac compiler option could be considered as the ideal option of a compiler for our pipeline. This is because naturally the javac compiler has the sole goal of producing executable java bytecode. Unfortunately, unlike Soot PPA, which is conscientious to the goal of analysis, javac will halt upon all error types. It cannot resolve type ambiguities by assigning an unknown type, as that would disallow the JVM from knowing which class to load at runtime. We evaluate our pipeline with Javac substituted in place of Soot PPA and discuss the outcome below.
 
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{PieJavaC.png}
+\caption{Counts of Snippets Analyzed that were Compiled \label{fig:javacPie}}
+\end{center}
+\end{figure}
+
+The first observation to make from Figure \ref{fig:javacPie} is that only 10 snippets compiled, this is 10\% of the snippets in this sample. Of the snippets that compiled, 9 had an object to analyze in them, and 6 of those had at least one error.
+
 \subsection{Eclipse JDT}
 
-We also evaluate our pipeline with Eclipse JDT substituted in place of Soot PPA and discuss below.
+As previously discussed one other work has used Eclipse JDT to transform snippets to AST level. \cite{Subramanian:2013:MSO:2487085.2487106}. For this reason we see it as worthwhile to evaluate our pipeline with Eclipse JDT substituted in place of Soot PPA and discuss below.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{PieJDT.png}
+\caption{Counts of Snippets Analyzed that were Compiled \label{fig:jdtPie}}
+\end{center}
+\end{figure}
+
+Similarly from Figure \ref{fig:jdtPie} we can see that only 15 snippets compiled, this is 16\% of the snippets in this sample. Of the snippets that compiled, 13 had an object to analyze in them, and 9 of those had at least one error.
+
+From all of the above we conclude that, on their own, not surprisingly compilers designed to compile full programs are not able to handle in a strong majority of cases code snippets. This is because the snippets are partial. This does let us know however, that some snippets can be compiled this way, and motivates our discussion in the future work section.
 
 \section{Results}
 
 \subsection{RQ1}
 
-We discovered that we were indeed able to analyze some of the snippets and from these we did find a noteworthy number of cryptographic misuses. As previously discussed there are two significant barriers to analyzing the snippets. First the snippets must be compiled. Then they must have been compiled in such a way that they contain an analyzable object. That is to say they must be valuable to analyze. 
+We discovered that we were indeed able to analyze some of the snippets and from these we did find that 50\% of the analysis relevant compiled snippets contain at least one cryptographic misuse. As previously discussed there are two significant barriers to analyzing the snippets. First the snippets must be compiled. Then they must have been compiled in such a way that they contain an analyzable object. That is to say they must be valuable to analyze. 
 
-Lastly, we discuss the evaluation of our heuristic of relevant snippet selection. From Table 1 we have a total of 138 keywords occurring in our snippets. This should roughly correspond to the number of objects that we can analyze. However we were only able to find even one object to analyze in 19\% of the compiled snippets, and found a total of 59 objects that were analyzed across all of the snippets. 
+Lastly, we discuss the evaluation of our heuristic of relevant snippet selection. From Table \ref{table:keywordCount} we have a total of 138 keywords occurring in our snippets. This should roughly correspond to the number of objects that we can analyze. However we were only able to find even one object to analyze in 19\% of the compiled snippets, and found a total of 59 objects that were analyzed across all of the snippets, in the partial match condition. The pure match condition was another story. Of the 96 snippets that compiled, 100\% of them contained at least one object to analyze. This strongly reinforces the importance of the initial snippet filter.
 
 
-In Figure 1 we can see that most snippets contained only one analyzed object. This makes sense, in that each snippet is demonstrating the functionality of only one object, and is not a complete demonstration of a complete piece of code. 
+In Figure \ref{fig:objectDistribution} we can see that most snippets contained only one analyzed object. This makes sense, in that each snippet is demonstrating the functionality of only one object, and is not a complete demonstration of a complete piece of code. 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{ObjectDist.png}
 \caption{Counts of Objects Analyzed in all Compiled Snippets}
+\label{fig:objectDistribution}
 \end{center}
 \end{figure}
 
-However if we compare this to the distribution of number of keywords in each snippet, as shown in Figure 2 we will see that . Our hypothesis for this discrepancy is that it arises from the type inference strategy of Soot PPA, and that it inherently cannot infer all types in incomplete programs, however a more thorough investigation would be required in order to conclude on this matter and ultimately improve the pipeline process described in this work. 
+However if we compare this to the distribution of number of keywords in each snippet, as shown in Figure \ref{fig:KeywordDistPureMatch} and Figure \ref{fig:KeywordDistPartialMatch} we will see that even against the pure match technique, there are still more keywords detected than objects procured to analyze. Our hypothesis for this discrepancy is that it arises from the type inference strategy of Soot PPA, and that it inherently cannot infer all types in incomplete programs, however a more thorough investigation would be required in order to conclude on this matter and ultimately improve the pipeline process described in this work. 
 
 Lastly, as an anecdotal comparison point for our ability to compile snippets we would like to cite this work \cite{7958574}, where they were able to successfully process between 85 and 66\% of their sample. In this study they processed their sample to the IR level, and this may be one reason for the difference in success. As our results are not too drastically different we believe that it a roughly 50\% successful compilation rate is reasonable.
 
@@ -289,12 +314,13 @@ Lastly, as an anecdotal comparison point for our ability to compile snippets we 
 
 \subsection{RQ2}
 
-The distribution of errors as reported by CogniCrypt is presented in Fig 2.
+The distribution of errors as reported by CogniCrypt is presented in Fig \ref{fig:errorDistribution}.
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=0.9\linewidth]{Dist.png}
 \caption{Error types generated by CogniCrypt}
+\label{fig:errorDistribution}
 \end{center}
 \end{figure}
 
@@ -306,6 +332,17 @@ In order to answer RQ3 we look at the number of GHUrls that correspond to unique
 \section{Discussion}
 
 In light of the results that we have observed it is important to reconsider the big picture. In order to do this first we present an overview to the reader of the types of errors that CogniCrypt reports, so that we may discuss the implications of these findings.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=0.9\linewidth]{cogrules.png}
+\caption{CogniCrypt Error Descriptions \label{fig:cogrules}}
+\end{center}
+\end{figure}
+
+In Figure \ref{fig:cogrules} we include the CogniCrypt error descriptions as listed in their Github repository README file. In Fig \ref{fig:errorDistribution} we can see that the constraint error type is the most common. To us this makes sense, because while many configurations for both hash and encryption algorithms exist, it can be hard to know which one should be used in which context, especially since there are even cases of insecure defaults supported and provided. 
+
+A large takeaway message from this is that choice of keysize, hash algorithm, and, encryption algorithm should always be researched, to know what is appropriate for a specific task but also what is currently safe and relevant.
 
 \section{Threats to Validity}
 
@@ -331,7 +368,7 @@ In this section we discuss some ways that this work could be extended.
 
 \subsection{Investigation of Alternative Compilation Tools}
 
-We acknowledge that there could be some alternative tools to perform the compilation step that could either be substituted into the pipeline process, or perhaps additionally used, such that snippets that do not compile solely under Soot PPA can potentially utilize another tool to allow them to reach the next step in the pipeline. Some such tools and a discussion of each is as follows:
+We acknowledge that there could be some alternative tools to perform the compilation step that could either be substituted into the pipeline process, or perhaps additionally used, such that snippets that do not compile solely under Soot PPA can potentially utilize another tool to allow them to reach the next step in the pipeline.Some such tools and a discussion of each is as follows:
 \begin{itemize}
 \item
 Javac: From our evaluation of Javac as the only compiler, we see that Soot PPA is a better choice, if we are picking a tool to do the complete compilation task in our pipeline. However we could see it as valuable to investigate the cost of adding the javac compiler simply at the beginning of the pipeline, after the preprocessing step. If it can catch some snippets at least, then it would be interesting to see if this impacts the percentage of subsequent snippets that can be analyzed, as it will have done the ideal job of resolving objects.
@@ -349,7 +386,7 @@ One feature of the Java language that we did not attempt to modify the presence 
 
 \section{Conclusion}
 
-In conclusion we were able to compile, analyze and detect errors in 50\% code snippets from SO that contain an entity to analyze, upon compilation. We do not present these results as an attempt to find flaw in developers at large. We acknowledge that the possibility of false positives exist, although we do believe these to be extremely minimal. Instead we present this work as a valuable learning opportunity. We seek to present a deeper takeaway message than a warning against copy paste behaviour (especially in security related tasks). The insight that can be gained from this work is that it is indeed a complex issue to decide how to deal with "correct", but inevitably insecure answers to posts on SO. Our suggestion is that at the very least these code snippets could be annotated, so that developers (inexperienced, experienced alike) can be more aware of the impact of the resources that they utilize. We also hope that this work can contribute to an abundance of work motivating the importance of the consideration of security in the software development, documentation, and, discussion process. Finally we believe that this work provides a significant contribution to the effort towards performing analysis upon code snippets, as it proves that it is not only feasible, but also worthwhile, to apply static analysis tools to code snippets.
+In conclusion we were able to detect errors in 50\% of code snippets from SO that both had been able to compile and contained an object relevant to our analysis. We do not present these results as an attempt to find flaw in developers at large. We acknowledge that the possibility of false positives exist, although we do believe these to be extremely minimal. Instead we present this work as a valuable learning opportunity. We seek to present a deeper takeaway message than a warning against copy paste behaviour (especially in security related tasks). The insight that can be gained from this work is that it is indeed a complex issue to decide how to deal with "correct", but inevitably insecure answers to posts on SO. Our suggestion is that at the very least these code snippets could be annotated, so that developers (inexperienced, experienced alike) can be more aware of the impact of the resources that they utilize. We also hope that this work can contribute to an abundance of work motivating the importance of the consideration of security in the software development, documentation, and, discussion process. Finally we believe that this work provides a significant contribution to the effort towards performing analysis upon code snippets, as it proves that it is not only feasible, but also worthwhile, to apply static analysis tools to code snippets.
 
 %\nocite{*}%not sure if you are needed.
 \printbibliography
