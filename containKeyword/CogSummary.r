@@ -14,5 +14,5 @@ main="Distribution of Error Types Found",
 ylim=c(0,15),
 ylab="Total Number of Occurrences")
 labs <- paste(names(table(d$V1)))
-text(cex=0.8, x=x-.25,
-y=-1.5, labs, xpd=TRUE, srt=45)
+text(cex=0.9, x=x-.25,
+y=-1, labs, xpd=TRUE, srt=45)
